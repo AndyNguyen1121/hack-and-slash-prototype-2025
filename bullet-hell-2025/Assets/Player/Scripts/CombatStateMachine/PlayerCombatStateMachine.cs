@@ -4,39 +4,27 @@ using UnityEngine;
 
 public class PlayerCombatStateMachine : MonoBehaviour
 {
-    public bool canAttack = true;
+    public PlayerCombatStateFactory factory;
 
-    public CombatStateFactory combatFactory;
-    public PlayerBaseState currentState;
+    public PlayerCombatBaseState currentState;
 
-    private void Start()
+    private void Awake()
     {
-        combatFactory = new CombatStateFactory(this);
-        currentState = combatFactory.CombatIdle();
-        currentState.OnStateEnter();
+        factory = new PlayerCombatStateFactory(this);
+
+        currentState = factory.Idle();
+        currentState.EnterState();
     }
+
     private void Update()
     {
-        currentState.OnStateUpdate();
+        currentState.UpdateState();
     }
-    public void SwitchState(PlayerBaseState newState)
+
+    public void SwitchState(PlayerCombatBaseState newState)
     {
-        currentState.OnStateExit();
+        currentState.ExitState();
+        newState.EnterState();
         currentState = newState;
-        currentState.OnStateEnter();
     }
-
-    #region Animation Events
-    public void EnableAttackWindow()
-    {
-        canAttack = true;
-        PlayerManager.instance.isPerformingAction = false;
-    }
-
-    public void DisableAttackWindow() 
-    {
-        canAttack = false; 
-    }
-
-    #endregion
 }

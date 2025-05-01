@@ -33,10 +33,13 @@ public class PlayerMovementManager : MonoBehaviour
     public bool useGravity = true;
 
     [Header("Jumping Settings")]
-    public float jumpingHeight;
+    public float firstJumpHeight;
+    public float secondJumpHeight;
     public bool isJumping = false;
     private float timeAboveGround;
     private bool fallingWithoutJump = false;
+    private bool canDoubleJump = true;
+
 
 
 
@@ -138,7 +141,9 @@ public class PlayerMovementManager : MonoBehaviour
         {
             isJumping = false;
             fallingWithoutJump = false;
-            //playerManager.animator.CrossFade("MovementBlend", 0.1f);
+            canDoubleJump = true;
+            //playerManager.animator.CrossFade("MovementBlend", 0.01f);
+            playerManager.playerAnimationManager.PlayActionAnimation("MovementBlend", true, false, false, true, true, true);
         }
 
 
@@ -149,7 +154,7 @@ public class PlayerMovementManager : MonoBehaviour
         // Start jump loop if falling too long without jumping
         if (!playerManager.isGrounded && !isJumping && timeAboveGround > 0.2f && !fallingWithoutJump)
         {
-            //playerManager.playerAnimationManager.PlayActionAnimation("JumpCycle", true, false, false, true, true, true);
+            playerManager.playerAnimationManager.PlayActionAnimation("JumpCycle", true, false, false, true, true, true);
             fallingWithoutJump = true;  
         }
     }
@@ -158,14 +163,29 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (!playerManager.isPerformingAction && playerManager.isGrounded && playerInputManager.jumpPressed)
         {
-            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", true, false, false, true, true, true, 0.05f);
+            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", true, false, false, true, true, true, 0.2f);
+        }
+        else if (isJumping && canDoubleJump && playerInputManager.jumpPressed)
+        {
+            playerManager.playerAnimationManager.PlayActionAnimation("DoubleJump", true, false, false, true, true, true, 0.2f);
+            canDoubleJump = false;
         }
     }
 
-    public void ApplyJumpForce()
+    public void ApplyJumpForce(float height)
     {
-        verticalVelocity.y = Mathf.Sqrt(-2 * airGravityScale * jumpingHeight);
+        verticalVelocity.y = Mathf.Sqrt(-2 * airGravityScale * height);
         isJumping = true;
+    }
+
+    public void ApplyFirstJumpForce()
+    {
+        ApplyJumpForce(firstJumpHeight);
+    }
+
+    public void ApplySecondJumpForce()
+    {
+        ApplyJumpForce(secondJumpHeight);
     }
 
     public void HandleMovementRotations()
