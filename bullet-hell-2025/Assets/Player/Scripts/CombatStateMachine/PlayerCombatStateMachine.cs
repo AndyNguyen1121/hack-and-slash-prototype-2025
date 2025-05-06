@@ -8,7 +8,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
 
     public PlayerCombatBaseState currentState;
 
-    private void Awake()
+    private void Start()
     {
         factory = new PlayerCombatStateFactory(this);
 

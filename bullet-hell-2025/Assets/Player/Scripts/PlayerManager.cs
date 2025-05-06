@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Auto-Initizalized References")]
     public PlayerMovementManager playerMovementManager;
     public PlayerAnimationManager playerAnimationManager;
+    public PlayerCombatStateMachine playerCombatStateMachine;
     public CharacterController characterController;
     public Animator animator;
     public Camera mainCam;
@@ -45,6 +46,7 @@ public class PlayerManager : MonoBehaviour
         mainCam = Camera.main;
         playerMovementManager = GetComponent<PlayerMovementManager>();
         playerAnimationManager = GetComponent<PlayerAnimationManager>();
+        playerCombatStateMachine = GetComponent<PlayerCombatStateMachine>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
@@ -100,6 +102,7 @@ public class PlayerManager : MonoBehaviour
     {
         isPerformingAction = false;
     }
+
     #endregion
     private void OnDrawGizmos()
     {

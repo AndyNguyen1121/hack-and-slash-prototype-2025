@@ -12,7 +12,10 @@ public class PlayerIdle : PlayerCombatBaseState
 
     public override void UpdateState()
     {
-        
+        if (!playerManager.isPerformingAction && PlayerInputManager.instance.attackPressed)
+        {
+            stateMachine.SwitchState(factory.Attack1());
+        }
     }
 
     public override void ExitState()

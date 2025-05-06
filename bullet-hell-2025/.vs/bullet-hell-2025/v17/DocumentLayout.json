@@ -3,16 +3,44 @@
   "WorkspaceRootPath": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\swordslashmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\swordslashmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\footik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\footik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playercombatstatemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\playercombatstatemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playercombatstatefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\nonmonobehavior\\playercombatbasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\nonmonobehavior\\playercombatbasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playerattack2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\playerattack2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playerattack1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\playerattack1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playercombatstatefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\playercombatstatefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\nonmonobehavior\\playercombatbasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\nonmonobehavior\\playercombatbasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\combatstatemachine\\playeridle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\playeridle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\resetvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\resetvalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\player\\scripts\\playermovementmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,44 +75,129 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerCombatStateFactory.cs",
-              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
-              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
-              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
-              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
+              "Title": "FootIK.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\FootIK.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\FootIK.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\FootIK.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\FootIK.cs",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAkwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T07:52:53.323Z",
+              "WhenOpened": "2025-05-04T06:53:21.25Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SwordSlashManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\SwordSlashManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\SwordSlashManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\SwordSlashManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\SwordSlashManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-04T06:29:03.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PlayerAttack2.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack2.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack2.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack2.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack2.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-04T06:23:15.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\PlayerManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\PlayerManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerManager.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAAAGgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T22:50:17.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ResetValues.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\ResetValues.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\ResetValues.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\ResetValues.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\ResetValues.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAB6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T22:49:26.96Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerAttack1.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack1.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack1.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack1.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerAttack1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T07:58:32.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PlayerIdle.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerIdle.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerIdle.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerIdle.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerIdle.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T07:56:44.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerCombatStateFactory.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateFactory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T07:52:53.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "PlayerCombatStateMachine.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateMachine.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateMachine.cs",
               "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateMachine.cs",
               "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\PlayerCombatStateMachine.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T07:50:42.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-01T07:50:42.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "PlayerCombatBaseState.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\NonMonobehavior\\PlayerCombatBaseState.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\NonMonobehavior\\PlayerCombatBaseState.cs",
               "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\CombatStateMachine\\NonMonobehavior\\PlayerCombatBaseState.cs",
               "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\NonMonobehavior\\PlayerCombatBaseState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-01T07:49:22.813Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "PlayerMovementManager.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Player\\Scripts\\PlayerMovementManager.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerMovementManager.cs",

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResetValues : StateMachineBehaviour
 {
-
+    public bool switchToIdle = true;
     public bool isPerformingAction;
     public bool canMove;
     public bool canRotate;
@@ -23,7 +23,11 @@ public class ResetValues : StateMachineBehaviour
 
         if (playerManager != null)
         {
-            
+            if (switchToIdle)
+            {
+                playerManager.playerCombatStateMachine.SwitchState(playerManager.playerCombatStateMachine.factory.Idle());
+            }   
+
             playerManager.isPerformingAction = this.isPerformingAction;
             animator.applyRootMotion = this.applyRootMotion;
             playerManager.canMove = this.canMove;
