@@ -9,6 +9,7 @@ public class SwordSlashManager : MonoBehaviour
     {
         public GameObject swordSlash;
         public Transform transform;
+        public bool followTransformTarget = false;
         public Vector3 offset;
     }
 
@@ -16,9 +17,26 @@ public class SwordSlashManager : MonoBehaviour
     public void ActivateSwordSlash(int i)
     {
         SwordSlash swordSlashPrefab = SwordSlashList[i];
-        Quaternion desiredRotation = Quaternion.FromToRotation(swordSlashPrefab.swordSlash.transform.forward, transform.forward) * swordSlashPrefab.swordSlash.transform.rotation;
-        Vector3 rotatedOffset = desiredRotation * swordSlashPrefab.offset;
-        Vector3 spawnPosition = swordSlashPrefab.transform.position + rotatedOffset;
-        Instantiate(swordSlashPrefab.swordSlash, spawnPosition, desiredRotation);
+
+        Quaternion desiredRotation = swordSlashPrefab.swordSlash.transform.rotation;
+
+        if (!swordSlashPrefab.followTransformTarget)
+        {
+            desiredRotation = Quaternion.FromToRotation(swordSlashPrefab.swordSlash.transform.forward, transform.forward) * swordSlashPrefab.swordSlash.transform.rotation;
+        }
+
+        Vector3 desiredOffset = desiredRotation * swordSlashPrefab.offset;
+        Vector3 spawnPosition = swordSlashPrefab.transform.position + desiredOffset;
+
+        if (!swordSlashPrefab.followTransformTarget)
+        {
+            Instantiate(swordSlashPrefab.swordSlash, spawnPosition, desiredRotation);
+        }
+        else
+        {
+            Instantiate(swordSlashPrefab.swordSlash, swordSlashPrefab.transform);
+        }
+
+        
     }
 }

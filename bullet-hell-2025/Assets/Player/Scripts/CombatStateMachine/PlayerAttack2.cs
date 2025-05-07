@@ -12,7 +12,10 @@ public class PlayerAttack2 : PlayerCombatBaseState
 
     public override void UpdateState()
     {
-
+        if (!playerManager.isPerformingAction && PlayerInputManager.instance.attackPressed)
+        {
+            stateMachine.SwitchState(factory.Attack3());
+        }
     }
 
     public override void ExitState()
