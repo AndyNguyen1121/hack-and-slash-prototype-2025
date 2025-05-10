@@ -111,9 +111,9 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _VoronoiPower: 0.2
-    - _VoronoiScale: 30.61
-    - _VoronoiSpeed: 14.7
+    - _VoronoiPower: 0.8
+    - _VoronoiScale: 34.5
+    - _VoronoiSpeed: 1000
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

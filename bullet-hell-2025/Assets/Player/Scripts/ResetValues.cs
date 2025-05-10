@@ -34,7 +34,7 @@ public class ResetValues : StateMachineBehaviour
             playerManager.canRotate = this.canRotate;
             playerManager.playerMovementManager.rootMotionSpeedMultiplierXZ = rootMotionSpeedXZ;
             playerManager.playerMovementManager.rootMotionSpeedMultiplierY = rootMotionSpeedY;  
-            playerManager.playerMovementManager.useGravity = this.useGravity;
+            playerManager.useGravity = this.useGravity;
             playerManager.playerMovementManager.groundGravityScale = defaultGravity;
         }
     }

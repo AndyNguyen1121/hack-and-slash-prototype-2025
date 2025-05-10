@@ -29,8 +29,6 @@ public class PlayerMovementManager : MonoBehaviour
     public float rotationSlerpSpeed;
     public Vector3 playerDirection;
 
-    [Header("Action Flags")]
-    public bool useGravity = true;
 
     [Header("Jumping Settings")]
     public float firstJumpHeight;
@@ -116,7 +114,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void HandleGravity()
     {
-        if (!useGravity)
+        if (!playerManager.useGravity)
             return;
 
 
@@ -137,7 +135,7 @@ public class PlayerMovementManager : MonoBehaviour
 
 
         // Reset to origin state on landing
-        if (playerManager.isGrounded && ((isJumping && verticalVelocity.y < 0) || fallingWithoutJump))
+        if (playerManager.isGrounded && ((isJumping && verticalVelocity.y < 0) || fallingWithoutJump) && !playerManager.inFinisher)
         {
             isJumping = false;
             fallingWithoutJump = false;
@@ -174,7 +172,13 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void ApplyJumpForce(float height)
     {
-        verticalVelocity.y = Mathf.Sqrt(-2 * airGravityScale * height);
+        float g = Mathf.Abs(airGravityScale); // Ensure gravity is positive
+        float t = 0.5f;
+
+        // Calculate vertical velocity needed to reach height in time
+        float velocity = (height + 0.5f * g * t * t) / t;
+
+        verticalVelocity.y = velocity;
         isJumping = true;
     }
 

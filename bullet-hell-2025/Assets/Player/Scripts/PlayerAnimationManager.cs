@@ -66,7 +66,7 @@ public class PlayerAnimationManager : MonoBehaviour
         playerManager.canMove = canMove;
         playerManager.canRotate = canRotate;
         animator.applyRootMotion = applyRootMotion;
-        playerManager.playerMovementManager.useGravity = useGravity;
+        playerManager.useGravity = useGravity;
     }
 
     public IEnumerator SlerpDuringAction (Quaternion rotation, float dampTime)
@@ -95,7 +95,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
 
 
-            if (playerManager.playerMovementManager.useGravity)
+            if (playerManager.useGravity)
                 velocity.y += playerManager.playerMovementManager.airGravityScale * Time.deltaTime;
 
             if (playerManager.characterController.enabled)
@@ -132,11 +132,14 @@ public class PlayerAnimationManager : MonoBehaviour
         playerManager.isPerformingAction = false;
     }
 
-    public void ActivateGravity(float scale)
+    public void ActivateGravity()
     {
-        playerManager.playerMovementManager.groundGravityScale = scale;
-        playerManager.playerMovementManager.groundGravityScale = scale;
-        playerManager.playerMovementManager.useGravity = true;
+        playerManager.useGravity = true;
+    }
+
+    public void DeactivateGravity()
+    {
+        playerManager.useGravity = false;
     }
 
     /*public void CanAttackTrue()

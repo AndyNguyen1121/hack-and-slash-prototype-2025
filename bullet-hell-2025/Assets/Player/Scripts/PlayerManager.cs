@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerMovementManager playerMovementManager;
     public PlayerAnimationManager playerAnimationManager;
     public PlayerCombatStateMachine playerCombatStateMachine;
+    public PlayerCombatManager playerCombatManager;
     public CharacterController characterController;
     public Animator animator;
     public Camera mainCam;
@@ -21,6 +22,8 @@ public class PlayerManager : MonoBehaviour
     public bool canRotate = true;
     public bool canMove = true;
     public bool canAttack = true;
+    public bool useGravity = true;
+    public bool inFinisher = false;
 
     [Header("Ground Check")]
     public bool isGrounded = true;
@@ -47,6 +50,7 @@ public class PlayerManager : MonoBehaviour
         playerMovementManager = GetComponent<PlayerMovementManager>();
         playerAnimationManager = GetComponent<PlayerAnimationManager>();
         playerCombatStateMachine = GetComponent<PlayerCombatStateMachine>();
+        playerCombatManager = GetComponent<PlayerCombatManager>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
@@ -90,6 +94,16 @@ public class PlayerManager : MonoBehaviour
                 Physics.IgnoreCollision(collider, otherCollider, true);
             }
         }
+    }
+
+    public void IgnorePlayerCollider(Collider collider)
+    {
+        foreach (var col in colliders)
+        {
+            Physics.IgnoreCollision(collider, col, true);
+        }
+        Collider characterControllerCollider = GetComponent<Collider>();
+        Physics.IgnoreCollision(collider, characterControllerCollider, true);
     }
 
     #region Animation Events
