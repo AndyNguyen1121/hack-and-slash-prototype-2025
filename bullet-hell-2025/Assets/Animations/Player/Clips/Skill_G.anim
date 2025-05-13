@@ -118003,6 +118003,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 5
     messageOptions: 0
+  - time: 0.26666668
+    functionName: ActivateIntenseScreenShakeImpulse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -0.95
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0333333
     functionName: ActivateSwordSlash
     data: 
@@ -118010,12 +118017,12 @@ AnimationClip:
     floatParameter: 0
     intParameter: 6
     messageOptions: 0
-  - time: 1.0666667
-    functionName: ActivateHitStop
+  - time: 1.0333333
+    functionName: ActivateIntenseScreenShakeImpulse
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
+    floatParameter: 1.5
+    intParameter: 0
     messageOptions: 0
   - time: 1.0666667
     functionName: UnparentTarget
@@ -118023,6 +118030,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
+    messageOptions: 0
+  - time: 1.0666667
+    functionName: ActivateHitStop
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 2
     messageOptions: 0
   - time: 1.1666666
     functionName: ClearTarget

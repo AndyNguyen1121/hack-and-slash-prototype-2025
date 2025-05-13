@@ -11,6 +11,7 @@ public class PlayerInputManager : MonoBehaviour
     public PlayerControls inputActions;
     public PlayerManager playerManager;
     public float deadZone = 0.2f;
+   // private PlayerCameraManager playerCameraManager;
 
     [Header("Movement")]
     public Vector2 movementDirection;
@@ -25,6 +26,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool isInteracting = false;
     public bool jumpPressed = false;
     public bool attackPressed = false;
+    //public bool isLockedOn = false;
 
     [Header("Input Queue")]
     public float defaultQueueTimer = 0.35f;
@@ -76,6 +78,7 @@ public class PlayerInputManager : MonoBehaviour
             inputActions.MovementMap.Sprint.performed += ctx => sprintPressed = true;
             inputActions.MovementMap.Sprint.canceled += ctx => sprintPressed = false;
             inputActions.Actions.AttackQueue.performed += ctx => QueueInput(ref attackInputQueue);
+            inputActions.Camera.LockOnToggle.performed += ctx => playerManager.playerCameraManager.ToggleLockOn();
 
         }
 
@@ -86,7 +89,7 @@ public class PlayerInputManager : MonoBehaviour
     private void OnDisable()
     {
         movementDirection = Vector2.zero;
-        playerManager.playerAnimationManager.UpdateAnimationMovementParameters(0, 0, 0);
+        playerManager.playerAnimationManager.UpdateAnimationMovementParameters(0, 0);
         cameraInputProvider.enabled = false;
         inputActions.Disable();
         
@@ -118,6 +121,7 @@ public class PlayerInputManager : MonoBehaviour
         attackPressed = inputActions.Actions.Attack.WasPressedThisFrame();
     }
 
+ 
     private void HandleMovementInput()
     {
         horizontalInput = movementDirection.x;
@@ -160,10 +164,29 @@ public class PlayerInputManager : MonoBehaviour
             moveAmount = 0;
         }
 
-       
-        playerManager.playerAnimationManager.UpdateAnimationMovementParameters(0, moveAmount, moveAmount);
         clampedDirection.x = clampedHorizontal;
         clampedDirection.y = clampedVertical;
+
+        if (!playerManager.playerCameraManager.isLockedOn)
+        {
+            playerManager.playerAnimationManager.UpdateAnimationMovementParameters(0, moveAmount);
+        }
+        else
+        {
+            float adjustedMovementX = clampedHorizontal != 0 ? 0.5f : 0;
+            float adjustedMovementY = clampedVertical != 0 ? 0.5f : 0;
+
+            if (clampedHorizontal < 0)
+            {
+                adjustedMovementX *= -1;
+            }
+            if (clampedVertical < 0)
+            {
+                adjustedMovementY *= -1; 
+            }
+
+            playerManager.playerAnimationManager.UpdateAnimationMovementParameters(adjustedMovementX, adjustedMovementY);
+        }
     }
 
     private void QueueInput(ref bool queuedInput)

@@ -47,8 +47,10 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public void JumpToHeightInTime(float height)
     {
+        if (!inKnockUpAnimation)
+            animator.Play("Knockup", 0, 0f);
+
         inKnockUpAnimation = true;
-        animator.Play("Knockup", 0, 0f);
         float g = Mathf.Abs(Physics.gravity.y); 
         float t = 0.5f;
         float h = height;

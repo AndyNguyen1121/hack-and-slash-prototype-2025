@@ -71,7 +71,7 @@ public class PlayerMovementManager : MonoBehaviour
         if (!playerManager.canMove || !playerManager.characterController.enabled)
             return;
 
-        if (!playerManager.animator.applyRootMotion && playerInputManager.movementDirection != Vector2.zero)
+        if (!playerManager.animator.applyRootMotion && playerInputManager.clampedDirection != Vector2.zero)
         {
 
            
@@ -197,10 +197,18 @@ public class PlayerMovementManager : MonoBehaviour
         if (!playerManager.canRotate)
             return;
 
-        if (playerInputManager.movementDirection != Vector2.zero)
+        if (playerInputManager.clampedDirection != Vector2.zero)
         {
+            if (playerManager.playerCameraManager.isLockedOn)
+            {
+                Vector3 lookAtDir = playerManager.playerCameraManager.currentLockOnTarget.position - transform.position;
+                lookAtDir.y = 0;
+                lookAtDir.Normalize();
 
-            if (playerDirection != Vector3.zero)
+                Quaternion desiredDirection = Quaternion.LookRotation(lookAtDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredDirection, rotationSlerpSpeed * Time.deltaTime);
+            }
+            else if (playerDirection != Vector3.zero)
             {
                 Quaternion desiredDirection = Quaternion.LookRotation(playerDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, desiredDirection, rotationSlerpSpeed * Time.deltaTime);

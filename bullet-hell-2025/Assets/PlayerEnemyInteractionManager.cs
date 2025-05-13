@@ -50,7 +50,7 @@ public class PlayerEnemyInteractionManager : MonoBehaviour
             if (currentTarget != null)
             {
                 FindAndAlignDistance(2);
-                playerManager.playerMovementManager.rootMotionSpeedMultiplierY = 2;
+                playerManager.playerMovementManager.rootMotionSpeedMultiplierY = 4;
                 playerManager.playerAnimationManager.PlayActionAnimation("KnockupFinisher", true, true, false, false, false, false);
             }
         }

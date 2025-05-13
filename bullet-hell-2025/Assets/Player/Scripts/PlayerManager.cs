@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerAnimationManager playerAnimationManager;
     public PlayerCombatStateMachine playerCombatStateMachine;
     public PlayerCombatManager playerCombatManager;
+    public PlayerCameraManager playerCameraManager;
     public CharacterController characterController;
     public Animator animator;
     public Camera mainCam;
@@ -51,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         playerAnimationManager = GetComponent<PlayerAnimationManager>();
         playerCombatStateMachine = GetComponent<PlayerCombatStateMachine>();
         playerCombatManager = GetComponent<PlayerCombatManager>();
+        playerCameraManager = GetComponent<PlayerCameraManager>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
