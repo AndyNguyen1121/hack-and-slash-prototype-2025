@@ -29,7 +29,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void UpdateAnimationMovementParameters(float horizontal, float vertical)
     {
-        animator.SetBool("isMoving", PlayerInputManager.instance.movementDirection != Vector2.zero);
+        animator.SetBool("isMoving", PlayerInputManager.instance.clampedDirection != Vector2.zero);
         if (!playerManager.canMove)
             return; 
 

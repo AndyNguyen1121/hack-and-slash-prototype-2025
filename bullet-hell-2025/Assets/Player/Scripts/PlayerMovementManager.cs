@@ -18,6 +18,7 @@ public class PlayerMovementManager : MonoBehaviour
     public float maxSprintSpeed;
     public float maxRunSpeed;
     public float maxWalkSpeed;
+    public float maxLockOnSpeed;
     public float rootMotionSpeedMultiplierXZ = 1;
     public float rootMotionSpeedMultiplierY = 1;
     public float airGravityScale = -5f;
@@ -76,8 +77,11 @@ public class PlayerMovementManager : MonoBehaviour
 
            
             float speedCap = 0f;
-
-            if (playerInputManager.moveAmount > 1f)
+            if (playerManager.playerCameraManager.isLockedOn)
+            {
+                speedCap = maxLockOnSpeed;
+            }
+            else if (playerInputManager.moveAmount > 1f)
             {
                 speedCap = maxSprintSpeed;
             }

@@ -45,23 +45,32 @@ public class PlayerCameraManager : MonoBehaviour
         if (camNum < 0)
             return;
 
+
+
         for (int i = 0; i < cameras.Length; i++)
         {
             if (i == camNum)
             {
+
                 if (cameras[i].name == lockOnCam.name && target != null)
                 {
                     cameras[i].LookAt = target;
                     currentLockOnTarget = target;
                     isLockedOn = true;
                     playerManager.animator.SetBool("lockedOn", true);
-                    //LockOnUI.instance.ChangeTarget(target);
+
+                    LockOnTarget lockOnScript = currentLockOnTarget.GetComponent<LockOnTarget>();
+
+                    if (lockOnScript != null)
+                        LockOnUI.instance.ChangeTarget(lockOnScript.cursorPosition);
+                    else
+                        Debug.LogWarning("No LockOnTarget component on object.");
                 }
                 else
                 {
                     isLockedOn = false;
                     playerManager.animator.SetBool("lockedOn", false);
-                    //LockOnUI.instance.ChangeTarget(null);
+                    LockOnUI.instance.ChangeTarget(null);
                 }
 
                 cameras[i].Priority = 10;
