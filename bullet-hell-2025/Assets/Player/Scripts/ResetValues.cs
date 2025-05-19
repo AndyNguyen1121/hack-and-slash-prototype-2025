@@ -25,7 +25,7 @@ public class ResetValues : StateMachineBehaviour
         {
             if (switchToIdle)
             {
-                playerManager.playerCombatStateMachine.SwitchState(playerManager.playerCombatStateMachine.factory.Idle());
+                playerManager.playerCombatStateMachine.SwitchState(PlayerCombatState.Idle);
             }   
 
             playerManager.isPerformingAction = this.isPerformingAction;

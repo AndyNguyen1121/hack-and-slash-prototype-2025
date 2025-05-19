@@ -145,7 +145,7 @@ public class PlayerMovementManager : MonoBehaviour
             fallingWithoutJump = false;
             canDoubleJump = true;
             //playerManager.animator.CrossFade("MovementBlend", 0.01f);
-            playerManager.playerAnimationManager.PlayActionAnimation("MovementBlend", true, false, false, true, true, true);
+            playerManager.playerAnimationManager.PlayActionAnimation("MovementBlend", false, false, false, true, true, true);
         }
 
 
@@ -156,7 +156,7 @@ public class PlayerMovementManager : MonoBehaviour
         // Start jump loop if falling too long without jumping
         if (!playerManager.isGrounded && !isJumping && timeAboveGround > 0.2f && !fallingWithoutJump)
         {
-            playerManager.playerAnimationManager.PlayActionAnimation("JumpCycle", true, false, false, true, true, true);
+            playerManager.playerAnimationManager.PlayActionAnimation("JumpCycle", false, false, false, true, true, true);
             fallingWithoutJump = true;  
         }
     }
@@ -165,11 +165,11 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (!playerManager.isPerformingAction && playerManager.isGrounded && playerInputManager.jumpPressed)
         {
-            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", true, false, false, true, true, true, 0.2f);
+            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", false, false, false, true, true, true, 0.2f);
         }
         else if (isJumping && canDoubleJump && playerInputManager.jumpPressed)
         {
-            playerManager.playerAnimationManager.PlayActionAnimation("DoubleJump", true, false, false, true, true, true, 0.2f);
+            playerManager.playerAnimationManager.PlayActionAnimation("DoubleJump", false, false, false, true, true, true, 0.2f);
             canDoubleJump = false;
         }
     }
@@ -201,18 +201,19 @@ public class PlayerMovementManager : MonoBehaviour
         if (!playerManager.canRotate)
             return;
 
-        if (playerInputManager.clampedDirection != Vector2.zero)
+        if (playerManager.playerCameraManager.isLockedOn)
         {
-            if (playerManager.playerCameraManager.isLockedOn)
-            {
-                Vector3 lookAtDir = playerManager.playerCameraManager.currentLockOnTarget.position - transform.position;
-                lookAtDir.y = 0;
-                lookAtDir.Normalize();
+            Vector3 lookAtDir = playerManager.playerCameraManager.currentLockOnTarget.position - transform.position;
+            lookAtDir.y = 0;
+            lookAtDir.Normalize();
 
-                Quaternion desiredDirection = Quaternion.LookRotation(lookAtDir);
-                transform.rotation = Quaternion.Slerp(transform.rotation, desiredDirection, rotationSlerpSpeed * Time.deltaTime);
-            }
-            else if (playerDirection != Vector3.zero)
+            Quaternion desiredDirection = Quaternion.LookRotation(lookAtDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredDirection, rotationSlerpSpeed * Time.deltaTime);
+        }
+        else if (playerInputManager.clampedDirection != Vector2.zero)
+        {
+            
+            if (playerDirection != Vector3.zero)
             {
                 Quaternion desiredDirection = Quaternion.LookRotation(playerDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, desiredDirection, rotationSlerpSpeed * Time.deltaTime);

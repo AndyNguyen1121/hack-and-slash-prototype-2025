@@ -35,7 +35,7 @@ public class EnemyInteractionManager : MonoBehaviour
 
         if (timeOnGround > minTimeOnGround && inKnockUpAnimation && isGrounded)
         {
-            animator.CrossFade("KnockupEnd", 0.01f);
+            animator.CrossFade("KnockupEnd", 0.1f);
             inKnockUpAnimation = false;
         }
     }
@@ -47,7 +47,7 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public void JumpToHeightInTime(float height)
     {
-        if (!inKnockUpAnimation)
+        //if (!inKnockUpAnimation)
             animator.Play("Knockup", 0, 0f);
 
         inKnockUpAnimation = true;

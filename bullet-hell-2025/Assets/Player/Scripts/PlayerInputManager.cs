@@ -5,6 +5,17 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+#region InputID
+public enum InputID
+{
+    Attack,
+    Interact,
+    Jump,
+    Sprint,
+    LockOn,
+}
+
+#endregion
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
@@ -19,6 +30,8 @@ public class PlayerInputManager : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public float moveAmount;
+
+    public float joystickIdleTime;
 
     [Header("Press flags")]
     public bool sprintPressed = false;
@@ -37,6 +50,9 @@ public class PlayerInputManager : MonoBehaviour
     // Assign in Inspector
     [Header("Camera Controls")]
     public CinemachineInputProvider cameraInputProvider;
+
+    [Header("Input ID Information")]
+    public List<InputID> currentInputs = new();
 
     private void Awake()
     {
@@ -66,6 +82,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleJumpingInput();
         HandleAttackInput();
         HandleQueuedInputs();
+        HandleJoystickIdleTime();
     }
 
     private void OnEnable()
@@ -75,11 +92,10 @@ public class PlayerInputManager : MonoBehaviour
             inputActions = new PlayerControls();
 
             inputActions.MovementMap.Movement.performed += ctx => movementDirection = ctx.ReadValue<Vector2>();
-            inputActions.MovementMap.Sprint.performed += ctx => sprintPressed = true;
-            inputActions.MovementMap.Sprint.canceled += ctx => sprintPressed = false;
             inputActions.Actions.AttackQueue.performed += ctx => QueueInput(ref attackInputQueue);
-            inputActions.Camera.LockOnToggle.performed += ctx => playerManager.playerCameraManager.ToggleLockOn();
-
+            inputActions.Camera.LockOnToggle.started += ctx => HandleLockOnInput(true);
+            inputActions.Camera.LockOnToggle.canceled += ctx => HandleLockOnInput(false);
+            inputActions.Camera.LockOnSwitch.performed += ctx => playerManager.playerCameraManager.SwitchLockOnTargets(ctx.ReadValue<Vector2>().x);
         }
 
         inputActions.Enable();
@@ -95,14 +111,40 @@ public class PlayerInputManager : MonoBehaviour
         
     }
 
+    public void HandleLockOnInput(bool enabled)
+    {
+        if ((!playerManager.playerCameraManager.isLockedOn && enabled)) 
+        {
+            AddInput(InputID.LockOn);
+            playerManager.playerCameraManager.ToggleLockOn();
+        }
+        else if (playerManager.playerCameraManager.isLockedOn && !enabled)
+        { 
+            RemoveInput(InputID.LockOn);
+            playerManager.playerCameraManager.ToggleLockOn();
+        }
+
+        
+    }
+
     private void HandleInteractInput()
     {
         isInteracting = inputActions.Actions.Interact.WasPressedThisFrame();
+
+        if (isInteracting) 
+            AddInput(InputID.Interact);
+        else
+            RemoveInput(InputID.Interact);
     }
 
     private void HandleJumpingInput()
     {
         jumpPressed = inputActions.MovementMap.Jump.WasPressedThisFrame();
+
+        if (jumpPressed)
+            AddInput(InputID.Jump);
+        else
+            RemoveInput(InputID.Jump);
     }
 
     private void HandleSprintingInput()
@@ -110,15 +152,22 @@ public class PlayerInputManager : MonoBehaviour
         if (sprintPressed && moveAmount > 0) 
         {
             isSprinting = true;
+            AddInput(InputID.Sprint);
         }
         else
         {
             isSprinting = false;
+            RemoveInput(InputID.Sprint);
         }
     }
     private void HandleAttackInput()
     {
         attackPressed = inputActions.Actions.Attack.WasPressedThisFrame();
+
+        if (attackPressed)
+            AddInput(InputID.Attack);
+        else
+            RemoveInput(InputID.Attack);
     }
 
  
@@ -189,6 +238,19 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    private void HandleJoystickIdleTime()
+    {
+        if (clampedDirection == Vector2.zero)
+        {
+            joystickIdleTime += Time.deltaTime;
+        }
+        else
+        {
+            joystickIdleTime = 0;
+        }
+    }
+    
+
     private void QueueInput(ref bool queuedInput)
     {
         attackInputQueue = false;
@@ -206,6 +268,7 @@ public class PlayerInputManager : MonoBehaviour
         if (attackInputQueue)
         {
             attackPressed = true;
+            AddInput(InputID.Attack);
         }
     }
 
@@ -223,6 +286,22 @@ public class PlayerInputManager : MonoBehaviour
                 attackInputQueue = false;
                 queueIsActive = false;
             }
+        }
+    }
+
+    public void AddInput(InputID id)
+    {
+        if (!currentInputs.Contains(id))
+        {
+            currentInputs.Add(id);
+        }
+    }
+
+    public void RemoveInput(InputID id)
+    {
+        if (currentInputs.Contains(id))
+        {
+            currentInputs.Remove(id);
         }
     }
 

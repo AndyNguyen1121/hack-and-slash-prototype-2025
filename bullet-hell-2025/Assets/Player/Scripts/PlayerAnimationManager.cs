@@ -11,6 +11,8 @@ public class PlayerAnimationManager : MonoBehaviour
     public Animator animator;
     Gamepad gamepad;
 
+    public Coroutine delayCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +31,21 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void UpdateAnimationMovementParameters(float horizontal, float vertical)
     {
-        animator.SetBool("isMoving", PlayerInputManager.instance.clampedDirection != Vector2.zero);
+        if (playerInputManager.clampedDirection == Vector2.zero && playerInputManager.joystickIdleTime > 0.075f)
+        {
+            animator.SetBool("isMoving", false);
+        }
+        else
+        {
+            animator.SetBool("isMoving", true);
+        }
+
+
         if (!playerManager.canMove)
             return; 
 
-        animator.SetFloat("horizontal", horizontal, 1f, Time.deltaTime * 6f);
-        animator.SetFloat("vertical", vertical, 1f, Time.deltaTime * 6f);
+        animator.SetFloat("horizontal", horizontal, 1.2f, Time.deltaTime * 6f);
+        animator.SetFloat("vertical", vertical, 1.2f, Time.deltaTime * 6f);
         
         
     }
