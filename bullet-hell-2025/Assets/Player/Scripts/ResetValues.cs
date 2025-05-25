@@ -11,8 +11,9 @@ public class ResetValues : StateMachineBehaviour
     public bool useGravity;
     public bool applyRootMotion;
 
-    public float rootMotionSpeedXZ = 1f;
+    public float rootMotionSpeedX = 1f;
     public float rootMotionSpeedY = 1f;
+    public float rootMotionSpeedZ = 1f;
     public float defaultGravity = -9.81f;
     
 
@@ -32,8 +33,9 @@ public class ResetValues : StateMachineBehaviour
             animator.applyRootMotion = this.applyRootMotion;
             playerManager.canMove = this.canMove;
             playerManager.canRotate = this.canRotate;
-            playerManager.playerMovementManager.rootMotionSpeedMultiplierXZ = rootMotionSpeedXZ;
-            playerManager.playerMovementManager.rootMotionSpeedMultiplierY = rootMotionSpeedY;  
+            playerManager.playerAnimationManager.rootMotionSpeedMultiplierX = rootMotionSpeedX;
+            playerManager.playerAnimationManager.rootMotionSpeedMultiplierY = rootMotionSpeedY;
+            playerManager.playerAnimationManager.rootMotionSpeedMultiplierZ = rootMotionSpeedZ;
             playerManager.useGravity = this.useGravity;
             playerManager.playerMovementManager.groundGravityScale = defaultGravity;
         }

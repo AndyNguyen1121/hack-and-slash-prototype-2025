@@ -14,16 +14,22 @@ public class DummyManager : MonoBehaviour, IDamageable
 
 
     public Animator animator;
+    public EnemyInteractionManager enemyInteractionManager;
 
     private void Awake()
     {
         Health = MaxHealth;
         animator = GetComponent<Animator>();
+        enemyInteractionManager = GetComponent<EnemyInteractionManager>();
+
+        Debug.Log(transform.parent.name);
     }
 
     public void TakeDamage(float value)
     {
-        animator.Play("Hit", 1, 0f);
+        if (!enemyInteractionManager.inKnockUpAnimation)
+            animator.Play("Hit", 0 , 0);
+        //enemyInteractionManager.JumpToHeightInTime(0.5f);
     }
 
     public void IncreaseHealth(float value)

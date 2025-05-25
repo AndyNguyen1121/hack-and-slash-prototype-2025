@@ -117982,11 +117982,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.26666668
-    functionName: ParentTarget
+  - time: 0.23333333
+    functionName: OpenWeaponCollider
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.7
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
@@ -118008,6 +118008,34 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: -0.95
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.26666668
+    functionName: ParentTarget
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.7
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: CloseWeaponCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: OpenWeaponCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0333333
+    functionName: SlamTarget
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 20
     intParameter: 0
     messageOptions: 0
   - time: 1.0333333
@@ -118037,6 +118065,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
+    messageOptions: 0
+  - time: 1.1333333
+    functionName: CloseWeaponCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 1.1666666
     functionName: ClearTarget

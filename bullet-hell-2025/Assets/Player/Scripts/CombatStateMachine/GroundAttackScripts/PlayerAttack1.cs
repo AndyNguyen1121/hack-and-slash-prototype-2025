@@ -34,7 +34,7 @@ public class PlayerAttack1 : PlayerCombatBaseState
 
     public override void UpdateState()
     {
-        foreach (CombatScriptableObj criteria in factory.stateList[PlayerCombatState.Attack1].stateInformation.nextStates)
+        foreach (CombatScriptableObj criteria in stateMachine.currentStateObj.nextStates)
         {
             if (stateMachine.ValidateCombatStateCriteria(criteria))
             {

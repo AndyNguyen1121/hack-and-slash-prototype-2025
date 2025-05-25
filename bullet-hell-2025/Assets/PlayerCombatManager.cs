@@ -1,4 +1,5 @@
 using Cinemachine;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 public class PlayerCombatManager : MonoBehaviour
 {
+    public GameObject swordSpark;
     [Header("Initialization")]
     public Collider weaponCollider;
     public CinemachineImpulseSource camShake;
@@ -15,6 +17,8 @@ public class PlayerCombatManager : MonoBehaviour
     
     [Header("DamageSettings")]
     public float damage;
+    public float knockUpForce;
+    public float knockBackForce;
     public LayerMask whatIsDamageable;
 
     [Header("Attack Info")]
@@ -46,8 +50,23 @@ public class PlayerCombatManager : MonoBehaviour
             if (collider.gameObject.TryGetComponent<IDamageable>(out IDamageable component))
             {
                 component.TakeDamage(damage);
+                EnemyInteractionManager enemyInteractionManager;
+
+                if (collider.TryGetComponent<EnemyInteractionManager>(out enemyInteractionManager))
+                {
+                    enemyInteractionManager.JumpToHeightInTime(knockUpForce);
+                }
+
+                Instantiate(swordSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));
             }
         }
+    }
+
+    public void SetDamageValues(CombatScriptableObj stateInfo)
+    {
+        damage = stateInfo.damageInfo.damage;
+        knockUpForce = stateInfo.damageInfo.knockUpForce;
+        knockBackForce = stateInfo.damageInfo.knockBackForce;
     }
 
 

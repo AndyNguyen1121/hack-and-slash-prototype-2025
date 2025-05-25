@@ -32,7 +32,7 @@ public class PlayerManager : MonoBehaviour
     public Vector3 groundCheckOffset;
     public LayerMask whatIsGround;
 
-    public Collider[] colliders;
+    public List<Collider> colliders = new();
 
     [Header("Debug")]
     public bool showDebug;
@@ -78,23 +78,22 @@ public class PlayerManager : MonoBehaviour
     public void IgnoreMyOwnColliders()
     {
         Collider characterControllerCollider = GetComponent<Collider>();
-       colliders = GetComponentsInChildren<Collider>();
+        Collider[] currentColliders = GetComponentsInChildren<Collider>();
 
-        List<Collider> ignoreColliders = new List<Collider>();
+        colliders.AddRange(currentColliders);
+        colliders.Add(characterControllerCollider);
 
         foreach (var collider in colliders)
         {
-            ignoreColliders.Add(collider);
-        }
-
-        ignoreColliders.Add(characterControllerCollider);
-
-        foreach (var collider in ignoreColliders)
-        {
-            foreach (var otherCollider in ignoreColliders)
+            foreach (var otherCollider in colliders)
             {
                 Physics.IgnoreCollision(collider, otherCollider, true);
             }
+        }
+
+        if (colliders.Contains(playerCombatManager.weaponCollider))
+        {
+            colliders.Remove(playerCombatManager.weaponCollider);
         }
     }
 
@@ -106,6 +105,16 @@ public class PlayerManager : MonoBehaviour
         }
         Collider characterControllerCollider = GetComponent<Collider>();
         Physics.IgnoreCollision(collider, characterControllerCollider, true);
+    }
+
+    public void EnableCollisionWithPlayerColliders(Collider collider)
+    {
+        foreach (var col in colliders)
+        {
+            Physics.IgnoreCollision(collider, col, false);
+        }
+        Collider characterControllerCollider = GetComponent<Collider>();
+        Physics.IgnoreCollision(collider, characterControllerCollider, false);
     }
 
     #region Animation Events

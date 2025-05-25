@@ -51,20 +51,17 @@ public class LockOnUI : MonoBehaviour
 
     private void TrackTarget()
     {
+        lockOnUI.transform.LookAt(mainCam.transform);
+        Quaternion lookRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+        float zRotation = 0;
+        zRotation += 360f / 3f * Time.deltaTime; // 360 degrees every 3 seconds
+        Quaternion zSpin = Quaternion.AngleAxis(zRotation, Vector3.forward);
+        transform.rotation = lookRotation * zSpin;
+
         if (target != null)
         {
-            lockOnUI.transform.LookAt(mainCam.transform);
             transform.position = target.position;
-
-            Quaternion lookRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
-
-            // Manually rotate around Z axis
-            float zRotation = 0;
-            zRotation += 360f / 3f * Time.deltaTime; // 360 degrees every 3 seconds
-            Quaternion zSpin = Quaternion.AngleAxis(zRotation, Vector3.forward);
-
-            transform.rotation = lookRotation * zSpin;
-
+            
             if (!isLocked)
             {
                 FadeInLockOnReticle();

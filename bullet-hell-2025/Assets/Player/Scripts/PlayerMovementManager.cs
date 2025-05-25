@@ -19,8 +19,6 @@ public class PlayerMovementManager : MonoBehaviour
     public float maxRunSpeed;
     public float maxWalkSpeed;
     public float maxLockOnSpeed;
-    public float rootMotionSpeedMultiplierXZ = 1;
-    public float rootMotionSpeedMultiplierY = 1;
     public float airGravityScale = -5f;
     public float groundGravityScale = -9.81f;
     public Vector3 verticalVelocity;
@@ -29,7 +27,7 @@ public class PlayerMovementManager : MonoBehaviour
     [Header("Rotation Attributes")]
     public float rotationSlerpSpeed;
     public Vector3 playerDirection;
-
+    public Vector3 localDirection;
 
     [Header("Jumping Settings")]
     public float firstJumpHeight;
@@ -39,8 +37,9 @@ public class PlayerMovementManager : MonoBehaviour
     private bool fallingWithoutJump = false;
     private bool canDoubleJump = true;
 
-
-
+    [Header("Dashing")]
+    public float dashSpeed;
+    public AnimationCurve dashMovementCurve;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +53,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         HandleGroundedMovements();
         HandleMovementRotations();
+        HandleDodgeMovements();
         HandleGravity();
         HandleJumping();
         CalculatePlayerInputDirection();
@@ -67,6 +67,7 @@ public class PlayerMovementManager : MonoBehaviour
         playerDirection.y = 0;
         playerDirection.Normalize();
     }
+
     public void HandleGroundedMovements()
     {
         if (!playerManager.canMove || !playerManager.characterController.enabled)
@@ -114,7 +115,6 @@ public class PlayerMovementManager : MonoBehaviour
 
         playerManager.characterController.Move(playerDirection * currentSpeed * Time.deltaTime);  
     }
-
 
     public void HandleGravity()
     {
@@ -223,6 +223,36 @@ public class PlayerMovementManager : MonoBehaviour
         else
         {
             playerDirection = Vector3.zero;
+        }
+    }
+
+    public void HandleDodgeMovements()
+    {
+        if (playerInputManager.dodgePressed && playerManager.isGrounded && !playerManager.isPerformingAction)
+        {
+            string dashDirection = "DodgeFront";
+
+            if (playerManager.playerCameraManager.isLockedOn)
+            {
+                if (playerInputManager.localInputDirection == Vector2.left)
+                {
+                    dashDirection = "DodgeLeft";
+                }
+                else if (playerInputManager.localInputDirection == Vector2.right)
+                {
+                    dashDirection = "DodgeRight";
+                }
+                else if (playerInputManager.localInputDirection == Vector2.down)
+                {
+                    dashDirection = "DodgeBack";
+                }
+            }
+
+            playerManager.playerAnimationManager.ChangeRootMotionMultiplier(dashSpeed, 1f, dashSpeed);
+            playerManager.playerAnimationManager.PlayActionAnimation(
+                animationName: dashDirection,
+                isPerformingAction: true
+                );
         }
     }
 

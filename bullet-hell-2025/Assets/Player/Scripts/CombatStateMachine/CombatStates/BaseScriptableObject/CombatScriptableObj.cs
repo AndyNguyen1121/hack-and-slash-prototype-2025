@@ -4,9 +4,19 @@ using UnityEngine;
 using NaughtyAttributes;
 using EditorAttributes;
 
+
+[System.Serializable]
+public class DamageInfo
+{
+    public float damage;
+    public float knockUpForce;
+    public float knockBackForce;
+}
+
 [CreateAssetMenu(fileName = "CombatScriptableObj", menuName = "CombatScriptableObj")]
 public class CombatScriptableObj : ScriptableObject
 {
+    public DamageInfo damageInfo; //
     public PlayerCombatState stateID;
 
     [Space(10)]

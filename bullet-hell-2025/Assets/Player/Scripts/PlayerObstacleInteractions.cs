@@ -214,8 +214,8 @@ public class PlayerObstacleInteractions : MonoBehaviour
 
             float multiplier = (distance / divideTime);
 
-            playerManager.playerMovementManager.rootMotionSpeedMultiplierXZ = multiplier;
-            playerManager.playerMovementManager.rootMotionSpeedMultiplierY = 1f;
+            playerManager.playerAnimationManager.rootMotionSpeedMultiplierX = multiplier;
+            playerManager.playerAnimationManager.rootMotionSpeedMultiplierY = 1f;
 
             playerManager.playerAnimationManager.PlayActionAnimation("Vault", true, true, false, false, false, false);
 

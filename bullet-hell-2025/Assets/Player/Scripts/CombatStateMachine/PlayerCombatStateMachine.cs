@@ -27,9 +27,15 @@ public class PlayerCombatStateMachine : MonoBehaviour
 
     public PlayerCombatStateFactory factory;
     public PlayerCombatBaseState currentState;
+    public CombatScriptableObj currentStateObj;
 
     [HideInInspector]
     public PlayerManager playerManager;
+
+    // Damage Values
+    public float damage;
+    public float knockUpForce;
+    public float knockBackForce;    
 
     private void Start()
     {
@@ -37,6 +43,8 @@ public class PlayerCombatStateMachine : MonoBehaviour
         factory = new PlayerCombatStateFactory(this);
 
         currentState = factory.stateList[PlayerCombatState.Idle].combatState;
+        currentStateObj = factory.stateList[PlayerCombatState.Idle].stateObj;
+        playerManager.playerCombatManager.SetDamageValues(factory.stateList[PlayerCombatState.Idle].stateObj);
         currentState.EnterState();
     }
 
@@ -49,7 +57,16 @@ public class PlayerCombatStateMachine : MonoBehaviour
     {
         currentState.ExitState();
         currentState = factory.stateList[switchState].combatState;
+        currentStateObj = factory.stateList[switchState].stateObj;
+        playerManager.playerCombatManager.SetDamageValues(factory.stateList[switchState].stateObj);
         currentState.EnterState();
+    }
+
+    public void SetDamageValues(CombatScriptableObj stateInfo)
+    {
+        damage = stateInfo.damageInfo.damage;
+        knockUpForce = stateInfo.damageInfo.knockUpForce;
+        knockBackForce = stateInfo.damageInfo.knockBackForce;
     }
 
     public void GravitateTowardsPosition(Vector3 position, float distanceToStop, float minimumDistance, float maximumDistance, float duration)

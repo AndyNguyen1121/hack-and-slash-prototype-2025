@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7f906332ed5041975cf4094bacead, type: 3}
   m_Name: PlayerJumpAttack1
   m_EditorClassIdentifier: 
+  damageInfo:
+    damage: 0
+    knockUpForce: 0.1
+    knockBackForce: 0
   stateID: 5
   grounded: 0
   interruptPerformingAction: 0

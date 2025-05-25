@@ -6,6 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerAnimationManager : MonoBehaviour
 {
+    [Header("Root Motion Multipliers")]
+    public float rootMotionSpeedMultiplierX = 1;
+    public float rootMotionSpeedMultiplierY = 1;
+    public float rootMotionSpeedMultiplierZ = 1;
+
     public PlayerInputManager playerInputManager;
     public PlayerManager playerManager;
     public Animator animator;
@@ -80,6 +85,13 @@ public class PlayerAnimationManager : MonoBehaviour
         playerManager.useGravity = useGravity;
     }
 
+    public void ChangeRootMotionMultiplier(float x, float y, float z)
+    {
+        rootMotionSpeedMultiplierX = x;
+        rootMotionSpeedMultiplierY = y;
+        rootMotionSpeedMultiplierZ = z;
+    }
+
     public IEnumerator SlerpDuringAction (Quaternion rotation, float dampTime)
     {
         float timer = 0;
@@ -100,9 +112,9 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             
             Vector3 velocity = animator.deltaPosition;
-            velocity.x *= playerManager.playerMovementManager.rootMotionSpeedMultiplierXZ;
-            velocity.z *= playerManager.playerMovementManager.rootMotionSpeedMultiplierXZ;
-            velocity.y *= playerManager.playerMovementManager.rootMotionSpeedMultiplierY;
+            velocity.x *= rootMotionSpeedMultiplierX;
+            velocity.y *= rootMotionSpeedMultiplierY;
+            velocity.z *= rootMotionSpeedMultiplierZ;
 
 
 

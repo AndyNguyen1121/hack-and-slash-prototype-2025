@@ -20,7 +20,7 @@ public class PlayerJumpAttack5 : PlayerCombatBaseState
 
     public override void UpdateState()
     {
-        foreach (CombatScriptableObj criteria in factory.stateList[PlayerCombatState.JumpAttack5].stateInformation.nextStates)
+        foreach (CombatScriptableObj criteria in stateMachine.currentStateObj.nextStates)
         {
             if (stateMachine.ValidateCombatStateCriteria(criteria))
             {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 #region InputID
@@ -12,6 +13,7 @@ public enum InputID
     Interact,
     Jump,
     Sprint,
+    Dash,
     LockOn,
 }
 
@@ -22,7 +24,6 @@ public class PlayerInputManager : MonoBehaviour
     public PlayerControls inputActions;
     public PlayerManager playerManager;
     public float deadZone = 0.2f;
-   // private PlayerCameraManager playerCameraManager;
 
     [Header("Movement")]
     public Vector2 movementDirection;
@@ -30,7 +31,6 @@ public class PlayerInputManager : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public float moveAmount;
-
     public float joystickIdleTime;
 
     [Header("Press flags")]
@@ -39,7 +39,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool isInteracting = false;
     public bool jumpPressed = false;
     public bool attackPressed = false;
-    //public bool isLockedOn = false;
+    public bool dodgePressed = false;
 
     [Header("Input Queue")]
     public float defaultQueueTimer = 0.35f;
@@ -53,6 +53,9 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Input ID Information")]
     public List<InputID> currentInputs = new();
+
+    [Header("Input Direction Relative To Player")]
+    public Vector2 localInputDirection;
 
     private void Awake()
     {
@@ -81,8 +84,10 @@ public class PlayerInputManager : MonoBehaviour
         HandleInteractInput();
         HandleJumpingInput();
         HandleAttackInput();
+        HandleDodgeInput();
         HandleQueuedInputs();
         HandleJoystickIdleTime();
+        CalculateInputDirectionRelativeToPlayer();
     }
 
     private void OnEnable()
@@ -113,14 +118,22 @@ public class PlayerInputManager : MonoBehaviour
 
     public void HandleLockOnInput(bool enabled)
     {
-        if ((!playerManager.playerCameraManager.isLockedOn && enabled)) 
+        if (enabled)
         {
             AddInput(InputID.LockOn);
+        }
+        else
+        {
+            RemoveInput(InputID.LockOn);
+        }
+
+        if ((!playerManager.playerCameraManager.isLockedOn && enabled)) 
+        {
             playerManager.playerCameraManager.ToggleLockOn();
         }
         else if (playerManager.playerCameraManager.isLockedOn && !enabled)
         { 
-            RemoveInput(InputID.LockOn);
+            
             playerManager.playerCameraManager.ToggleLockOn();
         }
 
@@ -170,7 +183,16 @@ public class PlayerInputManager : MonoBehaviour
             RemoveInput(InputID.Attack);
     }
 
- 
+    private void HandleDodgeInput()
+    {
+        dodgePressed = inputActions.MovementMap.Dodge.WasPressedThisFrame();
+
+        if (dodgePressed)
+            AddInput(InputID.Dash);
+        else
+            RemoveInput(InputID.Dash);
+    }
+
     private void HandleMovementInput()
     {
         horizontalInput = movementDirection.x;
@@ -303,6 +325,44 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentInputs.Remove(id);
         }
+    }
+    
+    public void CalculateInputDirectionRelativeToPlayer()
+    {
+        if (clampedDirection == Vector2.zero)
+        {
+            localInputDirection = Vector2.zero;
+            return;
+        }
+        Vector3 playerDirection = playerManager.mainCam.transform.right * clampedDirection.x;
+        playerDirection += playerManager.mainCam.transform.forward * clampedDirection.y;
+
+        playerDirection.y = 0;
+        playerDirection.Normalize();
+
+        Vector3 dir = transform.InverseTransformDirection(playerDirection);
+
+        
+        localInputDirection = new Vector2(dir.x, dir.z);
+
+        if (Mathf.Abs(localInputDirection.x) > 0.5f)
+        {
+            localInputDirection.x = localInputDirection.x > 0 ? 1 : -1f;
+        }
+        else
+        {
+            localInputDirection.x = 0;
+        }
+
+        if (Mathf.Abs(localInputDirection.y) > 0.5f)
+        {
+            localInputDirection.y = localInputDirection.y > 0 ? 1 : -1f;
+        }
+        else
+        {
+            localInputDirection.y = 0;
+        }
+
     }
 
 }

@@ -47,6 +47,8 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public void JumpToHeightInTime(float height)
     {
+        if (height == 0)
+            return;
         //if (!inKnockUpAnimation)
             animator.Play("Knockup", 0, 0f);
 
@@ -57,11 +59,25 @@ public class EnemyInteractionManager : MonoBehaviour
 
         float requiredVelocity = (h + 0.5f * g * t * t) / t;
         float impulse = rb.mass * requiredVelocity;
+
+        Vector3 velocity = rb.velocity;
+        velocity.y = 0f;
+
+        rb.velocity = velocity;
         rb.AddForce(Vector3.up * impulse, ForceMode.Impulse);
 
         timeOnGround = 0f;
 
 
+    }
+
+    public void SlamDown(float slamForce)
+    {
+        Vector3 velocity = rb.velocity;
+        velocity.y = 0f;
+        rb.velocity = velocity;
+
+        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse);
     }
 
     private void OnDrawGizmos()

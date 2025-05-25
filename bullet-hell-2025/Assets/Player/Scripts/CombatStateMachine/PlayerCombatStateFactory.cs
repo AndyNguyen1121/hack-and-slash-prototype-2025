@@ -24,12 +24,12 @@ public enum PlayerCombatState
 public class StateInfo
 {
     public PlayerCombatBaseState combatState;
-    public CombatScriptableObj stateInformation;
+    public CombatScriptableObj stateObj;
 
     public StateInfo(PlayerCombatBaseState combatBaseState, CombatScriptableObj stateInformation)
     {
         this.combatState = combatBaseState;
-        this.stateInformation = stateInformation;
+        this.stateObj = stateInformation;
     }
 }
 
@@ -85,9 +85,6 @@ public class PlayerCombatStateFactory
             { PlayerCombatState.JumpAttack4, new StateInfo(jumpAttack4, stateMachine.jumpAttack4) },
             { PlayerCombatState.JumpAttack5, new StateInfo(jumpAttack5, stateMachine.jumpAttack5) },
             { PlayerCombatState.JumpAttack6, new StateInfo(jumpAttack6, stateMachine.jumpAttack6) },
-
-
-
 
             };
     }
