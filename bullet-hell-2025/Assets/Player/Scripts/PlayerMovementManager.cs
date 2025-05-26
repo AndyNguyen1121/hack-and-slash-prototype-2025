@@ -33,8 +33,8 @@ public class PlayerMovementManager : MonoBehaviour
     public float firstJumpHeight;
     public float secondJumpHeight;
     public bool isJumping = false;
-    private float timeAboveGround;
-    private bool fallingWithoutJump = false;
+    public float timeAboveGround;
+    public bool fallingWithoutJump = false;
     private bool canDoubleJump = true;
 
     [Header("Dashing")]
@@ -119,7 +119,10 @@ public class PlayerMovementManager : MonoBehaviour
     public void HandleGravity()
     {
         if (!playerManager.useGravity)
+        {
+            verticalVelocity = Vector3.zero;
             return;
+        }
 
 
         if (verticalVelocity.y < 0 && !isJumping)
@@ -231,6 +234,7 @@ public class PlayerMovementManager : MonoBehaviour
         if (playerInputManager.dodgePressed && playerManager.isGrounded && !playerManager.isPerformingAction)
         {
             string dashDirection = "DodgeFront";
+            bool canRotateInInputDir = true;
 
             if (playerManager.playerCameraManager.isLockedOn)
             {
@@ -246,13 +250,18 @@ public class PlayerMovementManager : MonoBehaviour
                 {
                     dashDirection = "DodgeBack";
                 }
+
+                canRotateInInputDir = false;
             }
 
             playerManager.playerAnimationManager.ChangeRootMotionMultiplier(dashSpeed, 1f, dashSpeed);
             playerManager.playerAnimationManager.PlayActionAnimation(
                 animationName: dashDirection,
-                isPerformingAction: true
+                isPerformingAction: true,
+                rotateTowardsPlayerInput: canRotateInInputDir
                 );
+
+            //playerManager.meshTrail.AttemptToExecuteDash();
         }
     }
 

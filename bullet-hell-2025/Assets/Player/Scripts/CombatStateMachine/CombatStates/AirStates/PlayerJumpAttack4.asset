@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageInfo:
     damage: 0
-    knockUpForce: 0.3
+    knockUpForce: 0.01
     knockBackForce: 0
-  stateID: 8
+  stateID: 9
   grounded: 0
   interruptPerformingAction: 0
   onlyLockedOn: 0
@@ -24,4 +24,5 @@ MonoBehaviour:
   directionalInput: {x: 0, y: 0}
   requiredInputs: 00000000
   nextStates:
+  - {fileID: 11400000, guid: 7bddccbff55a2d348a77ed867c837186, type: 2}
   - {fileID: 11400000, guid: bf17beeaed399784f8487af9ffd58557, type: 2}

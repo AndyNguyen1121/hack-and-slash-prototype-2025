@@ -12,14 +12,16 @@ public class PlayerCombatStateMachine : MonoBehaviour
     public CombatScriptableObj attack2Info;
     public CombatScriptableObj attack3Info;
     public CombatScriptableObj attack4Info;
+    public CombatScriptableObj uppercutInfo;
 
     [Space(10)]
-    public CombatScriptableObj jumpAttack1;
-    public CombatScriptableObj jumpAttack2;
-    public CombatScriptableObj jumpAttack3;
-    public CombatScriptableObj jumpAttack4;
-    public CombatScriptableObj jumpAttack5;
-    public CombatScriptableObj jumpAttack6;
+    public CombatScriptableObj jumpAttack1Info;
+    public CombatScriptableObj jumpAttack2Info;
+    public CombatScriptableObj jumpAttack3Info;
+    public CombatScriptableObj jumpAttack4Info;
+    public CombatScriptableObj jumpAttack5Info;
+    public CombatScriptableObj jumpAttack6Info;
+    public CombatScriptableObj helmBreakInfo;
 
 
     #endregion
@@ -98,6 +100,8 @@ public class PlayerCombatStateMachine : MonoBehaviour
             isValid = false;
         }
 
+
+        // check inputs
         if (isValid)
         {
             foreach (var input in combatStateObject.requiredInputs)
@@ -106,6 +110,14 @@ public class PlayerCombatStateMachine : MonoBehaviour
                 {
                     isValid = false;
                     break;
+                }
+            }
+
+            if (combatStateObject.requireDirectionalInput)
+            {
+                if (PlayerInputManager.instance.localInputDirection != combatStateObject.directionalInput)
+                {
+                    isValid = false;
                 }
             }
         }

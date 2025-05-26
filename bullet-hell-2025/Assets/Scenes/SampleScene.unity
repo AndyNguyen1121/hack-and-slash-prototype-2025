@@ -1436,6 +1436,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5259adba151e03147875477cfdd42e52, type: 3}
       insertIndex: -1
       addedObject: {fileID: 840330022}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5259adba151e03147875477cfdd42e52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 840330023}
   m_SourcePrefab: {fileID: 100100000, guid: 5259adba151e03147875477cfdd42e52, type: 3}
 --- !u!4 &777736786 stripped
 Transform:
@@ -6506,6 +6509,7 @@ MonoBehaviour:
   playerCombatManager: {fileID: 0}
   playerCameraManager: {fileID: 0}
   characterController: {fileID: 0}
+  meshTrail: {fileID: 0}
   animator: {fileID: 0}
   mainCam: {fileID: 0}
   isPerformingAction: 0
@@ -6603,7 +6607,9 @@ MonoBehaviour:
   firstJumpHeight: 2
   secondJumpHeight: 2
   isJumping: 0
-  dashSpeed: 0
+  timeAboveGround: 0
+  fallingWithoutJump: 0
+  dashSpeed: 2
   dashMovementCurve:
     serializedVersion: 2
     m_Curve: []
@@ -6627,12 +6633,14 @@ MonoBehaviour:
   attack2Info: {fileID: 11400000, guid: bf517aa3ccb7dc848852d143887d2c38, type: 2}
   attack3Info: {fileID: 11400000, guid: 98515dc0cab1e674fa1fd8e60999404c, type: 2}
   attack4Info: {fileID: 11400000, guid: dd8a41525713755439229b51752cf590, type: 2}
-  jumpAttack1: {fileID: 11400000, guid: 61be6cc2bb7318d46a36ceab39e78c87, type: 2}
-  jumpAttack2: {fileID: 11400000, guid: 9ca756afbfdd89440bfb37a07c3b5663, type: 2}
-  jumpAttack3: {fileID: 11400000, guid: 3ca4866e4ed51db488fd2be9641284d8, type: 2}
-  jumpAttack4: {fileID: 11400000, guid: d557e231f176b084788b59301300e2ae, type: 2}
-  jumpAttack5: {fileID: 11400000, guid: bf17beeaed399784f8487af9ffd58557, type: 2}
-  jumpAttack6: {fileID: 11400000, guid: 88aea55b574bfc94b8eb0f16595da2eb, type: 2}
+  uppercutInfo: {fileID: 11400000, guid: 6e8a5908ccbfb0d4ebb0e7f747ef7103, type: 2}
+  jumpAttack1Info: {fileID: 11400000, guid: 61be6cc2bb7318d46a36ceab39e78c87, type: 2}
+  jumpAttack2Info: {fileID: 11400000, guid: 9ca756afbfdd89440bfb37a07c3b5663, type: 2}
+  jumpAttack3Info: {fileID: 11400000, guid: 3ca4866e4ed51db488fd2be9641284d8, type: 2}
+  jumpAttack4Info: {fileID: 11400000, guid: d557e231f176b084788b59301300e2ae, type: 2}
+  jumpAttack5Info: {fileID: 11400000, guid: bf17beeaed399784f8487af9ffd58557, type: 2}
+  jumpAttack6Info: {fileID: 11400000, guid: 88aea55b574bfc94b8eb0f16595da2eb, type: 2}
+  helmBreakInfo: {fileID: 11400000, guid: 7bddccbff55a2d348a77ed867c837186, type: 2}
   currentStateObj: {fileID: 0}
   playerManager: {fileID: 0}
   damage: 0
@@ -6747,6 +6755,23 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &840330023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840330009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2070114a3b3eac4cbe490ac36c2b78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 0.5
+  trailActive: 0
+  meshRefreshRate: 0.02
+  cloneDestroy: 0.07
+  mat: {fileID: 2100000, guid: f0fb1bac58787734b8d7ee0e06d9f4ca, type: 2}
 --- !u!4 &1005336789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 18bf3165101e999418426c2ea883aadb, type: 3}
@@ -6995,7 +7020,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550174920}
-  m_Material: {fileID: 13400000, guid: 79c4e60b13bc7de419155cb85e6a5db7, type: 2}
+  m_Material: {fileID: 13400000, guid: bf015a1677c6738479b84f2d9bf0a63b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -7025,19 +7050,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1415446923520856401, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.93
+      value: 0.9902921
       objectReference: {fileID: 0}
     - target: {fileID: 1415446923520856401, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -4.68
+      value: -4.66877
       objectReference: {fileID: 0}
     - target: {fileID: 1485010796334305582, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.93
+      value: 0.9902921
       objectReference: {fileID: 0}
     - target: {fileID: 1485010796334305582, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -4.68
+      value: -4.66877
       objectReference: {fileID: 0}
     - target: {fileID: 1546503650443329577, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7061,11 +7086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1546503650443329577, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 8.753588e-17
+      value: 0.00000002188135
       objectReference: {fileID: 0}
     - target: {fileID: 1546503650443329577, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.0591175e-17
+      value: -0.00000001922659
       objectReference: {fileID: 0}
     - target: {fileID: 1620083799249654552, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7081,19 +7106,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620083799249654552, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8031131
+      value: 0.80311304
       objectReference: {fileID: 0}
     - target: {fileID: 1620083799249654552, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5958267
+      value: -0.59582675
       objectReference: {fileID: 0}
     - target: {fileID: 1620083799249654552, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000002411755
+      value: 8.644494e-17
       objectReference: {fileID: 0}
     - target: {fileID: 1620083799249654552, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000002839114
+      value: -1.172823e-16
       objectReference: {fileID: 0}
     - target: {fileID: 2026321864972899379, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7113,15 +7138,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2026321864972899379, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.60865927
+      value: -0.6086593
       objectReference: {fileID: 0}
     - target: {fileID: 2026321864972899379, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000018319647
+      value: -2.9073863e-11
       objectReference: {fileID: 0}
     - target: {fileID: 2026321864972899379, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000020876239
+      value: 3.3147922e-11
       objectReference: {fileID: 0}
     - target: {fileID: 2797725276344493618, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7185,11 +7210,11 @@ PrefabInstance:
       objectReference: {fileID: 84097570}
     - target: {fileID: 4924436016981823097, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.93
+      value: 0.9902921
       objectReference: {fileID: 0}
     - target: {fileID: 4924436016981823097, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -4.68
+      value: -4.66877
       objectReference: {fileID: 0}
     - target: {fileID: 6016823451557967653, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
       propertyPath: m_Lens.FieldOfView
@@ -11397,10 +11422,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.18
-  m_Height: 1.54
+  m_Radius: 0.2
+  m_Height: 1.81
   m_Direction: 1
-  m_Center: {x: 0.00000005617585, y: 0.61, z: 0.000000044110507}
+  m_Center: {x: 0.00000005617585, y: 0.69, z: 0.000000044110507}
 --- !u!114 &1890402548
 MonoBehaviour:
   m_ObjectHideFlags: 0

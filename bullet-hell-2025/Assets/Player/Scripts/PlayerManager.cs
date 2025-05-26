@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCombatManager playerCombatManager;
     public PlayerCameraManager playerCameraManager;
     public CharacterController characterController;
+    public MeshTrail meshTrail;
     public Animator animator;
     public Camera mainCam;
 
@@ -31,6 +32,8 @@ public class PlayerManager : MonoBehaviour
     public float groundCheckRadius;
     public Vector3 groundCheckOffset;
     public LayerMask whatIsGround;
+
+
 
     public List<Collider> colliders = new();
 
@@ -54,6 +57,7 @@ public class PlayerManager : MonoBehaviour
         playerCombatManager = GetComponent<PlayerCombatManager>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         characterController = GetComponent<CharacterController>();
+        meshTrail = GetComponent<MeshTrail>();  
         animator = GetComponent<Animator>();
     }
 
@@ -73,6 +77,7 @@ public class PlayerManager : MonoBehaviour
     private void CheckGroundedState()
     {
         isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
+        animator.SetBool("isGrounded", isGrounded);
     }
 
     public void IgnoreMyOwnColliders()
@@ -128,6 +133,10 @@ public class PlayerManager : MonoBehaviour
         isPerformingAction = false;
     }
 
+    public void ActivateGravity()
+    {
+        useGravity = true;
+    }
     #endregion
     private void OnDrawGizmos()
     {

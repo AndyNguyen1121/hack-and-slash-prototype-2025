@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7f906332ed5041975cf4094bacead, type: 3}
   m_Name: PlayerAttack2
   m_EditorClassIdentifier: 
+  damageInfo:
+    damage: 0
+    knockUpForce: 0
+    knockBackForce: 0
   stateID: 2
   grounded: 1
   interruptPerformingAction: 0
@@ -20,4 +24,5 @@ MonoBehaviour:
   directionalInput: {x: 0, y: 0}
   requiredInputs: 00000000
   nextStates:
+  - {fileID: 11400000, guid: 6e8a5908ccbfb0d4ebb0e7f747ef7103, type: 2}
   - {fileID: 11400000, guid: 98515dc0cab1e674fa1fd8e60999404c, type: 2}

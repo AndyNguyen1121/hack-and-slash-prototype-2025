@@ -334,8 +334,8 @@ public class PlayerInputManager : MonoBehaviour
             localInputDirection = Vector2.zero;
             return;
         }
-        Vector3 playerDirection = playerManager.mainCam.transform.right * clampedDirection.x;
-        playerDirection += playerManager.mainCam.transform.forward * clampedDirection.y;
+        Vector3 playerDirection = playerManager.mainCam.transform.right * movementDirection.x;
+        playerDirection += playerManager.mainCam.transform.forward * movementDirection.y;
 
         playerDirection.y = 0;
         playerDirection.Normalize();
@@ -354,7 +354,7 @@ public class PlayerInputManager : MonoBehaviour
             localInputDirection.x = 0;
         }
 
-        if (Mathf.Abs(localInputDirection.y) > 0.5f)
+        if (Mathf.Abs(localInputDirection.y) > 0.8f)
         {
             localInputDirection.y = localInputDirection.y > 0 ? 1 : -1f;
         }

@@ -60,8 +60,8 @@ public class EnemyInteractionManager : MonoBehaviour
         float requiredVelocity = (h + 0.5f * g * t * t) / t;
         float impulse = rb.mass * requiredVelocity;
 
-        Vector3 velocity = rb.velocity;
-        velocity.y = 0f;
+        Vector3 velocity = Vector3.zero;
+        //velocity.y = 0f;
 
         rb.velocity = velocity;
         rb.AddForce(Vector3.up * impulse, ForceMode.Impulse);

@@ -38,6 +38,6 @@ public class SwordSlashManager : MonoBehaviour
             Instantiate(swordSlashPrefab.swordSlash, swordSlashPrefab.transform);
         }
 
-        
+
     }
 }

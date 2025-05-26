@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageInfo:
     damage: 0
-    knockUpForce: 0.3
+    knockUpForce: 0.01
     knockBackForce: 0
-  stateID: 10
+  stateID: 11
   grounded: 0
   interruptPerformingAction: 0
   onlyLockedOn: 0
   requireDirectionalInput: 0
   directionalInput: {x: 0, y: 0}
   requiredInputs: 00000000
-  nextStates: []
+  nextStates:
+  - {fileID: 11400000, guid: 7bddccbff55a2d348a77ed867c837186, type: 2}

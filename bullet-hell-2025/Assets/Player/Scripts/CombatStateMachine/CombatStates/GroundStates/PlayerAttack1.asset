@@ -24,4 +24,5 @@ MonoBehaviour:
   directionalInput: {x: 0, y: 0}
   requiredInputs: 00000000
   nextStates:
+  - {fileID: 11400000, guid: 6e8a5908ccbfb0d4ebb0e7f747ef7103, type: 2}
   - {fileID: 11400000, guid: bf517aa3ccb7dc848852d143887d2c38, type: 2}
