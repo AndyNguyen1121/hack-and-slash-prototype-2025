@@ -53,18 +53,9 @@ public class EnemyInteractionManager : MonoBehaviour
             animator.Play("Knockup", 0, 0f);
 
         inKnockUpAnimation = true;
-        float g = Mathf.Abs(Physics.gravity.y); 
-        float t = 0.5f;
-        float h = height;
+        rb.velocity = Vector3.zero;
 
-        float requiredVelocity = (h + 0.5f * g * t * t) / t;
-        float impulse = rb.mass * requiredVelocity;
-
-        Vector3 velocity = Vector3.zero;
-        //velocity.y = 0f;
-
-        rb.velocity = velocity;
-        rb.AddForce(Vector3.up * impulse, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * height, ForceMode.Impulse);
 
         timeOnGround = 0f;
 

@@ -7,20 +7,21 @@ using System;
 
 public enum PlayerCombatState
 {
-    Idle,
-    Attack1,
-    Attack2,
-    Attack3,
-    Attack4,
-    Uppercut,
+    Idle = 0,
+    Attack1 = 1,
+    Attack2 = 2,
+    Attack3 = 3,
+    Attack4 = 4,
+    Uppercut = 5,
+    DashStab = 6,
 
-    JumpAttack1,
-    JumpAttack2,
-    JumpAttack3,
-    JumpAttack4,
-    JumpAttack5,
-    JumpAttack6,
-    Helmbreak
+    JumpAttack1 = 7,
+    JumpAttack2 = 8,
+    JumpAttack3 = 9,
+    JumpAttack4 = 10,
+    JumpAttack5 = 11,
+    JumpAttack6 = 12,
+    Helmbreak = 13
 }
 
 public class StateInfo
@@ -46,6 +47,8 @@ public class PlayerCombatStateFactory
     private PlayerAttack3 attack3;  
     private PlayerAttack4 attack4;
     private PlayerUppercut uppercut;
+    private PlayerDashStab dashStab;
+
 
     private PlayerJumpAttack1 jumpAttack1;
     private PlayerJumpAttack2 jumpAttack2;
@@ -76,6 +79,7 @@ public class PlayerCombatStateFactory
         jumpAttack5 = new PlayerJumpAttack5(stateMachine, this);
         jumpAttack6 = new PlayerJumpAttack6(stateMachine, this);
         helmbreak = new PlayerHelmbreak(stateMachine, this);
+        dashStab = new PlayerDashStab(stateMachine, this);
 
 
         stateList = new Dictionary<PlayerCombatState, StateInfo> {
@@ -85,6 +89,7 @@ public class PlayerCombatStateFactory
             { PlayerCombatState.Attack3, new StateInfo(attack3, stateMachine.attack3Info) },
             { PlayerCombatState.Attack4, new StateInfo(attack4, stateMachine.attack4Info) },
             { PlayerCombatState.Uppercut, new StateInfo(uppercut, stateMachine.uppercutInfo) },
+            { PlayerCombatState.DashStab, new StateInfo(dashStab, stateMachine.dashStabInfo) },
 
             { PlayerCombatState.JumpAttack1, new StateInfo(jumpAttack1, stateMachine.jumpAttack1Info) },
             { PlayerCombatState.JumpAttack2, new StateInfo(jumpAttack2, stateMachine.jumpAttack2Info) },

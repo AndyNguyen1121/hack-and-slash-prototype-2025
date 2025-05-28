@@ -17,7 +17,7 @@ public class LockOnUI : MonoBehaviour
 
     private float defaultReticleWidth;
     private float defaultReticleHeight;
-    private Sequence sequence;
+    private DG.Tweening.Sequence sequence;
 
     private void Awake()
     {
