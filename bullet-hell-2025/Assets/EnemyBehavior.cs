@@ -2,18 +2,28 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
     private BehaviorTree enemyBehaviorTree;
+    private EnemyManager enemyManager;
 
     public Transform player;
     public float rangeFromPlayer = 2f;
-    public bool isAlive = true;
-    public bool isStunned = false;
+    
     public bool targetInRange = false;
 
+    [Header("Flags")]
+    public bool isAlive = true;
+    public bool isStunned = false;
+    public bool canMove = true;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        enemyManager = GetComponent<EnemyManager>();
+    }
     void Start()
     {
         CreateEnemyBehaviorTree();
@@ -24,6 +34,7 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
         UpdateRangeToTarget();
+        HandleStunnedState();
         enemyBehaviorTree.Process();
     }
 
@@ -95,11 +106,32 @@ public class EnemyBehavior : MonoBehaviour
 
     public void HandleAttacks()
     {
-        Debug.Log("Can attack");
     }
 
     public void HandleMovements()
     {
-        Debug.Log("Moving");
+        if (!enemyManager.agent.enabled)
+            return;
+
+        enemyManager.agent.SetDestination(player.position);
+
+        Vector3 velocity = transform.InverseTransformDirection(enemyManager.agent.velocity).normalized;
+        enemyManager.enemyAnimationManager.SetMovementParameters(velocity.x, velocity.z);
+ 
+        
+    }
+
+    
+
+    public void HandleStunnedState()
+    {
+        if (isStunned)
+        {
+            enemyManager.agent.enabled = false;
+        }
+        else if (canMove) 
+        {
+            enemyManager.agent.enabled = true;
+        }
     }
 }

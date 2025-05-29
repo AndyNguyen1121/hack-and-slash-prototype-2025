@@ -127,7 +127,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         if (verticalVelocity.y < 0 && !isJumping)
         {
-            verticalVelocity.y = groundGravityScale;
+            verticalVelocity.y += groundGravityScale * Time.deltaTime;
         }
         else
         {
@@ -270,5 +270,26 @@ public class PlayerMovementManager : MonoBehaviour
         playerManager.characterController.enabled = false;
         transform.DOMove(position, duration).SetEase(Ease.OutSine).OnComplete( () => playerManager.characterController.enabled = true);
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Enemy"))
+        {
+            Vector3 collisionDir = hit.normal;
+
+            if (hit.collider.bounds.max.y - 0.2f < transform.position.y)
+            {
+                Vector3 pushDir = new Vector3(collisionDir.x, 0, collisionDir.z).normalized;
+                playerManager.characterController.Move(pushDir * 1f * Time.deltaTime);
+
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+       
+    }
+
+
 
 }

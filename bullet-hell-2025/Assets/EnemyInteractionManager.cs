@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyInteractionManager : MonoBehaviour
 {
     public Rigidbody rb;
+    public EnemyManager enemyManager;
     public Animator animator;
 
     public bool inKnockUpAnimation = false;
@@ -18,6 +19,7 @@ public class EnemyInteractionManager : MonoBehaviour
     public float timeOnGround;
     private void Awake()
     {
+        enemyManager = GetComponent<EnemyManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
@@ -49,6 +51,8 @@ public class EnemyInteractionManager : MonoBehaviour
     {
         if (height == 0)
             return;
+
+        //enemyManager.agent.enabled = false;
         //if (!inKnockUpAnimation)
             animator.Play("Knockup", 0, 0f);
 

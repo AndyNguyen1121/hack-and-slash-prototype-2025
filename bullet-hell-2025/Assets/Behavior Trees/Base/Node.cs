@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class Selector : Node
 {
     public Selector(string name) : base(name) { }
+
 
     public override Status Process()
     {
@@ -32,10 +34,7 @@ public class Selector : Node
 
 public class Sequence : Node
 {
-    public Sequence(string name) : base(name)
-    {
-
-    }
+    public Sequence(string name) : base(name) { }
 
     public override Status Process()
     {
@@ -102,6 +101,7 @@ public class Node
     public enum Status { Success, Failure, Running }
 
     public readonly string name;
+    public readonly Action onNodeLeave;
 
     public readonly List<Node> children = new();
     protected int currentChild;
@@ -123,4 +123,5 @@ public class Node
             child.Reset();
         }
     }
+
 }
