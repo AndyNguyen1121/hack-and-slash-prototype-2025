@@ -39,6 +39,7 @@ public class EnemyInteractionManager : MonoBehaviour
         {
             animator.CrossFade("KnockupEnd", 0.1f);
             inKnockUpAnimation = false;
+            rb.isKinematic = true;
         }
     }
 
@@ -57,8 +58,9 @@ public class EnemyInteractionManager : MonoBehaviour
             animator.Play("Knockup", 0, 0f);
 
         inKnockUpAnimation = true;
+        rb.isKinematic = false;
         rb.velocity = Vector3.zero;
-
+        
         rb.AddForce(Vector3.up * height, ForceMode.Impulse);
 
         timeOnGround = 0f;
