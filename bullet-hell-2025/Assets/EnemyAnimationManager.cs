@@ -5,14 +5,18 @@ using UnityEngine.AI;
 
 public class EnemyAnimationManager : MonoBehaviour
 {
-    private EnemyManager enemyManager;
+    public EnemyManager enemyManager;
+    private Animator animator;
 
     private Vector2 velocity;
     private Vector2 smoothDeltaPosition;
+    private Vector3 lastPosition;
 
-    private void Awake()
+
+    private void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        animator = enemyManager.animator;
     }
 
     // Update is called once per frame
@@ -57,11 +61,10 @@ public class EnemyAnimationManager : MonoBehaviour
             velocity = Vector2.Lerp(Vector2.zero, velocity, enemyManager.agent.remainingDistance / enemyManager.agent.stoppingDistance);
         }
 
-        bool shouldMove = velocity.magnitude > 0.5f && enemyManager.agent.remainingDistance > enemyManager.agent.stoppingDistance;
-
-        enemyManager.animator.SetBool("isMoving", shouldMove);
-        enemyManager.animator.SetFloat("horizontal", horizontal, 1.2f, Time.deltaTime * 6f);
-        enemyManager.animator.SetFloat("vertical", vertical, 1.2f, Time.deltaTime * 6f);
+        Vector2 movementDir = new Vector2(horizontal, vertical);
+        enemyManager.animator.SetBool("isMoving", movementDir != Vector2.zero);
+        enemyManager.animator.SetFloat("horizontal", horizontal, 0.6f, Time.deltaTime * 6f);
+        enemyManager.animator.SetFloat("vertical", vertical, 0.6f, Time.deltaTime * 6f);
 
         float deltaMagnitude = worldDeltaPosition.magnitude;
 
@@ -71,5 +74,14 @@ public class EnemyAnimationManager : MonoBehaviour
                                               enemyManager.agent.nextPosition,
                                               smooth);
         }
+
+        lastPosition = transform.position;
+    }
+
+    public void PlayActionAnimation(string animationName, bool rootMotion = true, bool isPerformingAction = true)
+    {
+        animator.applyRootMotion = rootMotion;
+        enemyManager.isPerformingAction = isPerformingAction;
+        animator.CrossFade(animationName, 0.1f);
     }
 }

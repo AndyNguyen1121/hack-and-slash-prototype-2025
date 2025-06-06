@@ -42,7 +42,6 @@ public class PlayerCombatManager : MonoBehaviour
     {
         if ((((1 << collider.gameObject.layer) & whatIsDamageable) != 0) && !damagedEnemyColliders.Contains(collider))
         {
-            Debug.Log(collider.gameObject.name);
             ActivateDefaultScreenShakeImpulse(-1);
             damagedEnemyColliders.Add(collider);
             ActivateHitStop(0);

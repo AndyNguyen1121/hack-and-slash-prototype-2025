@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyAnimatorValues : StateMachineBehaviour
 {
     public bool isStunned;
+    public bool isPerformingAction;
+
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -13,6 +15,7 @@ public class EnemyAnimatorValues : StateMachineBehaviour
         if (enemyManager != null)
         {
             enemyManager.enemyBehavior.isStunned = isStunned;
+            enemyManager.isPerformingAction = isPerformingAction;
         }
     }
 

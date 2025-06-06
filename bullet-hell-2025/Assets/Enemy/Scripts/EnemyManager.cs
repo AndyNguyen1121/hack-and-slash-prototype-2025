@@ -20,6 +20,15 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public float moveSpeed = 1f;
 
+    [Header("Attack Settings")]
+    private Coroutine cooldownCoroutine;
+    public float minCooldown = 0.3f;
+    public float maxCooldown = 1f;
+
+    [Header("Flags")]
+    public bool isPerformingAction;
+    public bool canAttack = true;
+    public bool isSendingAttackSignal = false;
 
     public void Awake()
     {
@@ -42,10 +51,12 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void DeactivateRootMotion()
     {
         animator.applyRootMotion = false;
-        agent.updatePosition = false;
+        agent.updatePosition = true;
         agent.updateRotation = false;
+        agent.speed = 0f;
     }
 
+    #region Health
     public void TakeDamage(float value)
     {
         Health -= value;
@@ -54,5 +65,40 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void IncreaseHealth(float value)
     {
         Health += value;
+    }
+
+    public void SetHealthValue(float value)
+    {
+        Health = value;
+    }
+
+    #endregion
+    public void ActivateCooldown(float time = -1)
+    {
+        if (cooldownCoroutine != null)
+        {
+            StopCoroutine(cooldownCoroutine);
+        }
+
+        float cooldown = time;
+
+        if (time < 0)
+        {
+            cooldown = Random.Range(minCooldown, maxCooldown);
+        }
+
+        cooldownCoroutine = StartCoroutine(ResetAttack(cooldown));
+    }
+    public void EndAttack()
+    {
+        canAttack = false;
+        isSendingAttackSignal = false;
+        WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
+    }
+
+    public IEnumerator ResetAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canAttack = true;
     }
 }

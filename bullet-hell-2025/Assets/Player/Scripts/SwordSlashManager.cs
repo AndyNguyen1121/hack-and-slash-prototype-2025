@@ -21,7 +21,8 @@ public class SwordSlashManager : MonoBehaviour
     private void Start()
     {
         var trails = swordSlashTrail.trails;
-        startingLifetime = trails.lifetime.constant; 
+        startingLifetime = trails.lifetime.constant;
+        DisableSwordSlashParticle();
     }
     public void ActivateSwordSlash(int i)
     {

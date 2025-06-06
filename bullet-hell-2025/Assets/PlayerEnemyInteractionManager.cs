@@ -68,14 +68,6 @@ public class PlayerEnemyInteractionManager : MonoBehaviour
         }
     }
 
-    public void SlamTarget(float slamForce)
-    {
-        if (currentTarget != null)
-        {
-            currentTarget.SlamDown(slamForce);
-        }
-    }
-
     public void FindAndAlignDistance(float distance)
     {
         if (currentTarget == null)

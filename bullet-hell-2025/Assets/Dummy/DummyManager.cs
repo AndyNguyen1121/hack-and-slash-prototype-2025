@@ -37,4 +37,9 @@ public class DummyManager : MonoBehaviour, IDamageable
 
     }
 
+    public void SetHealthValue(float value)
+    {
+        Health = value;
+    }
+
 }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class EnemyInteractionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            JumpToHeightInTime(2);
+            KnockBackRigidbody(10, -transform.forward);
         }
 
         CheckGroundedState();
@@ -54,8 +55,10 @@ public class EnemyInteractionManager : MonoBehaviour
             return;
 
         //enemyManager.agent.enabled = false;
-        //if (!inKnockUpAnimation)
-            animator.Play("Knockup", 0, 0f);
+        if (!inKnockUpAnimation)
+            animator.Play("KnockUp", 0, 0f);
+        else
+            animator.Play("KnockUpRestart", 0, 0f);
 
         inKnockUpAnimation = true;
         rb.isKinematic = false;
@@ -68,13 +71,24 @@ public class EnemyInteractionManager : MonoBehaviour
 
     }
 
-    public void SlamDown(float slamForce)
+    public void KnockBackRigidbody(float force, Vector3 directionOfImpact)
     {
-        Vector3 velocity = rb.velocity;
-        velocity.y = 0f;
-        rb.velocity = velocity;
+        if (!inKnockUpAnimation)
+            animator.Play("KnockUp", 0, 0f);
+        else
+            animator.Play("KnockUpRestart", 0, 0f);
 
-        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse);
+        directionOfImpact.Normalize();
+        directionOfImpact.y = 0f;
+
+        Vector3 newDir = Quaternion.AngleAxis(45f, transform.right) * directionOfImpact;
+        inKnockUpAnimation = true;
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+
+        rb.AddForce(newDir * force, ForceMode.Impulse);
+
+        timeOnGround = 0f;
     }
 
     private void OnDrawGizmos()
