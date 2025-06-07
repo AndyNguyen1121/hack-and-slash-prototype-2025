@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using System;
+using UnityEngine.Experimental.AI;
 
 
 public enum PlayerCombatState
@@ -14,6 +15,7 @@ public enum PlayerCombatState
     Attack4 = 4,
     Uppercut = 5,
     DashStab = 6,
+    Guard = 14,
 
     JumpAttack1 = 7,
     JumpAttack2 = 8,
@@ -48,6 +50,7 @@ public class PlayerCombatStateFactory
     private PlayerAttack4 attack4;
     private PlayerUppercut uppercut;
     private PlayerDashStab dashStab;
+    private PlayerGuard guard;
 
 
     private PlayerJumpAttack1 jumpAttack1;
@@ -71,6 +74,7 @@ public class PlayerCombatStateFactory
         attack3 = new PlayerAttack3(stateMachine, this);
         attack4 = new PlayerAttack4(stateMachine, this);
         uppercut = new PlayerUppercut(stateMachine, this);
+        guard = new PlayerGuard(stateMachine, this);
 
         jumpAttack1 = new PlayerJumpAttack1(stateMachine, this);
         jumpAttack2 = new PlayerJumpAttack2(stateMachine, this);
@@ -90,6 +94,7 @@ public class PlayerCombatStateFactory
             { PlayerCombatState.Attack4, new StateInfo(attack4, stateMachine.attack4Info) },
             { PlayerCombatState.Uppercut, new StateInfo(uppercut, stateMachine.uppercutInfo) },
             { PlayerCombatState.DashStab, new StateInfo(dashStab, stateMachine.dashStabInfo) },
+            { PlayerCombatState.Guard, new StateInfo(guard, stateMachine.guardInfo) },
 
             { PlayerCombatState.JumpAttack1, new StateInfo(jumpAttack1, stateMachine.jumpAttack1Info) },
             { PlayerCombatState.JumpAttack2, new StateInfo(jumpAttack2, stateMachine.jumpAttack2Info) },

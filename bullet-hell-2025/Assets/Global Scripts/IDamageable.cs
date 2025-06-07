@@ -9,7 +9,7 @@ public interface IDamageable
     public float MaxHealth { get; }
     public UnityEvent OnHealthChanged { get; set; }
 
-    public void TakeDamage(float value);
+    public void TakeDamage(float value, Vector3 attackDir, GameObject attackSource);
     public void IncreaseHealth(float value);
     public void SetHealthValue(float value);
 }

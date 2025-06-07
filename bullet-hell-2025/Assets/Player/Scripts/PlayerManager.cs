@@ -67,11 +67,13 @@ public class PlayerManager : MonoBehaviour
         IgnoreMyOwnColliders();
     }
 
+    private bool animationStarted = false;
     // Update is called once per frame
     void Update()
     {
         CheckGroundedState();
 
+        
     }
 
     private void CheckGroundedState()
@@ -143,4 +145,7 @@ public class PlayerManager : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + groundCheckOffset, groundCheckRadius);
     }
+
+
+    
 }

@@ -299,6 +299,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Guard",
+                    "type": "Button",
+                    "id": "69b6b863-d575-43ee-a9a5-016d4c630aa4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.05)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -365,6 +374,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "AttackQueue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6bfd4a4-9805-4672-938b-ef45f6b147c3",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e46bedb-f7f0-4611-8739-dad4c46ebdec",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -14,6 +14,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
     public CombatScriptableObj attack4Info;
     public CombatScriptableObj uppercutInfo;
     public CombatScriptableObj dashStabInfo;
+    public CombatScriptableObj guardInfo;
 
     [Space(10)]
     public CombatScriptableObj jumpAttack1Info;

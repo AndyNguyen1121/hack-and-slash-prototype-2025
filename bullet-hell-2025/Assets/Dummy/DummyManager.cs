@@ -25,7 +25,7 @@ public class DummyManager : MonoBehaviour, IDamageable
         Debug.Log(transform.parent.name);
     }
 
-    public void TakeDamage(float value)
+    public void TakeDamage(float value, Vector3 attackDir, GameObject attackSource)
     {
         if (!enemyInteractionManager.inKnockUpAnimation)
             animator.Play("Hit", 0 , 0);

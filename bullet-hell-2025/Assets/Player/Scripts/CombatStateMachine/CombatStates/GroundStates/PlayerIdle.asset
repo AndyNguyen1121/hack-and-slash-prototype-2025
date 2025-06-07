@@ -19,7 +19,7 @@ MonoBehaviour:
   stateID: 0
   grounded: 0
   interruptPerformingAction: 0
-  onlyLockedOn: 0
+  onlyLockedOn: 1
   requireDirectionalInput: 0
   directionalInput: {x: 0, y: 0}
   requiredInputs: 
@@ -28,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e8a5908ccbfb0d4ebb0e7f747ef7103, type: 2}
   - {fileID: 11400000, guid: 61be6cc2bb7318d46a36ceab39e78c87, type: 2}
   - {fileID: 11400000, guid: 41f3770791014fe4f858a07b20541b9e, type: 2}
+  - {fileID: 11400000, guid: 461947d1f15d1ac4ea87f812612e8f99, type: 2}

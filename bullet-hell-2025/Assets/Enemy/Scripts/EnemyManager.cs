@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
     [Header("Flags")]
     public bool isPerformingAction;
     public bool canAttack = true;
-    public bool isSendingAttackSignal = false;
+
+    public event Action<EnemyManager> SendAttackSignal;
 
     public void Awake()
     {
@@ -38,7 +40,14 @@ public class EnemyManager : MonoBehaviour, IDamageable
         agent = GetComponent<NavMeshAgent>();
         Health = MaxHealth;
 
+        
         ActivateRootMotion();
+    }
+
+    private void Start()
+    {
+        WorldEnemySpawnerManager.Instance.RegisterEnemy(this);
+        ActivateCooldown();
     }
 
     public void ActivateRootMotion()
@@ -57,7 +66,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     #region Health
-    public void TakeDamage(float value)
+    public void TakeDamage(float value, Vector3 attackDir, GameObject attackSource)
     {
         Health -= value;
     }
@@ -84,7 +93,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
         if (time < 0)
         {
-            cooldown = Random.Range(minCooldown, maxCooldown);
+            cooldown = UnityEngine.Random.Range(minCooldown, maxCooldown);
         }
 
         cooldownCoroutine = StartCoroutine(ResetAttack(cooldown));
@@ -92,13 +101,21 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void EndAttack()
     {
         canAttack = false;
-        isSendingAttackSignal = false;
         WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
     }
 
     public IEnumerator ResetAttack(float time)
     {
         yield return new WaitForSeconds(time);
-        canAttack = true;
+        SendAttackSignal?.Invoke(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (canAttack)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, 0.5f);
+        }
     }
 }

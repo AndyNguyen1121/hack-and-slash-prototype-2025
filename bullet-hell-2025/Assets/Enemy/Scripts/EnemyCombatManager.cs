@@ -20,7 +20,7 @@ public class EnemyCombatManager : MonoBehaviour
             IDamageable playerHealthManager;
             if (other.gameObject.TryGetComponent<IDamageable>(out playerHealthManager))
             {
-                playerHealthManager.TakeDamage(damage);
+                playerHealthManager.TakeDamage(damage, other.ClosestPointOnBounds(weaponCollider.transform.position), gameObject);
                 Debug.Log(other.name);
             }
 

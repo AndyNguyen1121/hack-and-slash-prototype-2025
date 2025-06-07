@@ -15,6 +15,7 @@ public enum InputID
     Sprint,
     Dash,
     LockOn,
+    Guard
 }
 
 #endregion
@@ -40,6 +41,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool jumpPressed = false;
     public bool attackPressed = false;
     public bool dodgePressed = false;
+    public bool isGuarding = false;
 
     [Header("Input Queue")]
     public float defaultQueueTimer = 0.35f;
@@ -101,6 +103,17 @@ public class PlayerInputManager : MonoBehaviour
             inputActions.Camera.LockOnToggle.started += ctx => HandleLockOnInput(true);
             inputActions.Camera.LockOnToggle.canceled += ctx => HandleLockOnInput(false);
             inputActions.Camera.LockOnSwitch.performed += ctx => playerManager.playerCameraManager.SwitchLockOnTargets(ctx.ReadValue<Vector2>().x);
+            inputActions.Actions.Guard.started += ctx =>
+            {
+                isGuarding = true;
+                AddInput(InputID.Guard);
+            };
+
+            inputActions.Actions.Guard.canceled += ctx => 
+            {
+                isGuarding = false;
+                RemoveInput(InputID.Guard);
+            };
         }
 
         inputActions.Enable();

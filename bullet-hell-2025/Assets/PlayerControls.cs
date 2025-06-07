@@ -321,6 +321,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""69b6b863-d575-43ee-a9a5-016d4c630aa4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.05)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -389,6 +398,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""AttackQueue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6bfd4a4-9805-4672-938b-ef45f6b147c3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e46bedb-f7f0-4611-8739-dad4c46ebdec"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -410,6 +441,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
         m_Actions_AttackQueue = m_Actions.FindAction("AttackQueue", throwIfNotFound: true);
+        m_Actions_Guard = m_Actions.FindAction("Guard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -598,6 +630,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Interact;
     private readonly InputAction m_Actions_Attack;
     private readonly InputAction m_Actions_AttackQueue;
+    private readonly InputAction m_Actions_Guard;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -605,6 +638,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputAction @Attack => m_Wrapper.m_Actions_Attack;
         public InputAction @AttackQueue => m_Wrapper.m_Actions_AttackQueue;
+        public InputAction @Guard => m_Wrapper.m_Actions_Guard;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -623,6 +657,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @AttackQueue.started += instance.OnAttackQueue;
             @AttackQueue.performed += instance.OnAttackQueue;
             @AttackQueue.canceled += instance.OnAttackQueue;
+            @Guard.started += instance.OnGuard;
+            @Guard.performed += instance.OnGuard;
+            @Guard.canceled += instance.OnGuard;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -636,6 +673,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @AttackQueue.started -= instance.OnAttackQueue;
             @AttackQueue.performed -= instance.OnAttackQueue;
             @AttackQueue.canceled -= instance.OnAttackQueue;
+            @Guard.started -= instance.OnGuard;
+            @Guard.performed -= instance.OnGuard;
+            @Guard.canceled -= instance.OnGuard;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -670,5 +710,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAttackQueue(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
     }
 }
