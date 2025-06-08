@@ -60,7 +60,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2352714891205079126
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6409638512588433190}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.2
+  m_Radius: 0.54
   m_Speed: 0.01
   m_Acceleration: 10000
   avoidancePriority: 50
@@ -486,9 +486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   movementState: 0
-  attackDistance: 1.25
+  attackDistance: 1
   minimumDistanceRange: {x: 3, y: 7}
-  minDistFromPlayer: 1
   maxDistFromPlayer: 7
   rotationSpeed: 9
   targetInRange: 0

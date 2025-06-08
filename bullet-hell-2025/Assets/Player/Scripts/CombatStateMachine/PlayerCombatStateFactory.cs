@@ -16,6 +16,7 @@ public enum PlayerCombatState
     Uppercut = 5,
     DashStab = 6,
     Guard = 14,
+    CounterAttack = 15,
 
     JumpAttack1 = 7,
     JumpAttack2 = 8,
@@ -51,6 +52,7 @@ public class PlayerCombatStateFactory
     private PlayerUppercut uppercut;
     private PlayerDashStab dashStab;
     private PlayerGuard guard;
+    private PlayerCounterAttack counterAttack;
 
 
     private PlayerJumpAttack1 jumpAttack1;
@@ -75,6 +77,7 @@ public class PlayerCombatStateFactory
         attack4 = new PlayerAttack4(stateMachine, this);
         uppercut = new PlayerUppercut(stateMachine, this);
         guard = new PlayerGuard(stateMachine, this);
+        counterAttack = new PlayerCounterAttack(stateMachine, this);
 
         jumpAttack1 = new PlayerJumpAttack1(stateMachine, this);
         jumpAttack2 = new PlayerJumpAttack2(stateMachine, this);
@@ -95,6 +98,7 @@ public class PlayerCombatStateFactory
             { PlayerCombatState.Uppercut, new StateInfo(uppercut, stateMachine.uppercutInfo) },
             { PlayerCombatState.DashStab, new StateInfo(dashStab, stateMachine.dashStabInfo) },
             { PlayerCombatState.Guard, new StateInfo(guard, stateMachine.guardInfo) },
+            { PlayerCombatState.CounterAttack, new StateInfo(counterAttack, stateMachine.counterAttackInfo) },
 
             { PlayerCombatState.JumpAttack1, new StateInfo(jumpAttack1, stateMachine.jumpAttack1Info) },
             { PlayerCombatState.JumpAttack2, new StateInfo(jumpAttack2, stateMachine.jumpAttack2Info) },

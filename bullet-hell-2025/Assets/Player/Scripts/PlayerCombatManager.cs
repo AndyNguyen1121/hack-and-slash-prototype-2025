@@ -14,6 +14,15 @@ public class PlayerCombatManager : MonoBehaviour
     public Collider weaponCollider;
     public CinemachineImpulseSource camShake;
     private PlayerManager playerManager;
+
+    [Header("Parry")]
+    public float windowFrames;
+    public float elapsedFrames;
+    public bool parryWindowActive;
+
+    public float counterAttackWindowFrames;
+    public float elapsedCounterAttackWindowFrames;
+    public bool canCounterAttack;
     
     [Header("DamageSettings")]
     public float damage;
@@ -27,6 +36,7 @@ public class PlayerCombatManager : MonoBehaviour
     [Header("HitStop")]
     public List<HitstopBaseScript> hitStopProfiles = new();
     public Coroutine hitStopCoroutine;
+
 
     // Cinemachine impulse default settings
     public float defaultImpulseFreq;
@@ -168,6 +178,21 @@ public class PlayerCombatManager : MonoBehaviour
     {
         weaponCollider.enabled = false;
         damagedEnemyColliders.Clear();
+    }
+
+    public void SetKnockUpDamage(float value)
+    {
+        knockUpForce = value;
+    }
+
+    public void SetDamage(float value)
+    {
+        damage = value;
+    }
+
+    public void SetKnockBackDamage(float value)
+    {
+        knockBackForce = value;
     }
 
     #endregion

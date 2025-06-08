@@ -12,6 +12,11 @@ public class PlayerIdle : PlayerCombatBaseState
 
     public override void UpdateState()
     {
+        if (playerManager.playerCombatManager.canCounterAttack && PlayerInputManager.instance.attackPressed)
+        {
+            stateMachine.SwitchState(PlayerCombatState.CounterAttack);
+        }
+
         foreach (CombatScriptableObj criteria in stateMachine.currentStateObj.nextStates)
         {
             if (stateMachine.ValidateCombatStateCriteria(criteria))

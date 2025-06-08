@@ -27,10 +27,6 @@ public class EnemyInteractionManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            KnockBackRigidbody(10, -transform.forward);
-        }
 
         CheckGroundedState();
 

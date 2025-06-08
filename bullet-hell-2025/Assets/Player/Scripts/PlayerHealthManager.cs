@@ -27,6 +27,12 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
 
     public void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
+        if (playerManager.playerCombatManager.parryWindowActive)
+        {
+            Debug.Log("Parried");
+            playerManager.playerCombatManager.canCounterAttack = true;
+            return;
+        }
         value = -value;
         Health += value;
 

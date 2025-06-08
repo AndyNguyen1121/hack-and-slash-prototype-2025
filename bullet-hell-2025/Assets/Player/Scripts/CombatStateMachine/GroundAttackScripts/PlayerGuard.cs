@@ -27,6 +27,11 @@ public class PlayerGuard : PlayerCombatBaseState
             }
         }*/
 
+        if (playerManager.playerCombatManager.canCounterAttack && PlayerInputManager.instance.attackPressed)
+        {
+            stateMachine.SwitchState(PlayerCombatState.CounterAttack);
+        }
+
         if (PlayerInputManager.instance.isGuarding)
         { 
             playerManager.animator.SetBool("isGuarding", true);
@@ -36,10 +41,20 @@ public class PlayerGuard : PlayerCombatBaseState
         {
             playerManager.animator.SetBool("isGuarding", false);
         }
+
+        if (playerManager.playerCombatManager.elapsedFrames <= playerManager.playerCombatManager.windowFrames)
+        {
+            playerManager.playerCombatManager.parryWindowActive = true;
+        }
+        else
+        {
+            playerManager.playerCombatManager.parryWindowActive = false;
+        }
     }
 
     public override void ExitState()
     {
-
+        playerManager.playerCombatManager.elapsedFrames = 0;
+        playerManager.playerCombatManager.parryWindowActive = false;
     }
 }

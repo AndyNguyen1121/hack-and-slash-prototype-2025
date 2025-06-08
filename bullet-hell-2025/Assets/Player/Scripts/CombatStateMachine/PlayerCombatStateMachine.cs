@@ -15,6 +15,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
     public CombatScriptableObj uppercutInfo;
     public CombatScriptableObj dashStabInfo;
     public CombatScriptableObj guardInfo;
+    public CombatScriptableObj counterAttackInfo;
 
     [Space(10)]
     public CombatScriptableObj jumpAttack1Info;
@@ -57,6 +58,27 @@ public class PlayerCombatStateMachine : MonoBehaviour
         currentState.UpdateState();
     }
 
+    private void FixedUpdate()
+    {
+
+        // Frame independent parry window
+        if (currentStateObj == guardInfo)
+        {
+            playerManager.playerCombatManager.elapsedFrames += 1;
+        }
+
+        if (playerManager.playerCombatManager.canCounterAttack
+            && playerManager.playerCombatManager.elapsedCounterAttackWindowFrames <= playerManager.playerCombatManager.counterAttackWindowFrames)
+        {
+            playerManager.playerCombatManager.elapsedCounterAttackWindowFrames += 1;
+        }
+        else
+        {
+            playerManager.playerCombatManager.elapsedCounterAttackWindowFrames = 0;
+            playerManager.playerCombatManager.canCounterAttack = false;
+        }
+
+    }
     public void SwitchState(PlayerCombatState switchState)
     {
         currentState.ExitState();

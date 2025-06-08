@@ -67,13 +67,10 @@ public class PlayerManager : MonoBehaviour
         IgnoreMyOwnColliders();
     }
 
-    private bool animationStarted = false;
     // Update is called once per frame
     void Update()
     {
         CheckGroundedState();
-
-        
     }
 
     private void CheckGroundedState()
