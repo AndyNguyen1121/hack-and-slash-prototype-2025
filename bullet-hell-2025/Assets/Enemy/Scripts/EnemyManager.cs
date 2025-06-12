@@ -15,6 +15,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public UnityEvent OnHealthChanged { get; set; }
 
     public EnemyAnimationManager enemyAnimationManager;
+    public EnemyInteractionManager enemyInteractionManager;
     public EnemyBehavior enemyBehavior;
     public Animator animator;
     public NavMeshAgent agent;
@@ -36,6 +37,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     {
         enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyBehavior = GetComponent<EnemyBehavior>();
+        enemyInteractionManager = GetComponent<EnemyInteractionManager>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         Health = MaxHealth;

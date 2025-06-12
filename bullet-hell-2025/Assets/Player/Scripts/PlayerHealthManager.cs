@@ -29,8 +29,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
     {
         if (playerManager.playerCombatManager.parryWindowActive)
         {
-            Debug.Log("Parried");
-            playerManager.playerCombatManager.canCounterAttack = true;
+            playerManager.playerCombatManager.ActivateParryBehavior();   
             return;
         }
         value = -value;

@@ -19,6 +19,8 @@ public class PlayerCombatManager : MonoBehaviour
     public float windowFrames;
     public float elapsedFrames;
     public bool parryWindowActive;
+    public Transform parryParticleTransform;
+    public ParticleSystem parryParticle;
 
     public float counterAttackWindowFrames;
     public float elapsedCounterAttackWindowFrames;
@@ -48,6 +50,11 @@ public class PlayerCombatManager : MonoBehaviour
         SetCamShakeDefaultValues();
         playerManager = PlayerManager.instance;
     }
+
+    private void FixedUpdate()
+    {
+        HandleCounterAttackBehavior();
+    }
     public void OnWeaponTriggerEnter(Collider collider)
     {
         if ((((1 << collider.gameObject.layer) & whatIsDamageable) != 0) && !damagedEnemyColliders.Contains(collider))
@@ -76,6 +83,27 @@ public class PlayerCombatManager : MonoBehaviour
         damage = stateInfo.damageInfo.damage;
         knockUpForce = stateInfo.damageInfo.knockUpForce;
         knockBackForce = stateInfo.damageInfo.knockBackForce;
+    }
+
+    public void HandleCounterAttackBehavior()
+    {
+        if (canCounterAttack && elapsedCounterAttackWindowFrames <= counterAttackWindowFrames)
+        {
+            elapsedCounterAttackWindowFrames += 1;
+        }
+        else
+        {
+            elapsedCounterAttackWindowFrames = 0;
+            canCounterAttack = false;
+        }
+    }
+
+    public void ActivateParryBehavior()
+    {
+        playerManager.playerCombatManager.canCounterAttack = true;
+        Instantiate(parryParticle, parryParticleTransform.position, Quaternion.identity);
+        ActivateDefaultScreenShakeImpulse(2f);
+        ActivateHitStop(3);
     }
 
 

@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerCombatManager playerCombatManager;
     public PlayerCameraManager playerCameraManager;
     public CharacterController characterController;
+    public FootIK footIK;
+    public Rigidbody rb;
     public MeshTrail meshTrail;
     public Animator animator;
     public Camera mainCam;
@@ -57,6 +59,8 @@ public class PlayerManager : MonoBehaviour
         playerCombatManager = GetComponent<PlayerCombatManager>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         characterController = GetComponent<CharacterController>();
+        footIK = GetComponent<FootIK>();
+        rb = GetComponent<Rigidbody>();
         meshTrail = GetComponent<MeshTrail>();  
         animator = GetComponent<Animator>();
     }

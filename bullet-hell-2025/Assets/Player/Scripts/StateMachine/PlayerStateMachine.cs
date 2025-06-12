@@ -70,7 +70,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (!playerManager.canMove || !playerManager.characterController.enabled)
             return;
 
-        if (!playerManager.animator.applyRootMotion && playerInputManager.movementDirection != Vector2.zero)
+        if (!playerManager.animator.applyRootMotion && playerInputManager.clampedDirection != Vector2.zero)
         {
 
 
@@ -173,7 +173,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (!playerManager.canRotate)
             return;
 
-        if (playerInputManager.movementDirection != Vector2.zero)
+        if (playerInputManager.clampedDirection != Vector2.zero)
         {
 
             if (playerDirection != Vector3.zero)

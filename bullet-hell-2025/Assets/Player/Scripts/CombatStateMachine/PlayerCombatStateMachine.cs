@@ -67,16 +67,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
             playerManager.playerCombatManager.elapsedFrames += 1;
         }
 
-        if (playerManager.playerCombatManager.canCounterAttack
-            && playerManager.playerCombatManager.elapsedCounterAttackWindowFrames <= playerManager.playerCombatManager.counterAttackWindowFrames)
-        {
-            playerManager.playerCombatManager.elapsedCounterAttackWindowFrames += 1;
-        }
-        else
-        {
-            playerManager.playerCombatManager.elapsedCounterAttackWindowFrames = 0;
-            playerManager.playerCombatManager.canCounterAttack = false;
-        }
+        
 
     }
     public void SwitchState(PlayerCombatState switchState)

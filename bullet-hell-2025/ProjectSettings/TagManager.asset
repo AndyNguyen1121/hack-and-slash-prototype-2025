@@ -15,8 +15,8 @@ TagManager:
   - DamageableTarget
   - IgnoreCameraCollision
   - LockOnUI
-  - 
-  - 
+  - Player
+  - Stairs
   - 
   - 
   - 

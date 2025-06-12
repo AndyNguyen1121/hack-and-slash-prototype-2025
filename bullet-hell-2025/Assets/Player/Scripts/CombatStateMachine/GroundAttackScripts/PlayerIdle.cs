@@ -28,6 +28,7 @@ public class PlayerIdle : PlayerCombatBaseState
 
     public override void ExitState()
     {
-        
+        playerManager.playerCombatManager.elapsedFrames = 0;
+        playerManager.playerCombatManager.parryWindowActive = false;
     }
 }

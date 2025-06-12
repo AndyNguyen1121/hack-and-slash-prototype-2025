@@ -158,7 +158,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         // Start jump loop if falling too long without jumping
         if (!playerManager.isGrounded && !isJumping && timeAboveGround > 0.2f && !fallingWithoutJump)
-        {
+        { 
             playerManager.playerAnimationManager.PlayActionAnimation("JumpCycle", false, false, false, true, true, true);
             fallingWithoutJump = true;  
         }
@@ -168,7 +168,8 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (!playerManager.isPerformingAction && playerManager.isGrounded && playerInputManager.jumpPressed)
         {
-            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", false, false, false, true, true, true, 0.2f);
+            playerManager.animator.SetBool("FootIK", false);
+            playerManager.playerAnimationManager.PlayActionAnimation("JumpUp", false, false, false, true, true, true, 0.05f);
         }
         else if (isJumping && canDoubleJump && playerInputManager.jumpPressed)
         {

@@ -131,7 +131,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void HandleAttacks()
     {
-        if (enemyManager.canAttack && !enemyManager.isPerformingAction)
+        if (!enemyManager.isPerformingAction)
         {
             enemyManager.canAttack = false;
             enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyAttack1");
@@ -240,7 +240,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void HandleStunnedState()
     {
-        if (isStunned)
+        if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation)
         {
             enemyManager.agent.enabled = false;
         }

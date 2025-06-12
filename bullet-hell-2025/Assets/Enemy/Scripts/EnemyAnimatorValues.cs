@@ -6,6 +6,7 @@ public class EnemyAnimatorValues : StateMachineBehaviour
 {
     public bool isStunned;
     public bool isPerformingAction;
+    public bool enableAgent;
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,6 +17,7 @@ public class EnemyAnimatorValues : StateMachineBehaviour
         {
             enemyManager.enemyBehavior.isStunned = isStunned;
             enemyManager.isPerformingAction = isPerformingAction;
+            enemyManager.agent.enabled = enableAgent;
         }
     }
 

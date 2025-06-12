@@ -15,6 +15,8 @@ public class PlayerCounterAttack : PlayerCombatBaseState
             canRotate: playerManager.playerCameraManager.isLockedOn, // allow lock on rotations to occur during attack
             canMove: false,
             useGravity: true);
+
+        Debug.Log(playerManager.playerCombatManager.parryWindowActive + "Counter");
     }
 
     public override void UpdateState()
@@ -30,6 +32,6 @@ public class PlayerCounterAttack : PlayerCombatBaseState
 
     public override void ExitState()
     {
-
+        Debug.Log(playerManager.playerCombatManager.parryWindowActive + "CounterEnd");
     }
 }

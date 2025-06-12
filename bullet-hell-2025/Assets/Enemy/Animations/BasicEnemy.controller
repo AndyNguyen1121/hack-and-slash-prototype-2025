@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStunned: 1
   isPerformingAction: 0
+  enableAgent: 0
 --- !u!1102 &-1300444270768726155
 AnimatorState:
   serializedVersion: 6
@@ -476,6 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStunned: 0
   isPerformingAction: 0
+  enableAgent: 1
 --- !u!1102 &6126032859773415582
 AnimatorState:
   serializedVersion: 6

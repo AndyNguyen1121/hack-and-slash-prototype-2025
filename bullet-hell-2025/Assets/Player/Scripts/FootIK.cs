@@ -1,9 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Transforms;
 using Unity.VisualScripting;
-using UnityEditor.Animations.Rigging;
 using UnityEngine;
 
 public class FootIK : MonoBehaviour
@@ -11,9 +10,10 @@ public class FootIK : MonoBehaviour
     [Header("IK Settings")]
     public bool enableFootIK = true;
     public LayerMask validLayerInteractions;
+    public LayerMask stairLayers;
 
     private Vector3 rightFootPosition, leftFootPosition, rightFootIKPos, leftFootIKPos;
-    private float lastPelvisYPos, lastLeftFootYPos, lastRightFootYPos;
+    public float lastPelvisYPos, lastLeftFootYPos, lastRightFootYPos;
     private Quaternion rightFootRotation, leftFootRotation;
     private float previousRotationWeight;
 
@@ -22,7 +22,7 @@ public class FootIK : MonoBehaviour
     public float footRotationSpeed = 0.5f;
     public float maxRotationSlerp;
     public bool enableRotations = true;
-    public Vector3 hintPos;
+    public Vector3 finalIkPlacementOffset;
 
     public string leftFootAnimRotationName;
     public string rightFootAnimRotationName;
@@ -49,16 +49,21 @@ public class FootIK : MonoBehaviour
     [Header("Movement Detection")]
     public float idleTime;
     public float minimumTimeOnSlope;
+    public bool isRunning;
 
     [Header("Debug")]
     public bool debugVisible = true;
     private Animator animator;
+    public CharacterController characterController;
     public Vector3 localSpaceIkPos;
+    public float baseCenterY;
 
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
+        characterController = PlayerManager.instance.characterController;
+        baseCenterY = characterController.center.y;
     }
 
     private void Update()
@@ -75,33 +80,47 @@ public class FootIK : MonoBehaviour
     {
         if (!enableFootIK)
         {
-            lastPelvisYPos = hips.position.y;
+            lastPelvisYPos = PlayerManager.instance.rb.centerOfMass.y;
         }
 
         AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightFoot);
         AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftFoot);
-
-       
+;
 
     }
 
+    public float lastIkPosBeforeDisabled;
     private void OnAnimatorIK(int layerIndex)
     {
+            
         FindValidIKPosition(rightFootPosition, HumanBodyBones.RightFoot, AvatarIKGoal.RightFoot, ref rightFootIKPos, ref rightFootRotation);
         FindValidIKPosition(leftFootPosition, HumanBodyBones.LeftFoot, AvatarIKGoal.LeftFoot, ref leftFootIKPos, ref leftFootRotation);
+
+        
+
+        /*if (onSlope)
+        {
+            Vector3 bodyPos = animator.bodyPosition;
+            float center = transform.TransformPoint(characterController.center).y;
+
+            bodyPos.y = center;
+            animator.bodyPosition = bodyPos;
+        }*/
+
+
 
         if ((onSlope || onSteps) && idleTime < minimumTimeOnSlope)
         {
             lastPelvisYPos = animator.bodyPosition.y;
             return;
         }
-        if (!enableFootIK)
-        {
-            
-            return;
-        }
 
         AdjustPelvisPosition();
+
+        if (!enableFootIK)
+        {
+            return;
+        }
 
         animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
         animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
@@ -113,6 +132,8 @@ public class FootIK : MonoBehaviour
         MoveFeetToIkPoint(AvatarIKGoal.RightFoot, rightFootIKPos, ref lastRightFootYPos);
     }
 
+    
+
     #region Solver Methods
     private void MoveFeetToIkPoint(AvatarIKGoal foot, Vector3 positionIkHolder, ref float lastFootPositionY)
     {
@@ -123,7 +144,7 @@ public class FootIK : MonoBehaviour
             positionIkHolder = transform.InverseTransformPoint(positionIkHolder);
             footIKPos = transform.InverseTransformPoint(footIKPos);
 
-            float adjustedYPosition = Mathf.Lerp(lastFootPositionY, positionIkHolder.y, footHeightAdjustmentSpeed);
+            float adjustedYPosition = Mathf.Lerp(lastFootPositionY, positionIkHolder.y, footHeightAdjustmentSpeed * Time.deltaTime);
             footIKPos.y += adjustedYPosition;
 
             lastFootPositionY = adjustedYPosition;
@@ -141,7 +162,7 @@ public class FootIK : MonoBehaviour
         if (animator.GetFloat(animRotationParam) > 0 && enableRotations)
         {
             animator.SetIKRotation(foot, rotation);
-            lerpedWeight = Mathf.Lerp(previousRotationWeight, maxRotationSlerp, footRotationSpeed * Time.deltaTime);
+            lerpedWeight = Mathf.Lerp(previousRotationWeight, maxRotationSlerp, footRotationSpeed);
         }
         else
         {
@@ -164,16 +185,17 @@ public class FootIK : MonoBehaviour
         {
             Debug.DrawLine(footPosition + rayCastOffsetXZ, footPosition + (Vector3.down * raycastLength), Color.cyan);
         }*/
-
-        if (Physics.Raycast(footPosition + rayCastOffsetXZ, -transform.up, out hit, raycastLength, validLayerInteractions))
+        if (Physics.Raycast(footPosition + rayCastOffsetXZ, -transform.up, out hit, raycastLength, stairLayers))
         {
-
-            feetIkPositions = hit.point;
-
+            feetIkPositions = hit.point + finalIkPlacementOffset;
             Quaternion slopeAlignment = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-
             feetIkRotation = slopeAlignment;
-
+        }
+        else if (Physics.Raycast(footPosition + rayCastOffsetXZ, -transform.up, out hit, raycastLength, validLayerInteractions))
+        {
+            feetIkPositions = hit.point + finalIkPlacementOffset;
+            Quaternion slopeAlignment = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            feetIkRotation = slopeAlignment;
         }
         else
         {
@@ -189,15 +211,29 @@ public class FootIK : MonoBehaviour
             return;
         }
 
-        float leftFootOffset = leftFootIKPos.y - transform.position.y;
-        float rightFootOffset = rightFootIKPos.y - transform.position.y;
+        // If onSlope → let animation control pelvis
+        /*if (onSlope && !animator.GetBool("isMoving"))
+        {
+            lastPelvisYPos = animator.bodyPosition.y;
+            return;
+        }*/
+
+        
+
+
+        float leftFootOffset;
+        float rightFootOffset;
+
+        leftFootOffset = leftFootIKPos.y - transform.position.y;
+        rightFootOffset = rightFootIKPos.y - transform.position.y;
 
         float desiredOffset = leftFootOffset < rightFootOffset ? leftFootOffset : rightFootOffset;
-        
+
         Vector3 desiredPos = animator.bodyPosition + (Vector3.up * desiredOffset);
         desiredPos.y = Mathf.Lerp(lastPelvisYPos, desiredPos.y, pelvisAdjustmentSpeed * Time.deltaTime);
         animator.bodyPosition = desiredPos;
         lastPelvisYPos = desiredPos.y;
+
     }
 
     private void AdjustFeetTarget(ref Vector3 footPosition, HumanBodyBones foot)
@@ -207,7 +243,7 @@ public class FootIK : MonoBehaviour
 
     private void DetectIdleTime(ref float time)
     {
-        if (PlayerInputManager.instance.movementDirection == Vector2.zero)
+        if (PlayerInputManager.instance.clampedDirection == Vector2.zero || !PlayerManager.instance.canMove)
         {
             time += Time.deltaTime;
         }
@@ -257,21 +293,20 @@ public class FootIK : MonoBehaviour
         }
     }
 
+    public void ActivateFootIKAnimationEvent()
+    {
+        animator.SetBool("FootIK", true);
+    }
+
     #endregion
     private void OnDrawGizmos()
     {
-
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.cyan;
 
         Gizmos.DrawWireSphere(rightFootPosition, 0.2f);
         Gizmos.DrawWireSphere(leftFootPosition, 0.2f);
-        Gizmos.DrawRay(hips.position + slopeDetectionOffset, -transform.up * slopeRaycastLength);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(rightFootIKPos, 0.2f);
-        Gizmos.DrawWireSphere(leftFootIKPos, 0.2f);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(hips.position + transform.rotation * stepDetectionOffset, -transform.up * stepRaycastLength);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(new Vector3(leftFootPosition.x, leftFootPosition.y + raycastDistanceAboveFoot, leftFootPosition.z) + rayCastOffsetXZ, -transform.up * raycastLength);
     }
 }

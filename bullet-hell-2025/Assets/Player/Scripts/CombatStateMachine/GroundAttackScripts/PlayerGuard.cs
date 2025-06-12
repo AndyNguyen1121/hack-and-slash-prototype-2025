@@ -14,7 +14,9 @@ public class PlayerGuard : PlayerCombatBaseState
             rotateTowardsPlayerInput: !playerManager.playerCameraManager.isLockedOn, // do not follow input rotation when locked on
             canRotate: false, // allow lock on rotations to occur during attack
             canMove: false,
-            useGravity: true);
+            useGravity: true,
+            normalizedTime: 0.01f);
+
     }
 
     public override void UpdateState()
@@ -26,11 +28,6 @@ public class PlayerGuard : PlayerCombatBaseState
                 stateMachine.SwitchState(criteria.stateID);
             }
         }*/
-
-        if (playerManager.playerCombatManager.canCounterAttack && PlayerInputManager.instance.attackPressed)
-        {
-            stateMachine.SwitchState(PlayerCombatState.CounterAttack);
-        }
 
         if (PlayerInputManager.instance.isGuarding)
         { 
@@ -50,11 +47,18 @@ public class PlayerGuard : PlayerCombatBaseState
         {
             playerManager.playerCombatManager.parryWindowActive = false;
         }
+
+        if (playerManager.playerCombatManager.canCounterAttack && PlayerInputManager.instance.attackPressed)
+        {
+            stateMachine.SwitchState(PlayerCombatState.CounterAttack);
+        }
     }
 
     public override void ExitState()
     {
         playerManager.playerCombatManager.elapsedFrames = 0;
         playerManager.playerCombatManager.parryWindowActive = false;
+
+        Debug.Log(playerManager.playerCombatManager.parryWindowActive);
     }
 }

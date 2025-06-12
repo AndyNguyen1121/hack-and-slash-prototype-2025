@@ -16,7 +16,7 @@ MonoBehaviour:
     damage: 10
     knockUpForce: 0
     knockBackForce: 0
-  stateID: 0
+  stateID: 15
   grounded: 0
   interruptPerformingAction: 0
   onlyLockedOn: 0

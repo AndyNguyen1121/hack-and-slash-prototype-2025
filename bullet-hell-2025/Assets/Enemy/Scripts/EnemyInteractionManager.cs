@@ -38,6 +38,8 @@ public class EnemyInteractionManager : MonoBehaviour
             inKnockUpAnimation = false;
             rb.isKinematic = true;
         }
+
+        Debug.Log(rb.velocity);
     }
 
     private void CheckGroundedState()
@@ -47,22 +49,22 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public void JumpToHeightInTime(float height)
     {
+        Debug.Log("hit");
+        timeOnGround = 0f;
         if (height == 0)
             return;
 
-        //enemyManager.agent.enabled = false;
         if (!inKnockUpAnimation)
             animator.Play("KnockUp", 0, 0f);
         else
             animator.Play("KnockUpRestart", 0, 0f);
 
         inKnockUpAnimation = true;
+        
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
-        
-        rb.AddForce(Vector3.up * height, ForceMode.Impulse);
 
-        timeOnGround = 0f;
+        rb.AddForce(Vector3.up * height, ForceMode.Impulse);
 
 
     }
