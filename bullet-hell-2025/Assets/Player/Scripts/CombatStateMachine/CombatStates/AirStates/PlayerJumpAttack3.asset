@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerJumpAttack3
   m_EditorClassIdentifier: 
   damageInfo:
-    damage: 0
-    knockUpForce: 5
+    damage: 15
+    knockUpForce: 0.5
     knockBackForce: 0
   stateID: 9
   grounded: 0

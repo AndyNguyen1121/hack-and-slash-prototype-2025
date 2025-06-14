@@ -117215,7 +117215,7 @@ AnimationClip:
     functionName: SetKnockUpDamage
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 7
+    floatParameter: 2
     intParameter: 0
     messageOptions: 0
   - time: 0.93333334

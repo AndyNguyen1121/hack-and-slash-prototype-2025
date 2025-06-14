@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCombatManager playerCombatManager;
     public PlayerCameraManager playerCameraManager;
     public CharacterController characterController;
+    public PlayerUIManager playerUIManager;
     public FootIK footIK;
     public Rigidbody rb;
     public MeshTrail meshTrail;
@@ -60,6 +61,7 @@ public class PlayerManager : MonoBehaviour
         playerCameraManager = GetComponent<PlayerCameraManager>();
         characterController = GetComponent<CharacterController>();
         footIK = GetComponent<FootIK>();
+        playerUIManager = GetComponent<PlayerUIManager>();
         rb = GetComponent<Rigidbody>();
         meshTrail = GetComponent<MeshTrail>();  
         animator = GetComponent<Animator>();
@@ -140,6 +142,18 @@ public class PlayerManager : MonoBehaviour
     {
         useGravity = true;
     }
+
+    public void PlayerFootstepSFX(AnimationEvent evt)
+    {
+        if (evt.animatorClipInfo.weight < 0.5f)
+            return;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
+    }
+    public void MyCallback(AnimationEvent evt)
+    {
+
+    }
+
     #endregion
     private void OnDrawGizmos()
     {

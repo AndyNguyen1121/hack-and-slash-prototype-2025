@@ -16,6 +16,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public EnemyAnimationManager enemyAnimationManager;
     public EnemyInteractionManager enemyInteractionManager;
+    public EnemyCombatManager enemyCombatManager;
     public EnemyBehavior enemyBehavior;
     public Animator animator;
     public NavMeshAgent agent;
@@ -38,6 +39,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyBehavior = GetComponent<EnemyBehavior>();
         enemyInteractionManager = GetComponent<EnemyInteractionManager>();
+        enemyCombatManager = GetComponent<EnemyCombatManager>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         Health = MaxHealth;
@@ -68,9 +70,39 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     #region Health
-    public void TakeDamage(float value, Vector3 attackDir, GameObject attackSource)
+    public void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
         Health -= value;
+
+        Vector3 hitDirection = attackLocation - transform.position;
+        hitDirection.y = 0;
+
+        float horizontalHitDir = Vector3.Dot(hitDirection.normalized, transform.right);
+        float verticalHitDir = Vector3.Dot(transform.forward, hitDirection.normalized);
+
+
+        if (Mathf.Abs(horizontalHitDir) > Mathf.Abs(verticalHitDir))
+        {
+            if (horizontalHitDir < 0)
+            {
+                animator.Play("EnemyReactLeft", 0, 0f);
+            }
+            else
+            {
+                animator.Play("EnemyReactRight", 0, 0f);
+            }
+        }
+        else
+        {
+            if (verticalHitDir < 0)
+            {
+                animator.Play("EnemyReactBack", 0, 0f);
+            }
+            else
+            {
+                animator.Play("EnemyReactFront", 0, 0f);
+            }
+        }
     }
 
     public void IncreaseHealth(float value)
@@ -82,6 +114,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
     {
         Health = value;
     }
+
+
 
     #endregion
     public void ActivateCooldown(float time = -1)

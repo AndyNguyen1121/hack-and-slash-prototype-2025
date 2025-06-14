@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class PlayerHealthManager : MonoBehaviour, IDamageable
 {
@@ -23,6 +24,8 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
     private void Start()
     {
         playerManager = PlayerManager.instance;
+
+        playerManager.playerUIManager.SetHealthSliderValue(1);
     }
 
     public void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
@@ -35,6 +38,24 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         value = -value;
         Health += value;
 
+        playerManager.playerUIManager.UpdateHealthSliders(Health, MaxHealth);
+
+        HandleHitBehavior(value, attackLocation, attackSource);
+    }
+
+    public void IncreaseHealth(float value)
+    {
+        playerManager.playerUIManager.UpdateHealthSliders(Health, MaxHealth);
+    }
+
+    public void SetHealthValue(float value)
+    {
+        Health = value;
+        playerManager.playerUIManager.UpdateHealthSliders(Health, MaxHealth);
+    }
+
+    public void HandleHitBehavior(float value, Vector3 attackLocation, GameObject attackSource)
+    {
         Vector3 hitDirection = attackLocation - transform.position;
         hitDirection.y = 0;
 
@@ -67,21 +88,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
 
         Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
 
-        Debug.Log($"Bro really got hit for {value} damage");
-
         playerManager.playerCombatManager.ActivateIntenseScreenShakeImpulse(1.5f);
     }
-
-    public void IncreaseHealth(float value)
-    {
-
-    }
-
-    public void SetHealthValue(float value)
-    {
-        Health = value;
-    }
-
-    
 
 }

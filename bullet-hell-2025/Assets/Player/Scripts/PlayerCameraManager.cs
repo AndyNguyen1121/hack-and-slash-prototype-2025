@@ -54,7 +54,6 @@ public class PlayerCameraManager : MonoBehaviour
 
                 if (cameras[i].name == lockOnCam.name && target != null)
                 {
-                    cameras[i].LookAt = target;
                     currentLockOnTarget = target;
                     isLockedOn = true;
                     playerManager.animator.SetBool("lockedOn", true);
@@ -62,7 +61,10 @@ public class PlayerCameraManager : MonoBehaviour
                     LockOnTarget lockOnScript = currentLockOnTarget.GetComponent<LockOnTarget>();
 
                     if (lockOnScript != null)
+                    {
                         LockOnUI.instance.ChangeTarget(lockOnScript.cursorPosition);
+                        cameras[i].LookAt = lockOnScript.cursorPosition;
+                    }
                     else
                         Debug.LogWarning("No LockOnTarget component on object.");
                 }
@@ -71,6 +73,7 @@ public class PlayerCameraManager : MonoBehaviour
                     isLockedOn = false;
                     playerManager.animator.SetBool("lockedOn", false);
                     LockOnUI.instance.ChangeTarget(null);
+                    currentLockOnTarget = null;
                 }
 
                 cameras[i].Priority = 10;
@@ -80,6 +83,7 @@ public class PlayerCameraManager : MonoBehaviour
                 cameras[i].Priority = 0;
             }
         }
+
     }
 
     private void FindValidLockOnTargets()
@@ -133,6 +137,7 @@ public class PlayerCameraManager : MonoBehaviour
         }
         else
         {
+            currentLockOnTarget = null;
             SwitchCameras(0);
         }
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerUppercut
   m_EditorClassIdentifier: 
   damageInfo:
-    damage: 0
-    knockUpForce: 7.9
+    damage: 5
+    knockUpForce: 3
     knockBackForce: 0
   stateID: 5
   grounded: 1

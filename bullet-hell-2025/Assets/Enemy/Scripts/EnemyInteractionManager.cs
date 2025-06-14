@@ -38,8 +38,6 @@ public class EnemyInteractionManager : MonoBehaviour
             inKnockUpAnimation = false;
             rb.isKinematic = true;
         }
-
-        Debug.Log(rb.velocity);
     }
 
     private void CheckGroundedState()
@@ -64,7 +62,16 @@ public class EnemyInteractionManager : MonoBehaviour
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
 
-        rb.AddForce(Vector3.up * height, ForceMode.Impulse);
+        float gravity = Mathf.Abs(Physics.gravity.y);
+        float mass = rb.mass;
+
+        float velocity = Mathf.Sqrt(2f * gravity * Mathf.Abs(height));
+
+        float impulseForce = mass * velocity;
+
+        Vector3 direction = height > 0 ? Vector3.up : Vector3.down;
+
+        rb.AddForce(direction * impulseForce, ForceMode.Impulse);
 
 
     }

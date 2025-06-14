@@ -102,6 +102,7 @@ public class PlayerCombatManager : MonoBehaviour
     {
         playerManager.playerCombatManager.canCounterAttack = true;
         Instantiate(parryParticle, parryParticleTransform.position, Quaternion.identity);
+        PostProcessManager.instance.ActivateParryPostProcessingEffect();
         ActivateDefaultScreenShakeImpulse(2f);
         ActivateHitStop(3);
     }

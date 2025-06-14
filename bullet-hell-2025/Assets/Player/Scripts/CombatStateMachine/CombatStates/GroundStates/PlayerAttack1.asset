@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttack1
   m_EditorClassIdentifier: 
   damageInfo:
-    damage: 20
+    damage: 10
     knockUpForce: 0
     knockBackForce: 0
   stateID: 1
