@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerHelmbreak
   m_EditorClassIdentifier: 
   damageInfo:
-    damage: 0
+    damage: 25
     knockUpForce: -30
     knockBackForce: 0
   stateID: 13

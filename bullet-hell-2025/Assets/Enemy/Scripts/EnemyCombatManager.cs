@@ -39,4 +39,24 @@ public class EnemyCombatManager : MonoBehaviour
         colliderIds.Clear();
         weaponCollider.enabled = false;
     }
+
+    public void UnparentWeapon()
+    {
+        weaponCollider.transform.parent = null;
+
+        Rigidbody weaponRb = weaponCollider.GetComponent<Rigidbody>();
+        if (weaponRb != null)
+        {
+            weaponRb.isKinematic = false;
+        }
+
+        IColliderBridge weaponColliderBridge = weaponCollider.GetComponent<IColliderBridge>();
+        if (weaponColliderBridge != null)
+        {
+            ((MonoBehaviour)weaponColliderBridge).enabled = false;
+        }
+
+        weaponCollider.enabled = true;
+        weaponCollider.isTrigger = false;
+    }
 }

@@ -35,17 +35,16 @@ public class EnemyBehavior : MonoBehaviour
     
 
     [Header("Flags")]
-    public bool isAlive = true;
     public bool isStunned = false;
     public bool canMove = true;
     public bool isStopped = false;
 
     // Start is called before the first frame update
-    private void Awake()
+    public virtual void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
     }
-    void Start()
+    public virtual void Start()
     {
         minDistance = minimumDistanceRange.x;
         CreateEnemyBehaviorTree();
@@ -54,7 +53,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         UpdateRangeToTarget();
         HandleStunnedState();
@@ -70,21 +69,6 @@ public class EnemyBehavior : MonoBehaviour
         targetInRange =  distanceFromPlayer <= attackDistance;
 
     }
-
-    public void ToggleEnemy()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            isAlive = !isAlive;
-            GetComponentInChildren<SkinnedMeshRenderer>().enabled = isAlive;
-        }
-
-        if (!isAlive)
-        {
-            Debug.Log("Dead");
-        }
-    }
-
     public void CreateEnemyBehaviorTree()
     {
         enemyBehaviorTree = new BehaviorTree("EnemyBehaviorTree");
@@ -95,7 +79,7 @@ public class EnemyBehavior : MonoBehaviour
         // Alive
         Sequence isAliveSequence = new Sequence("AliveSequence");
         activeStatus.AddChild(isAliveSequence);
-        isAliveSequence.AddChild(new Leaf("CheckIsAlive", new Condition(() => isAlive)));
+        isAliveSequence.AddChild(new Leaf("CheckIsAlive", new Condition(() => enemyManager.isAlive)));
 
         // Handles Attack and Movement
         isAliveSequence.AddChild(ActivityTree());
@@ -103,12 +87,41 @@ public class EnemyBehavior : MonoBehaviour
 
         // Dead
         Sequence isDeadSequence = new Sequence("IsDead");
-        isDeadSequence.AddChild(new Leaf("CheckIfDead", new Condition(() => !isAlive)));
+        isDeadSequence.AddChild(new Leaf("CheckIfDead", new Condition(() => !enemyManager.isAlive)));
         activeStatus.AddChild(isDeadSequence);
-        isDeadSequence.AddChild(new Leaf("PrintIsDead", new ActionStrategy(ToggleEnemy)));
+        isDeadSequence.AddChild(new Leaf("PrintIsDead", new ActionStrategy(StartDeathSequence)));
     }
 
-    public Node ActivityTree()
+    private bool deathSequenceStarted;
+    public virtual void StartDeathSequence()
+    {
+        if (deathSequenceStarted)
+            return;
+        deathSequenceStarted = true;
+
+        
+        StopMovement();
+        WorldEnemySpawnerManager.Instance.DeregisterEnemy(enemyManager);
+        enemyManager.enemyCombatManager.UnparentWeapon();
+
+        if (!enemyManager.enemyInteractionManager.isGrounded)
+        {
+            DissolveObject dissolveScript = GetComponent<DissolveObject>();
+
+            if (dissolveScript != null)
+            {
+                dissolveScript.StartDissolve();
+                DOVirtual.DelayedCall(dissolveScript.fadeSpeed, () => enemyManager.DestroySelf());
+              
+            }
+        }
+        else
+        {
+            enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyDeath");
+        }
+    }
+
+    private Node ActivityTree()
     {
         Sequence attackAndMovementSeq = new Sequence("AttackAndMovement");
         attackAndMovementSeq.AddChild(new Leaf("IsStunned", new Condition(() => !isStunned)));
@@ -129,7 +142,7 @@ public class EnemyBehavior : MonoBehaviour
         return attackAndMovementSeq;
     }
 
-    public void HandleAttacks()
+    private void HandleAttacks()
     {
         if (!enemyManager.isPerformingAction)
         {
@@ -138,7 +151,7 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void HandleMovements()
+    private void HandleMovements()
     {
         if (!enemyManager.agent.enabled)
             return;
@@ -164,7 +177,7 @@ public class EnemyBehavior : MonoBehaviour
     private bool minDistanceRangeChosen;
     public float minDistance;
     private int retreatAxisDirection;
-    public void HandleChaseMovement()
+    private void HandleChaseMovement()
     {
         choseRetreatDirection = false;
         minDistanceRangeChosen = false;
@@ -185,7 +198,7 @@ public class EnemyBehavior : MonoBehaviour
         enemyManager.enemyAnimationManager.SetMovementParameters(velocity.x, velocity.z);
     }
 
-    public void HandleRetreatMovement()
+    private void HandleRetreatMovement()
     {
         LookTowardsPlayer();
         enemyManager.agent.updateRotation = false;
@@ -238,7 +251,7 @@ public class EnemyBehavior : MonoBehaviour
         enemyManager.enemyAnimationManager.SetMovementParameters(localVelocity.x, localVelocity.z);
     }
 
-    public void HandleStunnedState()
+    private void HandleStunnedState()
     {
         if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation)
         {
@@ -250,24 +263,24 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void ChangeDeadzoneBuffer()
+    private void ChangeDeadzoneBuffer()
     {
         deadzoneBuffer = defaultDeadzoneBuffer;
     }
-    public void StopMovement()
+    private void StopMovement()
     {
         deadzoneBuffer = defaultDeadzoneBuffer;
         isStopped = true;
         enemyManager.agent.updatePosition = false;
     }
 
-    public void ResumeMovement()
+    private void ResumeMovement()
     {
         deadzoneBuffer = 0;
         isStopped = false;
     }
 
-    public void LookTowardsPlayer()
+    private void LookTowardsPlayer()
     {
         Vector3 dirTowardsPlayer = player.position - transform.position;
         dirTowardsPlayer.y = 0;
@@ -275,7 +288,7 @@ public class EnemyBehavior : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
     }
 
-    public void LookTowardsPath()
+    private void LookTowardsPath()
     {
         Vector3 dirTowardsPath = enemyManager.agent.desiredVelocity.normalized;
 

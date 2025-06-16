@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: F:/FMOD/HackNSlashAudio/hacknslash/Build/Desktop/Events.bank
   Name: Events
   StudioPath: bank:/Events
-  lastModified: 638854390588479955
+  lastModified: 638856020575074547
   FileSizes:
   - Name: Desktop
-    Value: 5920
+    Value: 5376
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 2523555310946407451}
   StringsBanks:
   - {fileID: -8607440017814678928}
-  cacheTime: 638854390588479955
+  cacheTime: 638856020575074547
   cacheVersion: 131624
 --- !u!114 &410115327081991160
 MonoBehaviour:

@@ -96,7 +96,7 @@ public class PlayerCameraManager : MonoBehaviour
         {
             LockOnTarget lockOnTarget = target.GetComponentInChildren<LockOnTarget>();
 
-            if (lockOnTarget != null)
+            if (lockOnTarget != null && lockOnTarget.enabled)
             {
                 Vector3 directionRelativeToCamera = lockOnTarget.gameObject.transform.position - mainCam.transform.position;
                 float angleRelativeToCamera = Vector3.Angle(mainCam.transform.forward, directionRelativeToCamera);
@@ -176,6 +176,11 @@ public class PlayerCameraManager : MonoBehaviour
                 SwitchCameras(1, closestTarget);
             }
         }
+    }
+
+    public void DisableCurrentTarget()
+    {
+        SwitchCameras(0);
     }
 
     private void OnDrawGizmos()

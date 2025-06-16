@@ -140,7 +140,10 @@ PrefabInstance:
       addedObject: {fileID: 679785320618143384}
     - targetCorrespondingSourceObject: {fileID: 991772141375400263, guid: a821353c6e9508646aeab10299bff878, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8147161204152211288}
+      addedObject: {fileID: 356959560532505831}
+    - targetCorrespondingSourceObject: {fileID: 991772141375400263, guid: a821353c6e9508646aeab10299bff878, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1324032582767248092}
   m_SourcePrefab: {fileID: 100100000, guid: a821353c6e9508646aeab10299bff878, type: 3}
 --- !u!1 &1273012962021647082 stripped
 GameObject:
@@ -160,8 +163,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCombatManager: {fileID: 0}
---- !u!136 &8147161204152211288
-CapsuleCollider:
+--- !u!54 &356959560532505831
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273012962021647082}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1324032582767248092
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,11 +208,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.16757374
-  m_Height: 0.5853611
-  m_Direction: 1
-  m_Center: {x: 0.00000025109793, y: 0.14910251, z: -0.0000002714242}
+  serializedVersion: 3
+  m_Size: {x: 0.33514747, y: 0.71, z: 0.11}
+  m_Center: {x: 0.000000012679358, y: 0.14910245, z: 0.0000037816917}
 --- !u!4 &1936959228001712208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 470814377574888445, guid: a821353c6e9508646aeab10299bff878, type: 3}
@@ -218,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 650bf623ec125cc4faf5feefadab5f5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.1
+      value: 43.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 650bf623ec125cc4faf5feefadab5f5b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -300,6 +328,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 650bf623ec125cc4faf5feefadab5f5b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8709651479365719656}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 650bf623ec125cc4faf5feefadab5f5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9068686678298747176}
   m_SourcePrefab: {fileID: 100100000, guid: 650bf623ec125cc4faf5feefadab5f5b, type: 3}
 --- !u!4 &635086803757592299 stripped
 Transform:
@@ -463,6 +494,7 @@ MonoBehaviour:
   maxCooldown: 4
   isPerformingAction: 0
   canAttack: 0
+  isAlive: 1
 --- !u!114 &8506188060588702525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +517,6 @@ MonoBehaviour:
   distanceFromPlayer: 0
   defaultDeadzoneBuffer: 2.5
   deadzoneBuffer: 0
-  isAlive: 1
   isStunned: 0
   canMove: 1
   isStopped: 0
@@ -515,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285977a370e76b145b8fe576fa9add71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponCollider: {fileID: 8147161204152211288}
+  weaponCollider: {fileID: 1324032582767248092}
   damage: 5
   colliderIds: 
 --- !u!114 &8709651479365719656
@@ -531,3 +562,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPosition: {fileID: 2159038042586561688}
+--- !u!114 &9068686678298747176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409638512588433190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6185f2c33b506f14dba84b56aeb410b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 2100000, guid: 96703fab075e6564699e8b140a4ab6da, type: 2}
+  fadeSpeed: 3

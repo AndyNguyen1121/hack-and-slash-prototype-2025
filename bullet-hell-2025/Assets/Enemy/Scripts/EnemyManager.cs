@@ -31,10 +31,12 @@ public class EnemyManager : MonoBehaviour, IDamageable
     [Header("Flags")]
     public bool isPerformingAction;
     public bool canAttack = true;
+    public bool isAlive = true;
 
     public event Action<EnemyManager> SendAttackSignal;
+    public event Action OnDeath;
 
-    public void Awake()
+    public virtual void Awake()
     {
         enemyAnimationManager = GetComponent<EnemyAnimationManager>();
         enemyBehavior = GetComponent<EnemyBehavior>();
@@ -48,10 +50,27 @@ public class EnemyManager : MonoBehaviour, IDamageable
         ActivateRootMotion();
     }
 
-    private void Start()
+    public virtual void Start()
     {
         WorldEnemySpawnerManager.Instance.RegisterEnemy(this);
         ActivateCooldown();
+
+        LockOnTarget lockOnScript  = GetComponent<LockOnTarget>();
+
+        if (lockOnScript != null)
+        {
+            OnDeath += () => { 
+                lockOnScript.enabled = false;
+
+                if (PlayerManager.instance.playerCameraManager.currentLockOnTarget == this.transform)
+                {
+                    PlayerManager.instance.playerCameraManager.DisableCurrentTarget();
+                    WorldEnemySpawnerManager.Instance.DeregisterEnemy(this);
+                    WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
+                }
+            
+            };
+        }
     }
 
     public void ActivateRootMotion()
@@ -70,9 +89,20 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     #region Health
-    public void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
+    public virtual void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
-        Health -= value;
+        if (!isAlive)
+            return;
+
+        Health = Mathf.Max(Health - value, 0);
+
+        if (Health == 0)
+        {
+            isAlive = false;
+            OnDeath?.Invoke();
+            return;
+        }
+
 
         Vector3 hitDirection = attackLocation - transform.position;
         hitDirection.y = 0;
@@ -144,6 +174,11 @@ public class EnemyManager : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(time);
         SendAttackSignal?.Invoke(this);
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
     }
 
     private void OnDrawGizmos()

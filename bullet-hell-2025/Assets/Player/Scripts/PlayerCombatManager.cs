@@ -71,6 +71,7 @@ public class PlayerCombatManager : MonoBehaviour
                 if (collider.TryGetComponent<EnemyInteractionManager>(out enemyInteractionManager))
                 {
                     enemyInteractionManager.JumpToHeightInTime(knockUpForce);
+                    enemyInteractionManager.KnockBackRigidbody(knockBackForce, transform.position);
                 }
 
                 Instantiate(swordSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));

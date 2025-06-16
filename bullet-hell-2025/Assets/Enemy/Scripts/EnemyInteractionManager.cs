@@ -18,20 +18,29 @@ public class EnemyInteractionManager : MonoBehaviour
     public LayerMask whatIsGround;
     public float minTimeOnGround = 0.1f;
     public float timeOnGround;
-    private void Awake()
+    public virtual void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    public virtual void Update()
     {
 
         CheckGroundedState();
 
         timeOnGround += Time.deltaTime;
 
+        
+    }
+
+    private void CheckGroundedState()
+    {
+        if (!enemyManager.isAlive)
+            return;
+
+        isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
         if (timeOnGround > minTimeOnGround && inKnockUpAnimation && isGrounded)
         {
             animator.CrossFade("KnockupEnd", 0.1f);
@@ -40,16 +49,11 @@ public class EnemyInteractionManager : MonoBehaviour
         }
     }
 
-    private void CheckGroundedState()
-    {
-        isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
-    }
-
-    public void JumpToHeightInTime(float height)
+    public virtual void JumpToHeightInTime(float height)
     {
         Debug.Log("hit");
         timeOnGround = 0f;
-        if (height == 0)
+        if (height == 0 || !enemyManager.isAlive)
             return;
 
         if (!inKnockUpAnimation)
@@ -76,24 +80,50 @@ public class EnemyInteractionManager : MonoBehaviour
 
     }
 
-    public void KnockBackRigidbody(float force, Vector3 directionOfImpact)
+    public virtual void KnockBackRigidbody(float force, Vector3 directionOfImpact)
     {
+        timeOnGround = 0f;
+
+        if (force == 0 || !enemyManager.isAlive)
+            return;
+
+        // Play the knock-up animation
         if (!inKnockUpAnimation)
             animator.Play("KnockUp", 0, 0f);
         else
             animator.Play("KnockUpRestart", 0, 0f);
 
-        directionOfImpact.Normalize();
-        directionOfImpact.y = 0f;
-
-        Vector3 newDir = Quaternion.AngleAxis(45f, transform.right) * directionOfImpact;
         inKnockUpAnimation = true;
+
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
 
-        rb.AddForce(newDir * force, ForceMode.Impulse);
+        // Normalize direction of impact
+        Vector3 dirFromPlayer = transform.position - directionOfImpact;
+        Vector3 flatDirection = dirFromPlayer;
+        flatDirection.y = 0f;
 
-        timeOnGround = 0f;
+        if (flatDirection == Vector3.zero)
+            flatDirection = transform.forward;
+
+        flatDirection.Normalize();
+
+        // Add upward component at 45°
+        float angleInDegrees = 30f;
+        float angleInRadians = angleInDegrees * Mathf.Deg2Rad;
+
+        Vector3 knockbackDirection =
+            Mathf.Cos(angleInRadians) * flatDirection +
+            Mathf.Sin(angleInRadians) * Vector3.up;
+
+        // Calculate impulse
+        float gravity = Mathf.Abs(Physics.gravity.y);
+        float mass = rb.mass;
+        float velocity = Mathf.Sqrt(2f * gravity * Mathf.Abs(force));
+        float impulseForce = mass * velocity;
+
+        // Apply force
+        rb.AddForce(knockbackDirection * impulseForce, ForceMode.Impulse);
     }
 
     private void OnDrawGizmos()

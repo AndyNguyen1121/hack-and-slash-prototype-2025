@@ -26,7 +26,7 @@ public class SwordSlashManager : MonoBehaviour
     }
     public void ActivateSwordSlash(int i)
     {
-       /* SwordSlash swordSlashPrefab = SwordSlashList[i];
+        SwordSlash swordSlashPrefab = SwordSlashList[i];
 
         Quaternion desiredRotation = swordSlashPrefab.swordSlash.transform.rotation;
 
@@ -45,7 +45,7 @@ public class SwordSlashManager : MonoBehaviour
         else
         {
             Instantiate(swordSlashPrefab.swordSlash, swordSlashPrefab.transform);
-        }*/
+        }
 
 
     }

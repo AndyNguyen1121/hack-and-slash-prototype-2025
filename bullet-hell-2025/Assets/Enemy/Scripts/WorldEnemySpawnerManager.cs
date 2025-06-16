@@ -45,6 +45,15 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         }
     }
 
+    public void DeregisterEnemy(EnemyManager enemy)
+    {
+        if (allEnemies.Contains(enemy))
+        {
+            allEnemies.Remove(enemy);
+            enemy.SendAttackSignal -= HandleAttackSignal;
+        }
+    }
+
     private void HandleAttackSignal(EnemyManager enemy)
     {
         if (!attackSignalQueue.Contains(enemy) && !currentlyAttackingEnemies.Contains(enemy))
@@ -59,8 +68,12 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         while (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalQueue.Count > 0)
         {
             var enemy = attackSignalQueue.Dequeue();
-            enemy.canAttack = true;
-            currentlyAttackingEnemies.Add(enemy);
+
+            if (allEnemies.Contains(enemy))
+            {
+                enemy.canAttack = true;
+                currentlyAttackingEnemies.Add(enemy);
+            }
         }
     }
 

@@ -145,7 +145,7 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerFootstepSFX(AnimationEvent evt)
     {
-        if (evt.animatorClipInfo.weight < 0.5f)
+        if (evt.animatorClipInfo.weight < 0.4f)
             return;
         AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
     }
