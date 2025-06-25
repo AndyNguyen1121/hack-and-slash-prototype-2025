@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageInfo:
     damage: 15
-    knockUpForce: 0.25
+    knockUpForce: 0.15
     knockBackForce: 0
+    knockUpGrounded: 0
   stateID: 8
   grounded: 0
   interruptPerformingAction: 0

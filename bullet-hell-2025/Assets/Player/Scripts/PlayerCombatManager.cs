@@ -1,4 +1,5 @@
 using Cinemachine;
+using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -10,6 +11,7 @@ using UnityEngine;
 public class PlayerCombatManager : MonoBehaviour
 {
     public GameObject swordSpark;
+    public GameObject shieldSpark;
     [Header("Initialization")]
     public Collider weaponCollider;
     public CinemachineImpulseSource camShake;
@@ -26,11 +28,12 @@ public class PlayerCombatManager : MonoBehaviour
     public float elapsedCounterAttackWindowFrames;
     public bool canCounterAttack;
     
-    [Header("DamageSettings")]
+    [Header("Damage Settings")]
     public float damage;
     public float knockUpForce;
     public float knockBackForce;
     public LayerMask whatIsDamageable;
+    public bool canKnockUpGrounded;
 
     [Header("Attack Info")]
     public List<Collider> damagedEnemyColliders = new();
@@ -70,11 +73,23 @@ public class PlayerCombatManager : MonoBehaviour
 
                 if (collider.TryGetComponent<EnemyInteractionManager>(out enemyInteractionManager))
                 {
-                    enemyInteractionManager.JumpToHeightInTime(knockUpForce);
+                    if (canKnockUpGrounded && enemyInteractionManager.isGrounded || 
+                        !enemyInteractionManager.isGrounded)
+                    {
+                        enemyInteractionManager.JumpToHeightInTime(knockUpForce);
+                    }
+
                     enemyInteractionManager.KnockBackRigidbody(knockBackForce, transform.position);
                 }
 
-                Instantiate(swordSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));
+                if (component is ShieldEnemyManager shieldManager && shieldManager.isGuarding)
+                {
+                    Instantiate(shieldSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));
+                }
+                else
+                {
+                    Instantiate(swordSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));
+                }
             }
         }
     }
@@ -84,6 +99,7 @@ public class PlayerCombatManager : MonoBehaviour
         damage = stateInfo.damageInfo.damage;
         knockUpForce = stateInfo.damageInfo.knockUpForce;
         knockBackForce = stateInfo.damageInfo.knockBackForce;
+        canKnockUpGrounded = stateInfo.damageInfo.knockUpGrounded;
     }
 
     public void HandleCounterAttackBehavior()

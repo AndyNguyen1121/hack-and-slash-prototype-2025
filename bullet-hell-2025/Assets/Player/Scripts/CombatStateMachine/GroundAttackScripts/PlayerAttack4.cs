@@ -19,7 +19,13 @@ public class PlayerAttack4 : PlayerCombatBaseState
 
     public override void UpdateState()
     {
-
+        foreach (CombatScriptableObj criteria in stateMachine.currentStateObj.nextStates)
+        {
+            if (stateMachine.ValidateCombatStateCriteria(criteria))
+            {
+                stateMachine.SwitchState(criteria.stateID);
+            }
+        }
     }
 
     public override void ExitState()

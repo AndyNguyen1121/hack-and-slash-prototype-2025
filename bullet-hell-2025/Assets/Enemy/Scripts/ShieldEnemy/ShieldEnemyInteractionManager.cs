@@ -16,6 +16,7 @@ public class ShieldEnemyInteractionManager : EnemyInteractionManager
     public override void Update()
     {
         base.Update();
+
     }
 
     public override void JumpToHeightInTime(float height)
@@ -37,4 +38,6 @@ public class ShieldEnemyInteractionManager : EnemyInteractionManager
         }
         base.KnockBackRigidbody(force, directionOfImpact);
     }
+
+
 }

@@ -18,7 +18,16 @@ public class EnemyAnimatorValues : StateMachineBehaviour
         {
             enemyManager.enemyBehavior.isStunned = isStunned;
             enemyManager.isPerformingAction = isPerformingAction;
-            enemyManager.agent.enabled = enableAgent;
+
+            if (!enableAgent)
+            {
+                enemyManager.agent.enabled = enableAgent;
+            }
+            else
+            {
+                enemyManager.agent.enabled = enableAgent;
+                enemyManager.enemyBehavior.canMove = true;
+            }
             
             if (disableWeaponCollider)
             {

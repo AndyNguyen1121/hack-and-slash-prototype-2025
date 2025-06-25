@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,8 +66,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
                 if (PlayerManager.instance.playerCameraManager.currentLockOnTarget == this.transform)
                 {
                     PlayerManager.instance.playerCameraManager.DisableCurrentTarget();
-                    WorldEnemySpawnerManager.Instance.DeregisterEnemy(this);
-                    WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
+                    WorldEnemySpawnerManager.Instance.UnregisterEnemy(this);
                 }
             
             };
@@ -133,6 +133,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
                 animator.Play("EnemyReactFront", 0, 0f);
             }
         }
+
+        
     }
 
     public void IncreaseHealth(float value)
@@ -167,6 +169,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void EndAttack()
     {
         canAttack = false;
+        WorldEnemySpawnerManager.Instance.RemoveAttackSignal(this);
         WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
     }
 

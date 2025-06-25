@@ -16,9 +16,11 @@ public class PlayerCameraManager : MonoBehaviour
     [Header("Lock On Attributes")]
     public bool isLockedOn = false;
     public Transform currentLockOnTarget;
+    public EnemyManager lockedOnEnemy;
     public float lockOnRadius;
     public float lockOnAngle = 70;
     public List<Transform> validLockOnTargets = new List<Transform>();
+    public Transform cursorPosition;
 
     [Header("Layer Mask")]
     public LayerMask whatIsEnemy;
@@ -59,11 +61,13 @@ public class PlayerCameraManager : MonoBehaviour
                     playerManager.animator.SetBool("lockedOn", true);
 
                     LockOnTarget lockOnScript = currentLockOnTarget.GetComponent<LockOnTarget>();
+                    lockedOnEnemy = currentLockOnTarget.GetComponent<EnemyManager>();
 
                     if (lockOnScript != null)
                     {
                         LockOnUI.instance.ChangeTarget(lockOnScript.cursorPosition);
                         cameras[i].LookAt = lockOnScript.cursorPosition;
+                        cursorPosition = lockOnScript.cursorPosition;
                     }
                     else
                         Debug.LogWarning("No LockOnTarget component on object.");
@@ -74,6 +78,8 @@ public class PlayerCameraManager : MonoBehaviour
                     playerManager.animator.SetBool("lockedOn", false);
                     LockOnUI.instance.ChangeTarget(null);
                     currentLockOnTarget = null;
+                    cursorPosition = null;
+                    lockedOnEnemy = null;
                 }
 
                 cameras[i].Priority = 10;

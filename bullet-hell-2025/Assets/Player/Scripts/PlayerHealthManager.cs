@@ -41,6 +41,8 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         playerManager.playerUIManager.UpdateHealthSliders(Health, MaxHealth);
 
         HandleHitBehavior(value, attackLocation, attackSource);
+
+        playerManager.swordSlashManager.DisableSwordSlashParticle();
     }
 
     public void IncreaseHealth(float value)

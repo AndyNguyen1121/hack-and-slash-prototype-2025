@@ -9,7 +9,12 @@ public class ShieldEnemyManager : EnemyManager
     public bool guardBroken;
 
     [Header("Shield Attributes")]
+    public GameObject shield;
+    public GameObject shieldFractureGameObject;
+    public float explosionForce = 2f;
+    public float explosionHeight;
     public float shieldHealth = 50f;
+    
 
     // Start is called before the first frame update
     public override void Awake()
@@ -38,10 +43,38 @@ public class ShieldEnemyManager : EnemyManager
                 shieldEnemyBehavior.UnparentShield();
                 isGuarding = false;
                 guardBroken = true;
+                ExplodeShield();
+                return;
             }
+
+            enemyAnimationManager.PlayActionAnimation("TinyImpact", true, true, 0);
+            
             return;
         }
 
         base.TakeDamage(value, attackLocation, attackSource);
+    }
+
+    private void ExplodeShield()
+    {
+        if (shield == null)
+            return;
+        
+        enemyAnimationManager.PlayActionAnimation("BigImpact");
+
+        GameObject fracturedShield = Instantiate(shieldFractureGameObject, shield.transform.position, shield.transform.rotation);
+
+        Rigidbody[] fracturedRigidbodies = fracturedShield.GetComponentsInChildren<Rigidbody>();
+        Vector3 explosionPos = shield.transform.position;
+        Debug.Log(fracturedRigidbodies.Length);
+
+        foreach (Rigidbody rb in fracturedRigidbodies)
+        {
+            rb.AddExplosionForce(explosionForce, explosionPos, 2f, explosionHeight);
+            Destroy(rb.gameObject, Random.Range(3, 6));
+        }
+        Destroy(fracturedShield, 7);
+        shield.SetActive(false);
+        PlayerManager.instance.playerCombatManager.ActivateHitStop(4);
     }
 }

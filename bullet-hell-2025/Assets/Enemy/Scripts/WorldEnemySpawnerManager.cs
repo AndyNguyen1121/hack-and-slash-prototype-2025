@@ -10,7 +10,7 @@ public class WorldEnemySpawnerManager : MonoBehaviour
     private List<EnemyManager> allEnemies = new();
 
     [SerializeField]
-    private Queue<EnemyManager> attackSignalQueue = new();
+    private List<EnemyManager> attackSignalList = new();
 
     [SerializeField]
     private List<EnemyManager> currentlyAttackingEnemies = new();
@@ -41,39 +41,75 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         if (!allEnemies.Contains(enemy))
         {
             allEnemies.Add(enemy);
-            enemy.SendAttackSignal += HandleAttackSignal;
+            enemy.SendAttackSignal += AddAttackSignal;
         }
     }
 
-    public void DeregisterEnemy(EnemyManager enemy)
+    public void UnregisterEnemy(EnemyManager enemy)
     {
         if (allEnemies.Contains(enemy))
         {
             allEnemies.Remove(enemy);
-            enemy.SendAttackSignal -= HandleAttackSignal;
+            enemy.SendAttackSignal -= AddAttackSignal;
+            RemoveAttackSignal(enemy);
+            RemoveFromAttackingPool(enemy);
+
+            if (currentlyAttackingEnemies.Contains(enemy))
+            {
+                currentlyAttackingEnemies.Remove(enemy);
+            }
         }
     }
 
-    private void HandleAttackSignal(EnemyManager enemy)
+    private void AddAttackSignal(EnemyManager enemy)
     {
-        if (!attackSignalQueue.Contains(enemy) && !currentlyAttackingEnemies.Contains(enemy))
+        if (!attackSignalList.Contains(enemy) && !currentlyAttackingEnemies.Contains(enemy))
         {
-            attackSignalQueue.Enqueue(enemy);
-            TryActivateNextAttacker();
+            attackSignalList.Add(enemy);
+            //TryActivateNextAttacker();
+        }
+    }
+
+    public void RemoveAttackSignal(EnemyManager enemy)
+    {
+        if (attackSignalList.Contains(enemy))
+        {
+            attackSignalList.Remove(enemy);
+            //TryActivateNextAttacker();
         }
     }
 
     private void TryActivateNextAttacker()
     {
-        while (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalQueue.Count > 0)
+        while (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalList.Count > 0)
         {
-            var enemy = attackSignalQueue.Dequeue();
+            EnemyManager closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (EnemyManager enemy in attackSignalList)
+            {
+                float distance = Vector3.Distance(PlayerManager.instance.transform.position, enemy.transform.position);
+
+                if (distance < closestDistance && !currentlyAttackingEnemies.Contains(enemy)) 
+                {
+                    closestEnemy = enemy;
+                    closestDistance = distance;
+                }
+            }
+
+            if (closestEnemy != null)
+            {
+                closestEnemy.canAttack = true;
+                currentlyAttackingEnemies.Add(closestEnemy);
+            }
+
+           /* var enemy = attackSignalList.Dequeue();
 
             if (allEnemies.Contains(enemy))
             {
                 enemy.canAttack = true;
                 currentlyAttackingEnemies.Add(enemy);
-            }
+            }*/
         }
     }
 

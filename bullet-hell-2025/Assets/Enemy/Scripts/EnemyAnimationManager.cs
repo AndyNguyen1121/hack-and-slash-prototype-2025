@@ -78,10 +78,18 @@ public class EnemyAnimationManager : MonoBehaviour
         lastPosition = transform.position;
     }
 
-    public void PlayActionAnimation(string animationName, bool rootMotion = true, bool isPerformingAction = true)
+    public void PlayActionAnimation(string animationName, bool rootMotion = true, bool isPerformingAction = true, float normalizedTime = 0.1f)
     {
         animator.applyRootMotion = rootMotion;
         enemyManager.isPerformingAction = isPerformingAction;
-        animator.CrossFade(animationName, 0.1f);
+
+        if (normalizedTime > 0f)
+        {
+            animator.CrossFade(animationName, normalizedTime);
+        }
+        else
+        {
+            animator.Play(animationName, 0, 0);
+        }
     }
 }

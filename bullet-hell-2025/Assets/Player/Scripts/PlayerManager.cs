@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCameraManager playerCameraManager;
     public CharacterController characterController;
     public PlayerUIManager playerUIManager;
+    public SwordSlashManager swordSlashManager; 
     public FootIK footIK;
     public Rigidbody rb;
     public MeshTrail meshTrail;
@@ -39,6 +40,8 @@ public class PlayerManager : MonoBehaviour
 
 
     public List<Collider> colliders = new();
+    public Collider[] enemyCollided;
+    private Coroutine enemyCollisionCheck;
 
     [Header("Debug")]
     public bool showDebug;
@@ -60,6 +63,7 @@ public class PlayerManager : MonoBehaviour
         playerCombatManager = GetComponent<PlayerCombatManager>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         characterController = GetComponent<CharacterController>();
+        swordSlashManager = GetComponent<SwordSlashManager>();
         footIK = GetComponent<FootIK>();
         playerUIManager = GetComponent<PlayerUIManager>();
         rb = GetComponent<Rigidbody>();
@@ -77,6 +81,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         CheckGroundedState();
+        DetectEnemyCollisions();
     }
 
     private void CheckGroundedState()
@@ -84,6 +89,7 @@ public class PlayerManager : MonoBehaviour
         isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
         animator.SetBool("isGrounded", isGrounded);
     }
+
 
     public void IgnoreMyOwnColliders()
     {
@@ -126,6 +132,44 @@ public class PlayerManager : MonoBehaviour
         Collider characterControllerCollider = GetComponent<Collider>();
         Physics.IgnoreCollision(collider, characterControllerCollider, false);
     }
+    public void IgnoreEnemyLayerCollision()
+    {
+        characterController.excludeLayers = playerCombatManager.whatIsDamageable;
+    }
+
+    public void EnableEnemyLayerCollision()
+    {
+        characterController.excludeLayers = 0;
+    }
+
+    public void DetectEnemyCollisions()
+    {
+        CapsuleCollider capsule = characterController.GetComponent<CapsuleCollider>();
+
+        // Get capsule start and end points in world space
+        Vector3 point1 = characterController.transform.position + capsule.center + Vector3.up * (capsule.height / 2 - capsule.radius);
+        Vector3 point2 = characterController.transform.position + capsule.center - Vector3.up * (capsule.height / 2 - capsule.radius);
+
+        float radius = capsule.radius;
+
+        enemyCollided = Physics.OverlapCapsule(point1, point2, radius, playerCombatManager.whatIsDamageable);
+    }
+    public void AttemptToEnableEnemyCollision()
+    {
+        if (enemyCollisionCheck != null)
+            StopCoroutine(enemyCollisionCheck);
+        enemyCollisionCheck = StartCoroutine(CheckForEnemyCollision());
+    }
+
+    private IEnumerator CheckForEnemyCollision()
+    {
+        while (enemyCollided.Length > 0)
+        {
+            yield return null;
+        }
+
+        EnableEnemyLayerCollision();
+    }
 
     #region Animation Events
     public void IsPerformingAction()
@@ -149,11 +193,6 @@ public class PlayerManager : MonoBehaviour
             return;
         AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
     }
-    public void MyCallback(AnimationEvent evt)
-    {
-
-    }
-
     #endregion
     private void OnDrawGizmos()
     {

@@ -11,6 +11,7 @@ public class DamageInfo
     public float damage;
     public float knockUpForce;
     public float knockBackForce;
+    public bool knockUpGrounded;
 }
 
 [CreateAssetMenu(fileName = "CombatScriptableObj", menuName = "CombatScriptableObj")]

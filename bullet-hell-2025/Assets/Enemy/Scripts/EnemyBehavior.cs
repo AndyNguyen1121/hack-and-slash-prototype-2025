@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private BehaviorTree enemyBehaviorTree;
-    private EnemyManager enemyManager;
+    protected EnemyManager enemyManager;
     public Transform player;
     public MovementState movementState;
 
@@ -55,9 +56,17 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        if (!enemyManager.isAlive && deathSequenceStarted)
+            return;
+
         UpdateRangeToTarget();
         HandleStunnedState();
         enemyBehaviorTree.Process();
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            isStunned = true;
+        }
     }
 
     void UpdateRangeToTarget()
@@ -93,6 +102,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private bool deathSequenceStarted;
+    private bool deathAnimationPlayed;
     public virtual void StartDeathSequence()
     {
         if (deathSequenceStarted)
@@ -101,7 +111,7 @@ public class EnemyBehavior : MonoBehaviour
 
         
         StopMovement();
-        WorldEnemySpawnerManager.Instance.DeregisterEnemy(enemyManager);
+        WorldEnemySpawnerManager.Instance.UnregisterEnemy(enemyManager);
         enemyManager.enemyCombatManager.UnparentWeapon();
 
         if (!enemyManager.enemyInteractionManager.isGrounded)
@@ -117,7 +127,7 @@ public class EnemyBehavior : MonoBehaviour
         }
         else
         {
-            enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyDeath");
+            enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyDeath"); 
         }
     }
 
@@ -142,7 +152,7 @@ public class EnemyBehavior : MonoBehaviour
         return attackAndMovementSeq;
     }
 
-    private void HandleAttacks()
+    protected virtual void HandleAttacks()
     {
         if (!enemyManager.isPerformingAction)
         {
@@ -151,10 +161,12 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    private void HandleMovements()
+    protected virtual void HandleMovements()
     {
         if (!enemyManager.agent.enabled)
+        {
             return;
+        }
         
         
         switch (movementState)
@@ -253,13 +265,15 @@ public class EnemyBehavior : MonoBehaviour
 
     private void HandleStunnedState()
     {
-        if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation)
+        if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation || !canMove)
         {
             enemyManager.agent.enabled = false;
+            enemyManager.animator.SetBool("isMoving", false);
         }
         else if (canMove) 
         {
             enemyManager.agent.enabled = true;
+            enemyManager.animator.SetBool("isMoving", true);
         }
     }
 
@@ -267,11 +281,12 @@ public class EnemyBehavior : MonoBehaviour
     {
         deadzoneBuffer = defaultDeadzoneBuffer;
     }
-    private void StopMovement()
+    public void StopMovement()
     {
-        deadzoneBuffer = defaultDeadzoneBuffer;
+        /*deadzoneBuffer = defaultDeadzoneBuffer;
         isStopped = true;
         enemyManager.agent.updatePosition = false;
+        canMove = false;*/
     }
 
     private void ResumeMovement()
@@ -301,4 +316,5 @@ public class EnemyBehavior : MonoBehaviour
         }
 
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldEnemyBehavior : EnemyBehavior
 {
-    public GameObject shield;
+    ShieldEnemyManager shieldEnemyManager;
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -13,6 +13,11 @@ public class ShieldEnemyBehavior : EnemyBehavior
     public override void Start()
     {
         base.Start();
+        if (enemyManager is ShieldEnemyManager shieldEnemyManager)
+        {
+            this.shieldEnemyManager = shieldEnemyManager;
+        }
+
     }
 
     // Update is called once per frame
@@ -34,10 +39,23 @@ public class ShieldEnemyBehavior : EnemyBehavior
 
     public void UnparentShield()
     {
-        shield.transform.parent = null;
-        shield.AddComponent<Rigidbody>();
-        shield.AddComponent<BoxCollider>();
+       
+        shieldEnemyManager.shield.transform.parent = null;
+        shieldEnemyManager.shield.AddComponent<Rigidbody>();
+        shieldEnemyManager.shield.AddComponent<BoxCollider>();
 
         shieldUnparented = true;
+
+    }
+
+    protected override void HandleAttacks()
+    {
+
+        base.HandleAttacks();
+    }
+
+    protected override void HandleMovements()
+    {
+        base.HandleMovements();
     }
 }

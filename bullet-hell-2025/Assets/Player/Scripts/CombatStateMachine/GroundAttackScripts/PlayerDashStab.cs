@@ -12,9 +12,11 @@ public class PlayerDashStab : PlayerCombatBaseState
             isPerformingAction: true,
             applyRootMotion: true,
             rotateTowardsPlayerInput: !playerManager.playerCameraManager.isLockedOn, // do not follow input rotation when locked on
-            canRotate: false, // allow lock on rotations to occur during attack
+            canRotate: playerManager.playerCameraManager.isLockedOn, // allow lock on rotations to occur during attack
             canMove: false,
             useGravity: true);
+
+        playerManager.playerAnimationManager.ChangeRootMotionMultiplier(1.5f, 1, 1.5f);
     }
 
     public override void UpdateState()

@@ -21,6 +21,11 @@ public class PlayerHelmbreak : PlayerCombatBaseState
 
     public override void UpdateState()
     {
+        if (!playerManager.playerCameraManager.isLockedOn)
+        {
+            playerManager.canRotate = false;
+        }
+
         playerManager.playerMovementManager.timeAboveGround = 0;
         foreach (CombatScriptableObj criteria in stateMachine.currentStateObj.nextStates)
         {
