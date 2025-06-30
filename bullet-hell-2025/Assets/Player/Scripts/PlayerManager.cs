@@ -41,8 +41,8 @@ public class PlayerManager : MonoBehaviour
 
     public List<Collider> colliders = new();
     public Collider[] enemyCollided;
-    private Coroutine enemyCollisionCheck;
-
+    public Coroutine enemyCollisionCheck;
+    public bool collisionCheckCoroutineActive = false;
     [Header("Debug")]
     public bool showDebug;
     private void Awake()
@@ -156,19 +156,28 @@ public class PlayerManager : MonoBehaviour
     }
     public void AttemptToEnableEnemyCollision()
     {
-        if (enemyCollisionCheck != null)
+        if (collisionCheckCoroutineActive)
             StopCoroutine(enemyCollisionCheck);
         enemyCollisionCheck = StartCoroutine(CheckForEnemyCollision());
     }
 
+    public void StopEnemyCollisionCoroutine()
+    {
+        StopCoroutine(enemyCollisionCheck);
+        collisionCheckCoroutineActive = false;
+    }
+
     private IEnumerator CheckForEnemyCollision()
     {
+        collisionCheckCoroutineActive = true;
         while (enemyCollided.Length > 0)
         {
+            Debug.Log(enemyCollided.Length);
             yield return null;
         }
 
         EnableEnemyLayerCollision();
+        collisionCheckCoroutineActive = false;
     }
 
     #region Animation Events

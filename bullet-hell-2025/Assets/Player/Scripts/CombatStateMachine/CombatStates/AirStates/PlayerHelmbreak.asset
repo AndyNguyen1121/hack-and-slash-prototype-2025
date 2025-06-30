@@ -1,26 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b7f906332ed5041975cf4094bacead, type: 3}
-  m_Name: PlayerHelmbreak
-  m_EditorClassIdentifier: 
-  damageInfo:
-    damage: 25
-    knockUpForce: -30
-    knockBackForce: 0
-  stateID: 13
-  grounded: 0
-  interruptPerformingAction: 0
-  onlyLockedOn: 1
-  requireDirectionalInput: 1
-  directionalInput: {x: 0, y: -1}
-  requiredInputs: 0500000000000000
-  nextStates: []
+version https://git-lfs.github.com/spec/v1
+oid sha256:3e3f8d1d60a955a02627b0711294c965b23d283ea994f44342491e547198583d
+size 669

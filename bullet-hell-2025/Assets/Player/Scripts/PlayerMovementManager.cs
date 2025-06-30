@@ -272,25 +272,40 @@ public class PlayerMovementManager : MonoBehaviour
         transform.DOMove(position, duration).SetEase(Ease.OutSine).OnComplete( () => playerManager.characterController.enabled = true);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider hit) 
     {
         if (hit.gameObject.CompareTag("Enemy"))
         {
-            Vector3 collisionDir = hit.normal;
+            Vector3 collisionDir = hit.ClosestPoint(transform.position);
 
-            if (hit.collider.bounds.max.y - 0.2f < transform.position.y)
+            if (transform.position.y > hit.transform.position.y + hit.bounds.size.y
+                || transform.position.y < hit.bounds.min.y)
             {
-                Vector3 pushDir = new Vector3(collisionDir.x, 0, collisionDir.z).normalized;
-                playerManager.characterController.Move(pushDir * 1f * Time.deltaTime);
+                /*Vector3 pushDir = new Vector3(collisionDir.x, 0, collisionDir.z).normalized;
+                playerManager.characterController.Move(pushDir * 1f * Time.deltaTime);*/
 
+                if (playerManager.collisionCheckCoroutineActive)
+                {
+                    playerManager.StopEnemyCollisionCoroutine();
+                }
+
+                playerManager.IgnoreEnemyLayerCollision();
+            }
+        }
+
+    }
+
+    private void OnTriggerExit(Collider hit)
+    {
+        if (hit.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("exiting");
+            if (!playerManager.collisionCheckCoroutineActive)
+            {
+                playerManager.AttemptToEnableEnemyCollision();
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-       
-    }
-
 
 
 }

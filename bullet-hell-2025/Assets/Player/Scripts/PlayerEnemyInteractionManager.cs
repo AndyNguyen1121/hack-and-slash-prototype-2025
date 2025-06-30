@@ -23,7 +23,7 @@ public class PlayerEnemyInteractionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleKnockupFinisher();
+        //HandleKnockupFinisher();
     }
 
 

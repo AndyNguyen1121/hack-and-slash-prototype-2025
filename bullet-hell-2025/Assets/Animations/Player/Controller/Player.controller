@@ -136,6 +136,7 @@ MonoBehaviour:
   canRotate: 0
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -158,6 +159,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 1
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -618,6 +620,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -727,6 +730,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -1465,6 +1469,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 1
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -2460,6 +2465,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1
@@ -2739,6 +2745,7 @@ MonoBehaviour:
   canRotate: 1
   useGravity: 1
   applyRootMotion: 0
+  disableWeaponCollider: 0
   rootMotionSpeedX: 1
   rootMotionSpeedY: 1
   rootMotionSpeedZ: 1

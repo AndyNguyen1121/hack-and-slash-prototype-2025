@@ -1,6 +1,7 @@
 using Cinemachine;
 using DG.Tweening;
 using JetBrains.Annotations;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -90,6 +91,8 @@ public class PlayerCombatManager : MonoBehaviour
                 {
                     Instantiate(swordSpark, collider.ClosestPoint(weaponCollider.transform.position), Quaternion.LookRotation(weaponCollider.transform.forward));
                 }
+
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.swordHit, collider.ClosestPoint(weaponCollider.transform.position));
             }
         }
     }
@@ -120,6 +123,7 @@ public class PlayerCombatManager : MonoBehaviour
         playerManager.playerCombatManager.canCounterAttack = true;
         Instantiate(parryParticle, parryParticleTransform.position, Quaternion.identity);
         PostProcessManager.instance.ActivateParryPostProcessingEffect();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.swordParry, transform.position);
         ActivateDefaultScreenShakeImpulse(2f);
         ActivateHitStop(3);
     }
@@ -241,5 +245,19 @@ public class PlayerCombatManager : MonoBehaviour
         knockBackForce = value;
     }
 
+    public void CanKnockUpGrounded()
+    {
+        canKnockUpGrounded = true;
+    }
+
+    public void CannotKnockupGrounded()
+    {
+        canKnockUpGrounded = false;
+    }
+
+    public void PlaySwordSlashSound()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.swordSlash, transform.position);
+    }
     #endregion
 }

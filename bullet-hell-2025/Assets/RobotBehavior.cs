@@ -88,7 +88,7 @@ public class RobotBehavior : MonoBehaviour
                     }, outDuration, outDuration))
 
                  .AppendCallback(Grapple)
-                 .AppendCallback(PlayerManager.instance.IgnoreEnemyLayerCollision)
+                 //.AppendCallback(PlayerManager.instance.IgnoreEnemyLayerCollision)
                  .Append(
 
                     DOTween.To(() => 0f, x =>
@@ -100,9 +100,9 @@ public class RobotBehavior : MonoBehaviour
                         upDirection = Quaternion.LookRotation((updatedEndPos - updatedStartPos).normalized) * Vector3.up;
                     }, inDuration, inDuration))
 
-                .AppendCallback(() => isGrappling = false)
-                .AppendInterval(0.5f)
-                .AppendCallback(PlayerManager.instance.AttemptToEnableEnemyCollision);
+                .AppendCallback(() => isGrappling = false);
+               // .AppendInterval(0.2f)
+                //.AppendCallback(PlayerManager.instance.AttemptToEnableEnemyCollision);
 
         }
     }

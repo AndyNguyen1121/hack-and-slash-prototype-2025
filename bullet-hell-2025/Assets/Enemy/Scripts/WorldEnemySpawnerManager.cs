@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorldEnemySpawnerManager : MonoBehaviour
 {
+    public GameObject testObject;
     public static WorldEnemySpawnerManager Instance { get; private set; }
+
+    public List<Collider> spawnLocations = new();
 
     [SerializeField]
     private List<EnemyManager> allEnemies = new();
@@ -29,7 +33,10 @@ public class WorldEnemySpawnerManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void Start()
+    {
+        StartCoroutine(TestSpawn());
+    }
     // Update is called once per frame
     void Update()
     {
@@ -118,6 +125,39 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         if (currentlyAttackingEnemies.Contains(enemy))
         {
             currentlyAttackingEnemies.Remove(enemy);
+        }
+    }
+
+    public Vector3 GetColliderPosition()
+    {
+        int randomArea = Random.Range(0, spawnLocations.Count);
+
+        Collider collider = spawnLocations[randomArea];
+        Transform areaTransform = collider.transform;
+        Vector3 cubeCenter = areaTransform.position;
+        Vector3 cubeSize = collider.bounds.size;
+
+        Vector3 randomPos = cubeCenter + new Vector3(
+             Random.Range(-cubeSize.x / 2f, cubeSize.x / 2f),
+             Random.Range(-cubeSize.y / 2f, cubeSize.y / 2f),
+             Random.Range(-cubeSize.z / 2f, cubeSize.z / 2f));
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPos, out hit, 2f, NavMesh.AllAreas))
+        {
+            randomPos = hit.position;
+        }
+        return randomPos;
+    }
+
+    public IEnumerator TestSpawn()
+    {
+        int count = 0;
+        while (count < 8)
+        {
+            count++;
+            Instantiate(testObject, GetColliderPosition(), Quaternion.identity);
+            yield return new WaitForSeconds(1);
         }
     }
 }

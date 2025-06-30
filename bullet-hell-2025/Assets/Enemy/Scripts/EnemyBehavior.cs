@@ -154,7 +154,7 @@ public class EnemyBehavior : MonoBehaviour
 
     protected virtual void HandleAttacks()
     {
-        if (!enemyManager.isPerformingAction)
+        if (!enemyManager.isPerformingAction && !enemyManager.enemyInteractionManager.inKnockUpAnimation)
         {
             enemyManager.canAttack = false;
             enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyAttack1");

@@ -10,6 +10,7 @@ public class ResetValues : StateMachineBehaviour
     public bool canRotate;
     public bool useGravity;
     public bool applyRootMotion;
+    public bool disableWeaponCollider = false;
 
     public float rootMotionSpeedX = 1f;
     public float rootMotionSpeedY = 1f;
@@ -29,6 +30,11 @@ public class ResetValues : StateMachineBehaviour
                 playerManager.playerCombatStateMachine.SwitchState(PlayerCombatState.Idle);
             }   
 
+            if (disableWeaponCollider)
+            {
+                playerManager.playerCombatManager.CloseWeaponCollider();
+            }
+
             playerManager.isPerformingAction = this.isPerformingAction;
             animator.applyRootMotion = this.applyRootMotion;
             playerManager.canMove = this.canMove;
@@ -38,6 +44,7 @@ public class ResetValues : StateMachineBehaviour
             playerManager.playerAnimationManager.rootMotionSpeedMultiplierZ = rootMotionSpeedZ;
             playerManager.useGravity = this.useGravity;
             playerManager.playerMovementManager.groundGravityScale = defaultGravity;
+
         }
     }
 

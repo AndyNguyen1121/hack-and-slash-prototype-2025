@@ -18,6 +18,7 @@ public class PlayerUppercut : PlayerCombatBaseState
             useGravity: false);
 
         stateMachine.playerManager.playerMovementManager.isJumping = true;
+        PlayerManager.instance.EnableEnemyLayerCollision();
     }
 
     public override void UpdateState()

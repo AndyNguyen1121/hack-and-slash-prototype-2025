@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyAnimationManager : MonoBehaviour
 {
     public EnemyManager enemyManager;
-    private Animator animator;
+    public Animator animator;
 
     private Vector2 velocity;
     private Vector2 smoothDeltaPosition;
@@ -28,6 +28,8 @@ public class EnemyAnimationManager : MonoBehaviour
 
     private void OnAnimatorMove()
     {
+        if (animator == null)
+            return; 
         Vector3 deltaPosition = enemyManager.animator.deltaPosition;
         Vector3 rootPosition = enemyManager.animator.rootPosition;
         rootPosition.y = enemyManager.agent.nextPosition.y;

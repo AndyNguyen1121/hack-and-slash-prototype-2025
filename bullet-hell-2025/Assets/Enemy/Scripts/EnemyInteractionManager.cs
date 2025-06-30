@@ -30,11 +30,7 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public virtual void Update()
     {
-
         CheckGroundedState();
-
-        
-
     }
 
     private void CheckGroundedState()
@@ -89,7 +85,7 @@ public class EnemyInteractionManager : MonoBehaviour
 
         rb.AddForce(direction * impulseForce, ForceMode.Impulse);
 
-        if (!inKnockUpAnimation)
+       /* if (!inKnockUpAnimation)
         {
             Vector3 dirFromPlayer = transform.position - PlayerManager.instance.transform.position;
             dirFromPlayer.y = 0f;
@@ -98,7 +94,7 @@ public class EnemyInteractionManager : MonoBehaviour
             impulseForce = mass * velocity;
             rb.AddForce(impulseForce * dirFromPlayer, ForceMode.Impulse);
         }
-
+*/
 
         inKnockUpAnimation = true;
     }
@@ -201,6 +197,11 @@ public class EnemyInteractionManager : MonoBehaviour
         else
         {
             enemyManager.TakeDamage(0.1f, transform.position, gameObject);
+            
+            if (inKnockUpAnimation && isGrounded)
+            {
+                inKnockUpAnimation = false;
+            }
         }
 
         /*rb.velocity = CalculateParabolaVelocity(transform.position, PlayerManager.instance.transform.position, transform.position.y - PlayerManager.instance.transform.position.y);
