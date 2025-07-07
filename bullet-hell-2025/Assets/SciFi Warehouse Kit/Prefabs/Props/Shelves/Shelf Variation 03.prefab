@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14975824351061726}
-  - component: {fileID: 4629454653207412529}
   m_Layer: 0
   m_Name: Shelf Variation 03
   m_TagString: Untagged
@@ -82,27 +81,6 @@ Transform:
   - {fileID: 4346941724281586762}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4629454653207412529
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922192954965300429}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.67, y: 4.99, z: 1}
-  m_Center: {x: -3.11, y: 2.23, z: 0}
 --- !u!1 &7103953002949776329
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +92,6 @@ GameObject:
   - component: {fileID: 3243831694617437374}
   - component: {fileID: 4779243296905090392}
   - component: {fileID: 4509198116478246761}
-  - component: {fileID: 2057701215340697748}
   m_Layer: 0
   m_Name: Shelf Grate
   m_TagString: Untagged
@@ -187,27 +164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2057701215340697748
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7103953002949776329}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.099257, y: 1.74346, z: 0.11086771}
-  m_Center: {x: -3.0307577, y: -0.00069886446, z: 1.5440401}
 --- !u!1 &9134343725142727084
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +175,6 @@ GameObject:
   - component: {fileID: 8266922469214438111}
   - component: {fileID: 3573427141395677288}
   - component: {fileID: 3703455091088932780}
-  - component: {fileID: 3645279550843539416}
   m_Layer: 0
   m_Name: LP_shelf
   m_TagString: Untagged
@@ -292,27 +247,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3645279550843539416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9134343725142727084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4, y: 1.6798439, z: 6.3690186}
-  m_Center: {x: -7.26, y: -0.00003492833, z: 3.162754}
 --- !u!1001 &5640025019488927828
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,12 +14,14 @@ public class ShieldEnemyManager : EnemyManager
     public float explosionForce = 2f;
     public float explosionHeight;
     public float shieldHealth = 50f;
-    
 
+    private Vector3 previousPosition;
+    private float velocity;
     // Start is called before the first frame update
     public override void Awake()
     {
         base.Awake();
+        canGrapple = false;
     }
 
     // Update is called once per frame
@@ -30,6 +32,20 @@ public class ShieldEnemyManager : EnemyManager
     private void Update()
     {
         animator.SetBool("isGuarding", isGuarding);
+
+        
+        velocity = ((transform.position - previousPosition) / Time.deltaTime).magnitude;
+
+        if (velocity > 50f)
+        {
+            enemyCollider.isTrigger = true;
+        }
+        else
+        {
+            enemyCollider.isTrigger = false;
+        }
+
+        previousPosition = transform.position;
     }
 
     public override void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
@@ -43,6 +59,7 @@ public class ShieldEnemyManager : EnemyManager
                 shieldEnemyBehavior.UnparentShield();
                 isGuarding = false;
                 guardBroken = true;
+                canGrapple = true;
                 ExplodeShield();
                 return;
             }

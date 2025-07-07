@@ -24,6 +24,7 @@ public class RobotBehavior : MonoBehaviour
     public float velocity;
     private Spring spring;
     public float stopDistance;
+    public float yOffset;
 
     private void Awake()
     {
@@ -76,6 +77,7 @@ public class RobotBehavior : MonoBehaviour
             grapplingSequence =
                 DOTween.Sequence()
                 .AppendCallback(() => isGrappling = true)
+                .AppendCallback(() => AudioManager.instance.PlayOneShot(FMODEvents.instance.grapple, transform.position))
                 .Append(
 
                     DOTween.To(() => 0f, x =>
@@ -101,6 +103,7 @@ public class RobotBehavior : MonoBehaviour
                     }, inDuration, inDuration))
 
                 .AppendCallback(() => isGrappling = false);
+                
                // .AppendInterval(0.2f)
                 //.AppendCallback(PlayerManager.instance.AttemptToEnableEnemyCollision);
 
@@ -111,7 +114,8 @@ public class RobotBehavior : MonoBehaviour
     {
         if (PlayerManager.instance.playerCameraManager.lockedOnEnemy != null)
         {
-            PlayerManager.instance.playerCameraManager.lockedOnEnemy.enemyInteractionManager.Grapple(stopDistance);
+            
+            PlayerManager.instance.playerCameraManager.lockedOnEnemy.enemyInteractionManager.Grapple(stopDistance, yOffset);
         }
     }
 

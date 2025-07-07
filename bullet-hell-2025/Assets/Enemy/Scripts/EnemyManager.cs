@@ -21,8 +21,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public EnemyBehavior enemyBehavior;
     public Animator animator;
     public NavMeshAgent agent;
+    public Collider enemyCollider;
 
     public float moveSpeed = 1f;
+    public GameObject bloodParticle;
 
     [Header("Attack Settings")]
     private Coroutine cooldownCoroutine;
@@ -33,6 +35,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public bool isPerformingAction;
     public bool canAttack = true;
     public bool isAlive = true;
+    public bool canGrapple = true;
 
     public event Action<EnemyManager> SendAttackSignal;
     public event Action OnDeath;
@@ -45,6 +48,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         enemyCombatManager = GetComponent<EnemyCombatManager>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        enemyCollider = GetComponent<Collider>();
         Health = MaxHealth;
 
         
@@ -96,6 +100,11 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
         Health = Mathf.Max(Health - value, 0);
 
+        Vector3 hitDirection = attackLocation - transform.position;
+        hitDirection.Normalize();
+        hitDirection.y = 0;
+        Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
+
         if (Health == 0)
         {
             isAlive = false;
@@ -103,12 +112,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
             return;
         }
 
-
-        Vector3 hitDirection = attackLocation - transform.position;
-        hitDirection.y = 0;
-
-        float horizontalHitDir = Vector3.Dot(hitDirection.normalized, transform.right);
-        float verticalHitDir = Vector3.Dot(transform.forward, hitDirection.normalized);
+        float horizontalHitDir = Vector3.Dot(hitDirection, transform.right);
+        float verticalHitDir = Vector3.Dot(transform.forward, hitDirection);
 
 
         if (Mathf.Abs(horizontalHitDir) > Mathf.Abs(verticalHitDir))

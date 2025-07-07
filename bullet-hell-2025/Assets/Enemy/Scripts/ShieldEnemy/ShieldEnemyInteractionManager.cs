@@ -39,5 +39,13 @@ public class ShieldEnemyInteractionManager : EnemyInteractionManager
         base.KnockBackRigidbody(force, directionOfImpact);
     }
 
+    public override void Grapple(float stopDistance, float yOffset)
+    {
+        if (!enemyManager.canGrapple)
+            enemyManager.TakeDamage(0.1f, transform.position, gameObject);
+
+        base.Grapple(stopDistance, yOffset);
+    }
+
 
 }

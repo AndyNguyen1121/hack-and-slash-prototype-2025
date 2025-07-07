@@ -12,6 +12,7 @@ public class PlayerCameraManager : MonoBehaviour
     public CinemachineVirtualCamera lockOnCam;
     CinemachineVirtualCameraBase[] cameras;
     public Camera mainCam;
+    public CinemachineCollider cameraCollider;
 
     [Header("Lock On Attributes")]
     public bool isLockedOn = false;
@@ -24,13 +25,20 @@ public class PlayerCameraManager : MonoBehaviour
 
     [Header("Layer Mask")]
     public LayerMask whatIsEnemy;
+    public LayerMask whatIsWallCheckable;
+
+    [Header("Wall Check")]
+    public float wallCheckRadius = 2f;
+    public bool collidingWithWall;
 
     private void Awake()
     {
         cameras = new CinemachineVirtualCameraBase[] { normalCam, lockOnCam };
+        
     }
     private void Start()
     {
+        cameraCollider = lockOnCam.GetComponent<CinemachineCollider>();
         playerManager = PlayerManager.instance;
         mainCam = Camera.main;
     }
@@ -41,6 +49,8 @@ public class PlayerCameraManager : MonoBehaviour
         {
             FindValidLockOnTargets();
         }
+
+        CheckForWallCollision();
     }
     public void SwitchCameras(int camNum, Transform target = null)
     {
@@ -114,6 +124,30 @@ public class PlayerCameraManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void CheckForWallCollision()
+    {
+        
+        Collider[] colliders = Physics.OverlapSphere(transform.position, wallCheckRadius, whatIsWallCheckable);
+        collidingWithWall = false;
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Wall"))
+            {
+                collidingWithWall = true;
+            }
+               
+        }
+
+        if (collidingWithWall)
+        {
+            cameraCollider.m_DistanceLimit = 0;
+        }
+        else
+        {
+            cameraCollider.m_DistanceLimit = 0.1f;
+        }
     }
 
     public void ToggleLockOn()
@@ -193,5 +227,8 @@ public class PlayerCameraManager : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, lockOnRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, wallCheckRadius);
     }
 }

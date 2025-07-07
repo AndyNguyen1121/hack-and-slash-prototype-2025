@@ -48,11 +48,12 @@ public class EnemyInteractionManager : MonoBehaviour
             timeOnGround = 0f;
         }
 
-        if (timeOnGround > minTimeOnGround && inKnockUpAnimation && isGrounded)
+        if (timeOnGround > minTimeOnGround && inKnockUpAnimation)
         {
-            animator.CrossFade("KnockupEnd", 0.1f);
+            animator.CrossFade("KnockupEnd", 0.05f);
             inKnockUpAnimation = false;
             rb.isKinematic = true;
+            timeOnGround = 0f;
         }
     }
 
@@ -116,7 +117,6 @@ public class EnemyInteractionManager : MonoBehaviour
             grappleTween.Kill();
 
         inKnockUpAnimation = true;
-
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
         Vector3 dirFromPlayer = transform.position - directionOfImpact;
@@ -151,21 +151,22 @@ public class EnemyInteractionManager : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + groundCheckOffset, groundCheckRadius);
     }
 
-    public void Grapple(float stopDistance)
+    public virtual void Grapple(float stopDistance, float yOffset)
     {
-        if (!isGrounded)
-        {
-            timeOnGround = 0f;
-            
-            if (!inKnockUpAnimation)
-                animator.Play("KnockUp", 0, 0f);
-            else
-                animator.Play("KnockUpRestart", 0, 0f);
+        /* if (!isGrounded)
+         {
+             timeOnGround = 0f;
 
-            inKnockUpAnimation = true;
-        }
+             if (!inKnockUpAnimation)
+                 animator.Play("KnockUp", 0, 0f);
+             else
+                 animator.Play("KnockUpRestart", 0, 0f);
 
-        
+             inKnockUpAnimation = true;
+         }
+ */
+        if (!enemyManager.canGrapple)
+            return;
         
         enemyManager.enemyBehavior.isStunned = true;
         rb.isKinematic = false;
@@ -173,12 +174,18 @@ public class EnemyInteractionManager : MonoBehaviour
 
         Vector3 dirFromPlayer = (transform.position - PlayerManager.instance.transform.position).normalized;
         dirFromPlayer.y = 0f;
-        Vector3 desiredPosition = PlayerManager.instance.transform.position + (stopDistance * dirFromPlayer);
+        Vector3 desiredPosition = PlayerManager.instance.transform.position + (stopDistance * dirFromPlayer) + (Vector3.up * yOffset);
 
         if (grappleTween != null)
             grappleTween.Kill();
+        /*DOTween.To(() => 0f, x =>
+        {
+            elapsedTime = x;
+            Vector3 updatedEndPosition = PlayerManager.instance.transform.position + (dirFromPlayer * stopDistance);
+            transform.position = Vector3.Lerp(transform.position, updatedEndPosition, x / 0.25f);
+        }, 0.25f, 0.25f).SetEase(Ease.OutSine);*/
 
-        grappleTween = rb.DOMove(desiredPosition, 0.25f).SetEase(Ease.OutSine);
+        
 
 
         transform.DORotateQuaternion(Quaternion.LookRotation(-dirFromPlayer), 0.25f);
@@ -193,6 +200,7 @@ public class EnemyInteractionManager : MonoBehaviour
                 animator.Play("KnockUpRestart", 0, 0f);
 
             inKnockUpAnimation = true;
+            rb.isKinematic = false;
         }
         else
         {
@@ -203,6 +211,14 @@ public class EnemyInteractionManager : MonoBehaviour
                 inKnockUpAnimation = false;
             }
         }
+
+        grappleTween = rb.DOMove(desiredPosition, 0.25f).SetEase(Ease.OutSine)
+            .OnComplete(() =>
+            {
+                if (!inKnockUpAnimation)
+                    rb.isKinematic = true;
+            });
+           
 
         /*rb.velocity = CalculateParabolaVelocity(transform.position, PlayerManager.instance.transform.position, transform.position.y - PlayerManager.instance.transform.position.y);
         Debug.Log(CalculateParabolaVelocity(transform.position, PlayerManager.instance.transform.position, 3));*/

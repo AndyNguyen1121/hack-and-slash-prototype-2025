@@ -142,7 +142,10 @@ public class PlayerMovementManager : MonoBehaviour
 
 
         // Reset to origin state on landing
-        if (playerManager.isGrounded && ((isJumping && verticalVelocity.y < 0) || fallingWithoutJump) && !playerManager.inFinisher)
+        if (playerManager.isGrounded 
+            && ((isJumping && verticalVelocity.y < 0) || fallingWithoutJump) 
+            && !playerManager.inFinisher 
+            && !playerManager.playerAnimationManager.CheckIfAnimationIsPlaying("Uppercut"))
         {
             isJumping = false;
             fallingWithoutJump = false;
@@ -299,7 +302,6 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (hit.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("exiting");
             if (!playerManager.collisionCheckCoroutineActive)
             {
                 playerManager.AttemptToEnableEnemyCollision();

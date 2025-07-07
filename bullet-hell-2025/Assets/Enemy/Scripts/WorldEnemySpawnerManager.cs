@@ -35,7 +35,7 @@ public class WorldEnemySpawnerManager : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(TestSpawn());
+       // StartCoroutine(TestSpawn());
     }
     // Update is called once per frame
     void Update()

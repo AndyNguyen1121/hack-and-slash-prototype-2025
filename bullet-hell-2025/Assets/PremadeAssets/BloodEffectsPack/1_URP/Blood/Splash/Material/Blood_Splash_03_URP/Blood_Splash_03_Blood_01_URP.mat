@@ -98,7 +98,7 @@ Material:
     - _BumpScale: 0.5
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorIntensity: 0.39
+    - _ColorIntensity: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -118,7 +118,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SPECULARHIGHLIGHTS_OFF: 0
-    - _Smoothness: 0.8
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -128,7 +128,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.44313726, g: 0.32941177, b: 0.32941177, a: 0.98039216}
+    - _BaseColor: {r: 0, g: 1, b: 0.4017856, a: 0.98039216}
     - _Color: {r: 0.44313726, g: 0.32941177, b: 0.32941177, a: 0.98039216}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NormalMap_ScaleOffset: {r: 1, g: 1, b: 0, a: 0}

@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
     public bool collisionCheckCoroutineActive = false;
     [Header("Debug")]
     public bool showDebug;
+    private float timeControllerIsDisabled;
     private void Awake()
     {
         if (instance == null)
@@ -82,6 +83,23 @@ public class PlayerManager : MonoBehaviour
     {
         CheckGroundedState();
         DetectEnemyCollisions();
+
+        // safeguard
+        if (!characterController.enabled)
+        {
+            timeControllerIsDisabled += Time.deltaTime;
+        }
+        else
+        {
+            timeControllerIsDisabled = 0f;
+        }
+
+        if (timeControllerIsDisabled > 1f)
+        {
+            characterController.enabled = true;
+        }
+
+
     }
 
     private void CheckGroundedState()
@@ -191,14 +209,10 @@ public class PlayerManager : MonoBehaviour
         isPerformingAction = false;
     }
 
-    public void ActivateGravity()
-    {
-        useGravity = true;
-    }
 
     public void PlayerFootstepSFX(AnimationEvent evt)
     {
-        if (evt.animatorClipInfo.weight < 0.4f)
+        if (evt.animatorClipInfo.weight < 0.57f)
             return;
         AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
     }

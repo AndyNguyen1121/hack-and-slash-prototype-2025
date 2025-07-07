@@ -145,6 +145,11 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.speed = 1;
     }
 
+    public bool CheckIfAnimationIsPlaying(string animationName)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(animationName);
+    }
+
     #region AnimationEvents
     public void PerformingActionTrue()
     {

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2299504217015502082}
-  - component: {fileID: 7894479940178264729}
   m_Layer: 0
   m_Name: Shelf Variation 04
   m_TagString: Untagged
@@ -65,27 +64,6 @@ Transform:
   - {fileID: 5543264384839772395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7894479940178264729
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004502650624292625}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.39, y: 4.83, z: 1}
-  m_Center: {x: -2.87, y: 2.22, z: 0}
 --- !u!1 &6998589083004074608
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +75,6 @@ GameObject:
   - component: {fileID: 7883072480974856451}
   - component: {fileID: 3335781412521386932}
   - component: {fileID: 3222640271370394736}
-  - component: {fileID: 3263681430468127748}
   m_Layer: 0
   m_Name: LP_shelf
   m_TagString: Untagged
@@ -170,27 +147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3263681430468127748
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998589083004074608}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4, y: 1.6798439, z: 6.3690186}
-  m_Center: {x: -7.26, y: -0.00003492833, z: 3.162754}
 --- !u!1 &9028029597386878997
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +158,6 @@ GameObject:
   - component: {fileID: 3663723606099248994}
   - component: {fileID: 6741614849872164484}
   - component: {fileID: 2400327633689312437}
-  - component: {fileID: 7200599385574635440}
   m_Layer: 0
   m_Name: Shelf Grate
   m_TagString: Untagged
@@ -275,27 +230,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7200599385574635440
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9028029597386878997}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.4046574, y: 1.6872147, z: 0.16227503}
-  m_Center: {x: -3.1682463, y: -0.0006760955, z: 1.5016817}
 --- !u!1001 &9211772019535105106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1846,7 +1780,8 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5141884343314972354, guid: 1e3974e3db8c48c41b2604d2478e7e9e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
