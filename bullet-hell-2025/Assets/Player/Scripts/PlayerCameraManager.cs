@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +8,11 @@ public class PlayerCameraManager : MonoBehaviour
     private PlayerManager playerManager;
 
     [Header("Camera Collection")]
-    public CinemachineFreeLook normalCam;
-    public CinemachineVirtualCamera lockOnCam;
+    public CinemachineCamera normalCam;
+    public CinemachineCamera lockOnCam;
     CinemachineVirtualCameraBase[] cameras;
     public Camera mainCam;
-    public CinemachineCollider cameraCollider;
+    public CinemachineDecollider cameraCollider;
 
     [Header("Lock On Attributes")]
     public bool isLockedOn = false;
@@ -38,20 +38,11 @@ public class PlayerCameraManager : MonoBehaviour
     }
     private void Start()
     {
-        cameraCollider = lockOnCam.GetComponent<CinemachineCollider>();
+        cameraCollider = lockOnCam.GetComponent<CinemachineDecollider>();
         playerManager = PlayerManager.instance;
         mainCam = Camera.main;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            FindValidLockOnTargets();
-        }
-
-        CheckForWallCollision();
-    }
     public void SwitchCameras(int camNum, Transform target = null)
     {
         if (camNum < 0)
@@ -124,30 +115,6 @@ public class PlayerCameraManager : MonoBehaviour
             }
         }
 
-    }
-
-    public void CheckForWallCollision()
-    {
-        
-        Collider[] colliders = Physics.OverlapSphere(transform.position, wallCheckRadius, whatIsWallCheckable);
-        collidingWithWall = false;
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Wall"))
-            {
-                collidingWithWall = true;
-            }
-               
-        }
-
-        if (collidingWithWall)
-        {
-            cameraCollider.m_DistanceLimit = 0;
-        }
-        else
-        {
-            cameraCollider.m_DistanceLimit = 0.1f;
-        }
     }
 
     public void ToggleLockOn()

@@ -61,11 +61,6 @@ public class EnemyBehavior : MonoBehaviour
         UpdateRangeToTarget();
         HandleStunnedState();
         enemyBehaviorTree.Process();
-
-        if (Input.GetKey(KeyCode.T))
-        {
-            isStunned = true;
-        }
     }
 
     void UpdateRangeToTarget()

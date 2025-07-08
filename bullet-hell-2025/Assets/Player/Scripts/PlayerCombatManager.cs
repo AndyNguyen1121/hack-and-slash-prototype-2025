@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Bson;
@@ -133,7 +133,7 @@ public class PlayerCombatManager : MonoBehaviour
     {
         if (force < 0)
         {
-            camShake.GenerateImpulseAt(transform.position, camShake.m_DefaultVelocity);
+            camShake.GenerateImpulseAt(transform.position, camShake.DefaultVelocity);
         }
         else
         {
@@ -149,13 +149,13 @@ public class PlayerCombatManager : MonoBehaviour
             StopCoroutine(impulseResetCoroutine);
         }
 
-        camShake.m_ImpulseDefinition.m_FrequencyGain = 2f;
-        camShake.m_ImpulseDefinition.m_AmplitudeGain = 1.5f;
-        camShake.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = 0.13f;
+        camShake.ImpulseDefinition.FrequencyGain = 2f;
+        camShake.ImpulseDefinition.AmplitudeGain = 1.5f;
+        camShake.ImpulseDefinition.TimeEnvelope.SustainTime = 0.13f;
 
         if (force < 0)
         {
-            camShake.GenerateImpulseAt(transform.position, camShake.m_DefaultVelocity);
+            camShake.GenerateImpulseAt(transform.position, camShake.DefaultVelocity);
         }
         else
         {
@@ -167,21 +167,21 @@ public class PlayerCombatManager : MonoBehaviour
 
     private void SetCamShakeDefaultValues()
     {
-        defaultImpulseAmp = camShake.m_ImpulseDefinition.m_AmplitudeGain;
-        defaultImpulseDuration = camShake.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime;
-        defaultImpulseFreq = camShake.m_ImpulseDefinition.m_FrequencyGain;
+        defaultImpulseAmp = camShake.ImpulseDefinition.AmplitudeGain;
+        defaultImpulseDuration = camShake.ImpulseDefinition.TimeEnvelope.SustainTime;
+        defaultImpulseFreq = camShake.ImpulseDefinition.FrequencyGain;
     }
 
     private IEnumerator  ResetImpulseToDefaultValues(float time)
     {
         yield return new WaitForSeconds(time);
 
-        camShake.m_ImpulseDefinition.m_AmplitudeGain = defaultImpulseAmp;
-        camShake.m_ImpulseDefinition.m_FrequencyGain = defaultImpulseFreq;
+        camShake.ImpulseDefinition.AmplitudeGain = defaultImpulseAmp;
+        camShake.ImpulseDefinition.FrequencyGain = defaultImpulseFreq;
 
-        var envelope = camShake.m_ImpulseDefinition.m_TimeEnvelope;
-        envelope.m_SustainTime = defaultImpulseDuration;
-        camShake.m_ImpulseDefinition.m_TimeEnvelope = envelope;
+        var envelope = camShake.ImpulseDefinition.TimeEnvelope;
+        envelope.SustainTime = defaultImpulseDuration;
+        camShake.ImpulseDefinition.TimeEnvelope = envelope;
     }
 
     #region HitStop

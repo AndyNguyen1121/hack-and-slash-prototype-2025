@@ -23314,47 +23314,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 2
-    m_CustomImpulseShape:
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 0.05
-    m_ImpulseType: 3
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 11400000, guid: 8d74e42849b5d834a8b3b75522112158, type: 2}
-    m_AmplitudeGain: 1.5
-    m_FrequencyGain: 2
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
+    ImpulseDuration: 0.05
+    ImpulseType: 3
+    DissipationRate: 0.25
+    RawSignal: {fileID: 11400000, guid: 8d74e42849b5d834a8b3b75522112158, type: 2}
+    AmplitudeGain: 1.5
+    FrequencyGain: 2
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_DecayShape:
+      DecayShape:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.13
-      m_DecayTime: 0.5
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 1
-    m_DissipationMode: 1
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: -0.85, y: -0.85, z: -0.85}
+      AttackTime: 0
+      SustainTime: 0.13
+      DecayTime: 0.5
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 1
+    DissipationMode: 1
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: -0.85, y: -0.85, z: -0.85}
 --- !u!1 &7378016549744880267
 GameObject:
   m_ObjectHideFlags: 0
@@ -25576,7 +25576,7 @@ MonoBehaviour:
   queueTimer: 0
   queueIsActive: 0
   attackInputQueue: 0
-  cameraInputProvider: {fileID: 5281174384275642629}
+  cameraInputProvider: {fileID: 0}
   currentInputs: 
   localInputDirection: {x: 0, y: 0}
 --- !u!114 &1909199094584444276
@@ -25875,9 +25875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dff53b62e3c555419d72d636db22e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalCam: {fileID: 5471951106069992375}
-  lockOnCam: {fileID: 31422907025153936}
+  normalCam: {fileID: 0}
+  lockOnCam: {fileID: 0}
   mainCam: {fileID: 0}
+  cameraCollider: {fileID: 0}
   isLockedOn: 0
   currentLockOnTarget: {fileID: 0}
   lockedOnEnemy: {fileID: 0}
@@ -25888,6 +25889,11 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
+  whatIsWallCheckable:
+    serializedVersion: 2
+    m_Bits: 0
+  wallCheckRadius: 2
+  collidingWithWall: 0
 --- !u!114 &381063024483824040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26127,57 +26133,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2814603754477345930, guid: c0ffb312dcccf024ba2b61704a062bdd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 550449980923920926}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0ffb312dcccf024ba2b61704a062bdd, type: 3}
---- !u!114 &31422907025153936 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4089557249186951854, guid: c0ffb312dcccf024ba2b61704a062bdd, type: 3}
-  m_PrefabInstance: {fileID: 4084382580900769086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2279348502527504820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2279348502527504820 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2814603754477345930, guid: c0ffb312dcccf024ba2b61704a062bdd, type: 3}
-  m_PrefabInstance: {fileID: 4084382580900769086}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &550449980923920926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2279348502527504820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1
-  m_IgnoreTag: NoCameraObstruction
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0.1
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.5
-  m_Strategy: 0
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!4 &7033449166796123584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6428167813927813374, guid: c0ffb312dcccf024ba2b61704a062bdd, type: 3}
@@ -26652,28 +26609,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 7557253494935905187, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
   m_PrefabInstance: {fileID: 8938522295422071274}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5281174384275642629 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3838899444001990895, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
-  m_PrefabInstance: {fileID: 8938522295422071274}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5471951106069992375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4034174275984368221, guid: 8332e23c7b559c340ab49db83d857913, type: 3}
-  m_PrefabInstance: {fileID: 8938522295422071274}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 319d2fe34a804e245819465c9505ea59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9134046967071467231 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 202281525793642293, guid: 8332e23c7b559c340ab49db83d857913, type: 3}

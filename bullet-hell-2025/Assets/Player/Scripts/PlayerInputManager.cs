@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -51,7 +51,7 @@ public class PlayerInputManager : MonoBehaviour
 
     // Assign in Inspector
     [Header("Camera Controls")]
-    public CinemachineInputProvider cameraInputProvider;
+    public CinemachineInputAxisController cameraInputProvider;
 
     [Header("Input ID Information")]
     public List<InputID> currentInputs = new();
