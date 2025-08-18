@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public bool canAttack = true;
     public bool isAlive = true;
     public bool canGrapple = true;
+    public bool canMove = true;
 
     public event Action<EnemyManager> SendAttackSignal;
     public event Action OnDeath;
@@ -174,7 +175,6 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void EndAttack()
     {
         canAttack = false;
-        WorldEnemySpawnerManager.Instance.RemoveAttackSignal(this);
         WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
     }
 

@@ -31,17 +31,26 @@ public class EnemyCombatManager : MonoBehaviour
 
     public void OpenWeaponCollider()
     {
+        if (weaponCollider == null)
+            return;
+
         weaponCollider.enabled = true;
     }
 
     public void CloseWeaponCollider()
     {
+        if (weaponCollider == null)
+            return;
+
         colliderIds.Clear();
         weaponCollider.enabled = false;
     }
 
     public void UnparentWeapon()
     {
+        if (weaponCollider == null)
+            return;
+
         weaponCollider.transform.parent = null;
 
         Rigidbody weaponRb = weaponCollider.GetComponent<Rigidbody>();

@@ -88,7 +88,7 @@ public class WorldEnemySpawnerManager : MonoBehaviour
 
     private void TryActivateNextAttacker()
     {
-        while (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalList.Count > 0)
+        if (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalList.Count > 0 && allEnemies.Count > 0)
         {
             EnemyManager closestEnemy = null;
             float closestDistance = Mathf.Infinity;
@@ -101,22 +101,17 @@ public class WorldEnemySpawnerManager : MonoBehaviour
                 {
                     closestEnemy = enemy;
                     closestDistance = distance;
+                  
                 }
             }
 
-            if (closestEnemy != null)
+            RemoveAttackSignal(closestEnemy);
+
+            if (allEnemies.Contains(closestEnemy))
             {
                 closestEnemy.canAttack = true;
                 currentlyAttackingEnemies.Add(closestEnemy);
             }
-
-           /* var enemy = attackSignalList.Dequeue();
-
-            if (allEnemies.Contains(enemy))
-            {
-                enemy.canAttack = true;
-                currentlyAttackingEnemies.Add(enemy);
-            }*/
         }
     }
 

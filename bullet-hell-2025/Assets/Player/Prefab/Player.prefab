@@ -25678,9 +25678,6 @@ PrefabInstance:
       addedObject: {fileID: 7447453762593545879}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5259adba151e03147875477cfdd42e52, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2456478242499161109}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5259adba151e03147875477cfdd42e52, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 51073720944518108}
   m_SourcePrefab: {fileID: 100100000, guid: 5259adba151e03147875477cfdd42e52, type: 3}
 --- !u!1 &2566477358277561369 stripped
@@ -26114,56 +26111,6 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   playerManager: {fileID: 0}
   bloodParticle: {fileID: 8007369982305464528, guid: 85efed574c74bb24181b819f88da97b5, type: 3}
---- !u!114 &2456478242499161109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2566477358277561369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844fc4f6fadd20f4c90fabc936609215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableFootIK: 1
-  validLayerInteractions:
-    serializedVersion: 2
-    m_Bits: 1
-  stairLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  lastPelvisYPos: 0
-  lastLeftFootYPos: 0
-  lastRightFootYPos: 0
-  pelvisAdjustmentSpeed: 7
-  footHeightAdjustmentSpeed: 20
-  footRotationSpeed: 3
-  maxRotationSlerp: 1
-  enableRotations: 0
-  finalIkPlacementOffset: {x: 0, y: 0.16, z: 0}
-  leftFootAnimRotationName: leftFootRotation
-  rightFootAnimRotationName: rightFootRotation
-  hips: {fileID: 4238343211037359094}
-  raycastLength: 1.01
-  raycastDistanceAboveFoot: 0.25
-  rayCastOffsetXZ: {x: 0, y: 0, z: 0}
-  slopeAngle: 0
-  slopeRaycastLength: 1.16
-  onSlope: 0
-  slopeDetectionOffset: {x: 0, y: 0, z: 0}
-  minStepHeightDistance: 0
-  stepRaycastLength: 0
-  onSteps: 0
-  stepDetectionOffset: {x: 0, y: -0.58, z: 0}
-  idleTime: 2.0171404
-  minimumTimeOnSlope: 0.1
-  isRunning: 0
-  debugVisible: 1
-  characterController: {fileID: 0}
-  localSpaceIkPos: {x: 0.10911335, y: -0.5473604, z: -0.46174848}
-  baseCenterY: 0
-  lastIkPosBeforeDisabled: 0
 --- !u!114 &51073720944518108
 MonoBehaviour:
   m_ObjectHideFlags: 0

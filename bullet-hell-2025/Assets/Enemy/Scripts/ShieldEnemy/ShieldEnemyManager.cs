@@ -64,7 +64,7 @@ public class ShieldEnemyManager : EnemyManager
                 return;
             }
 
-            enemyAnimationManager.PlayActionAnimation("TinyImpact", true, true, 0);
+            enemyAnimationManager.PlayActionAnimation("TinyImpact", false, true, true, 0);
             
             return;
         }

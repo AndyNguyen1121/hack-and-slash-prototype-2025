@@ -19,6 +19,11 @@ public class EnemyInteractionManager : MonoBehaviour
     public LayerMask whatIsGround;
     public float minTimeOnGround = 0.1f;
     public float timeOnGround;
+    private bool ignoreGroundDetection = false;
+    private Coroutine ignoreGroundCoroutine;
+
+    // during certain actions, ignore ground detection
+    public float ignoreGroundDetectionDuration = 0.05f;
 
     private Tween grappleTween;
     public virtual void Awake()
@@ -37,6 +42,12 @@ public class EnemyInteractionManager : MonoBehaviour
     {
         if (!enemyManager.isAlive)
             return;
+        
+        if (ignoreGroundDetection)
+        {
+            isGrounded = false;
+            return;
+        }
 
         isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
         if (isGrounded)
@@ -47,19 +58,37 @@ public class EnemyInteractionManager : MonoBehaviour
         {
             timeOnGround = 0f;
         }
-
-        if (timeOnGround > minTimeOnGround && inKnockUpAnimation)
+        //timeOnGround > minTimeOnGround && 
+        if (inKnockUpAnimation && isGrounded)
         {
-            animator.CrossFade("KnockupEnd", 0.05f);
+            animator.CrossFade("KnockupEnd", 0.15f);
             inKnockUpAnimation = false;
             rb.isKinematic = true;
             timeOnGround = 0f;
         }
     }
 
+    private void IgnoreGroundDetection(float duration)
+    {
+        if (ignoreGroundCoroutine != null)
+        {
+            StopCoroutine(ignoreGroundCoroutine);
+        }
+
+        ignoreGroundCoroutine = StartCoroutine(IgnoreGroundDetectionCoroutine(duration));
+    }
+    private IEnumerator IgnoreGroundDetectionCoroutine(float time)
+    {
+        ignoreGroundDetection = true;
+        yield return new WaitForSeconds(time);
+        ignoreGroundDetection = false;
+    }
+
     public virtual void JumpToHeightInTime(float height)
     {
         timeOnGround = 0f;
+        IgnoreGroundDetection(ignoreGroundDetectionDuration);
+
         if (height == 0 || !enemyManager.isAlive)
             return;
 
@@ -87,6 +116,7 @@ public class EnemyInteractionManager : MonoBehaviour
     public virtual void KnockBackRigidbody(float force, Vector3 directionOfImpact)
     {
         timeOnGround = 0f;
+        IgnoreGroundDetection(ignoreGroundDetectionDuration);
 
         if (force == 0 || !enemyManager.isAlive)
             return;
@@ -156,6 +186,7 @@ public class EnemyInteractionManager : MonoBehaviour
         if (Mathf.Abs(desiredPosition.y - transform.position.y) > 1f) 
         {
             timeOnGround = 0f;
+            IgnoreGroundDetection(ignoreGroundDetectionDuration);
 
             if (!inKnockUpAnimation)
                 animator.Play("KnockUp", 0, 0f);

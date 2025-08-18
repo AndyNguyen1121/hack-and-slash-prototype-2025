@@ -22,7 +22,6 @@ public class EnemyBehavior : MonoBehaviour
     [Header("Settings")]
     public float attackDistance = 2f;
     public Vector2 minimumDistanceRange;
-    public float maxDistFromPlayer;
     public float rotationSpeed;
 
 
@@ -36,13 +35,13 @@ public class EnemyBehavior : MonoBehaviour
 
     [Header("Flags")]
     public bool isStunned = false;
-    public bool canMove = true;
     public bool isStopped = false;
 
     // Start is called before the first frame update
     public virtual void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
+        
     }
     public virtual void Start()
     {
@@ -50,6 +49,7 @@ public class EnemyBehavior : MonoBehaviour
         CreateEnemyBehaviorTree();
         movementState = MovementState.Retreat;
         player = PlayerManager.instance.transform;
+        enemyManager.agent.stoppingDistance = attackDistance;
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 adjustedSelfPos = new Vector3(transform.position.x, 0f, transform.position.z);
 
         distanceFromPlayer = Vector3.Distance(adjustedTargetPos, adjustedSelfPos);
-        targetInRange =  distanceFromPlayer <= attackDistance;
+        targetInRange = distanceFromPlayer <= attackDistance;
 
     }
     public void CreateEnemyBehaviorTree()
@@ -103,8 +103,6 @@ public class EnemyBehavior : MonoBehaviour
             return;
         deathSequenceStarted = true;
 
-        
-        StopMovement();
         WorldEnemySpawnerManager.Instance.UnregisterEnemy(enemyManager);
         enemyManager.enemyCombatManager.UnparentWeapon();
 
@@ -115,6 +113,14 @@ public class EnemyBehavior : MonoBehaviour
             if (dissolveScript != null)
             {
                 dissolveScript.StartDissolve();
+
+                if (enemyManager.enemyCollider is CapsuleCollider capsuleCollider)
+                {
+                    Debug.Log("Capsule collider");
+                    capsuleCollider.height = 0.01f;
+                    capsuleCollider.radius = 0.01f;
+                    capsuleCollider.center = new Vector3(capsuleCollider.center.x, capsuleCollider.center.y + 0.5f, capsuleCollider.center.z);
+                }
                 DOVirtual.DelayedCall(dissolveScript.fadeSpeed, () => enemyManager.DestroySelf());
               
             }
@@ -190,7 +196,6 @@ public class EnemyBehavior : MonoBehaviour
 
         if (!enemyManager.canAttack && distanceFromPlayer < minDistance)
         {
-            StopMovement();
             movementState = MovementState.Retreat;
             return;
         }
@@ -200,7 +205,7 @@ public class EnemyBehavior : MonoBehaviour
 
         LookTowardsPath();
         enemyManager.agent.SetDestination(player.position);
-        Vector3 velocity = transform.InverseTransformDirection(enemyManager.agent.velocity).normalized;
+        Vector3 velocity = transform.InverseTransformDirection(enemyManager.agent.desiredVelocity).normalized;
         enemyManager.enemyAnimationManager.SetMovementParameters(velocity.x, velocity.z);
     }
 
@@ -217,21 +222,20 @@ public class EnemyBehavior : MonoBehaviour
 
         }
 
-        if (distanceFromPlayer > maxDistFromPlayer || enemyManager.canAttack)
+        if (distanceFromPlayer > minimumDistanceRange.y || enemyManager.canAttack)
         {
             movementState = MovementState.Chase;
             ResumeMovement();
             return;
         }
 
-        if (distanceFromPlayer > minDistance - deadzoneBuffer && distanceFromPlayer < maxDistFromPlayer)
+        if (distanceFromPlayer > minDistance - deadzoneBuffer && distanceFromPlayer < minimumDistanceRange.y)
         {
             // Walk Sideways
             if (!choseRetreatDirection)
             {
                 retreatAxisDirection = Random.Range(0, 2) * 2 - 1;
-                choseRetreatDirection = true;
-                //StopMovement();
+                choseRetreatDirection = true;;
             }
             
             Vector3 movementDir = Vector3.zero;
@@ -259,12 +263,12 @@ public class EnemyBehavior : MonoBehaviour
 
     private void HandleStunnedState()
     {
-        if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation || !canMove)
+        if (isStunned || enemyManager.enemyInteractionManager.inKnockUpAnimation || !enemyManager.canMove)
         {
             enemyManager.agent.enabled = false;
             enemyManager.animator.SetBool("isMoving", false);
         }
-        else if (canMove) 
+        else if (enemyManager.canMove) 
         {
             enemyManager.agent.enabled = true;
             enemyManager.animator.SetBool("isMoving", true);
@@ -275,14 +279,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         deadzoneBuffer = defaultDeadzoneBuffer;
     }
-    public void StopMovement()
-    {
-        /*deadzoneBuffer = defaultDeadzoneBuffer;
-        isStopped = true;
-        enemyManager.agent.updatePosition = false;
-        canMove = false;*/
-    }
-
     private void ResumeMovement()
     {
         deadzoneBuffer = 0;

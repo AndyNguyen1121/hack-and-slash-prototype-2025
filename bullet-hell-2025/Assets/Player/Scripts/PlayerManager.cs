@@ -189,8 +189,7 @@ public class PlayerManager : MonoBehaviour
     {
         collisionCheckCoroutineActive = true;
         while (enemyCollided.Length > 0)
-        {
-            Debug.Log(enemyCollided.Length);
+        {   
             yield return null;
         }
 
