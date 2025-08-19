@@ -157,7 +157,7 @@ public class EnemyBehavior : MonoBehaviour
         if (!enemyManager.isPerformingAction && !enemyManager.enemyInteractionManager.inKnockUpAnimation)
         {
             enemyManager.canAttack = false;
-            enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyAttack1");
+            enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyAttack1", false);
         }
     }
 
@@ -219,7 +219,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             minDistance = Random.Range(minimumDistanceRange.x, minimumDistanceRange.y);
             minDistanceRangeChosen = true;
-
+            ChangeDeadzoneBuffer();
         }
 
         if (distanceFromPlayer > minimumDistanceRange.y || enemyManager.canAttack)
@@ -267,6 +267,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             enemyManager.agent.enabled = false;
             enemyManager.animator.SetBool("isMoving", false);
+            enemyManager.enemyAnimationManager.SetMovementParameters(0, 0);
         }
         else if (enemyManager.canMove) 
         {

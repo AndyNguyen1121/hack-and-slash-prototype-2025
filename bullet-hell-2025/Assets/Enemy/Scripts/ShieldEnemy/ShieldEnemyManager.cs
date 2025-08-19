@@ -48,7 +48,7 @@ public class ShieldEnemyManager : EnemyManager
         previousPosition = transform.position;
     }
 
-    public override void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
+    public override bool TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
         if (isGuarding)
         {
@@ -61,15 +61,14 @@ public class ShieldEnemyManager : EnemyManager
                 guardBroken = true;
                 canGrapple = true;
                 ExplodeShield();
-                return;
             }
 
             enemyAnimationManager.PlayActionAnimation("TinyImpact", false, true, true, 0);
             
-            return;
+            return false;
         }
 
-        base.TakeDamage(value, attackLocation, attackSource);
+        return base.TakeDamage(value, attackLocation, attackSource);
     }
 
     private void ExplodeShield()

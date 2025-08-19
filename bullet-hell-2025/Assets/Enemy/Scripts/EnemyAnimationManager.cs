@@ -44,9 +44,11 @@ public class EnemyAnimationManager : MonoBehaviour
 
     public void SetMovementParameters(float horizontal, float vertical)
     {
-        enemyManager.animator.SetFloat("horizontal", horizontal, 0.6f, Time.deltaTime * 6f);
-        enemyManager.animator.SetFloat("vertical", vertical, 0.6f, Time.deltaTime * 6f);
+        enemyManager.animator.SetFloat("horizontal", horizontal, 0.6f, Time.deltaTime * 9f);
+        enemyManager.animator.SetFloat("vertical", vertical, 0.6f, Time.deltaTime * 9f);
 
+        /*   enemyManager.animator.SetFloat("horizontal", horizontal);
+               enemyManager.animator.SetFloat("vertical", vertical);*/
         /* Vector3 worldDeltaPosition = enemyManager.agent.nextPosition - transform.position;
          worldDeltaPosition.y = 0f;
          float dx = Vector3.Dot(transform.right, worldDeltaPosition);
@@ -80,7 +82,7 @@ public class EnemyAnimationManager : MonoBehaviour
          lastPosition = transform.position;*/
     }
 
-    public void PlayActionAnimation(string animationName, bool canMove = true, bool rootMotion = true, bool isPerformingAction = true, float normalizedTime = 0.25f)
+    public void PlayActionAnimation(string animationName, bool canMove = true, bool rootMotion = true, bool isPerformingAction = true, float normalizedTime = 0.05f)
     {
         enemyManager.canMove = canMove;
         animator.applyRootMotion = rootMotion;

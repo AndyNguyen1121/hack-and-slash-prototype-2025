@@ -23,6 +23,9 @@ public class PlayerManager : MonoBehaviour
     public Animator animator;
     public Camera mainCam;
 
+    [Header("Assign in Inspector")]
+    public GameObject playerCenter;
+
     [Header("Action Flags")]
     public bool isPerformingAction = false;
     public bool canRotate = true;

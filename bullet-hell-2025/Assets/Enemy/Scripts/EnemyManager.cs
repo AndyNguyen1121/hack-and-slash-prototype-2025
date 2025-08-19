@@ -94,10 +94,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     #region Health
-    public virtual void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
+    public virtual bool TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
         if (!isAlive)
-            return;
+            return false;
 
         Health = Mathf.Max(Health - value, 0);
 
@@ -110,7 +110,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         {
             isAlive = false;
             OnDeath?.Invoke();
-            return;
+            return false;
         }
 
         float horizontalHitDir = Vector3.Dot(hitDirection, transform.right);
@@ -140,6 +140,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
             }
         }
 
+        return true;
         
     }
 

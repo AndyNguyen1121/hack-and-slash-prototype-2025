@@ -116,7 +116,7 @@ public class EnemyInteractionManager : MonoBehaviour
     public virtual void KnockBackRigidbody(float force, Vector3 directionOfImpact)
     {
         timeOnGround = 0f;
-        IgnoreGroundDetection(ignoreGroundDetectionDuration);
+        IgnoreGroundDetection(ignoreGroundDetectionDuration + 0.1f);
 
         if (force == 0 || !enemyManager.isAlive)
             return;

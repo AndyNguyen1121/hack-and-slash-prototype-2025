@@ -12,7 +12,7 @@ public class EnemyCombatManager : MonoBehaviour
 
     [SerializeField]
     private List<int> colliderIds = new();
-    public void OnWeaponTriggerEnter(Collider other)
+    public virtual void OnWeaponTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player")
             && !colliderIds.Contains(other.gameObject.GetInstanceID()))
@@ -29,7 +29,7 @@ public class EnemyCombatManager : MonoBehaviour
 
     }
 
-    public void OpenWeaponCollider()
+    public virtual void Attack()
     {
         if (weaponCollider == null)
             return;
@@ -37,7 +37,7 @@ public class EnemyCombatManager : MonoBehaviour
         weaponCollider.enabled = true;
     }
 
-    public void CloseWeaponCollider()
+    public virtual void CloseWeaponCollider()
     {
         if (weaponCollider == null)
             return;
