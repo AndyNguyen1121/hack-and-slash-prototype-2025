@@ -24,6 +24,9 @@ public class EnemyWeaponColliderBridge : MonoBehaviour, IColliderBridge
     }
     public void OnTriggerEnter(Collider other)
     {
+        if (!this.enabled)
+            return;
+
         if (enemyCombatManager != null)
             enemyCombatManager.OnWeaponTriggerEnter(other);
     }

@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 1320069729503578426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45348, y: 2.11, z: 1.0305876}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -429,6 +429,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7189615014340124575}
   m_LocalEulerAnglesHint: {x: -16.88, y: -52.697, z: 41.404}
+--- !u!1 &7800405823878449585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675309251392292620}
+  m_Layer: 0
+  m_Name: GunTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675309251392292620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800405823878449585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: -0.0655, z: 0.00447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6886300165167402263}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &6886300165167273879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,6 +530,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 400000, guid: b5742c35cad19b945bc129c719875b2d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4786353694770952719}
+    - targetCorrespondingSourceObject: {fileID: 400000, guid: b5742c35cad19b945bc129c719875b2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 675309251392292620}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: b5742c35cad19b945bc129c719875b2d, type: 3}
       insertIndex: -1
@@ -1206,7 +1240,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!114 &6075347398090667670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e8f8292713f940951834b8c3df2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClassification: 1
   <Health>k__BackingField: 0
   <MaxHealth>k__BackingField: 100
   enemyAnimationManager: {fileID: 0}
@@ -1253,7 +1288,7 @@ MonoBehaviour:
   movementState: 0
   attackDistance: 7
   minimumDistanceRange: {x: 7, y: 10}
-  rotationSpeed: 9
+  rotationSpeed: 20
   targetInRange: 0
   distanceFromPlayer: 0
   defaultDeadzoneBuffer: 2.5
@@ -1314,9 +1349,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaae6226fcdfec46b6e342ac7f7b034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponCollider: {fileID: 0}
+  weaponCollider: {fileID: 4984393038247372788}
   damage: 5
   colliderIds: 
+  bullet: {fileID: 7320506130262811712, guid: e985fed7a6a3e9247a53e2de828cfc02, type: 3}
+  gunTip: {fileID: 675309251392292620}
 --- !u!4 &8733045839447343903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 234480625599603528, guid: 6df41fd94eb27c24c9267c0c728b5a78, type: 3}

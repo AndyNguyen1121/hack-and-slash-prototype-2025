@@ -442,6 +442,7 @@ MonoBehaviour:
     m_Bits: 1025
   minTimeOnGround: 0.1
   timeOnGround: 0
+  ignoreGroundDetectionDuration: 0.05
 --- !u!54 &793177666737761576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -481,8 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256e8f8292713f940951834b8c3df2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClassification: 0
   <Health>k__BackingField: 0
-  <MaxHealth>k__BackingField: 10000
+  <MaxHealth>k__BackingField: 100
   enemyAnimationManager: {fileID: 0}
   enemyInteractionManager: {fileID: 0}
   enemyCombatManager: {fileID: 0}
@@ -498,6 +500,7 @@ MonoBehaviour:
   canAttack: 0
   isAlive: 1
   canGrapple: 1
+  canMove: 1
 --- !u!114 &8506188060588702525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,14 +517,12 @@ MonoBehaviour:
   movementState: 0
   attackDistance: 1
   minimumDistanceRange: {x: 3, y: 7}
-  maxDistFromPlayer: 7
   rotationSpeed: 9
   targetInRange: 0
   distanceFromPlayer: 0
   defaultDeadzoneBuffer: 2.5
   deadzoneBuffer: 0
   isStunned: 0
-  canMove: 1
   isStopped: 0
   minDistance: 0
 --- !u!114 &8178293082833473013

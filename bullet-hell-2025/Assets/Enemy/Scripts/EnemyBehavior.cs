@@ -159,10 +159,20 @@ public class EnemyBehavior : MonoBehaviour
             enemyManager.canAttack = false;
             enemyManager.enemyAnimationManager.PlayActionAnimation("EnemyAttack1", false);
         }
+        else
+        {
+            Debug.Log("Attacking");
+        }
+
     }
 
     protected virtual void HandleMovements()
-    {
+    {   
+        if (enemyManager.isPerformingAction)
+        {
+            LookTowardsPlayer();
+        }
+        
         if (!enemyManager.agent.enabled)
         {
             return;
@@ -194,6 +204,8 @@ public class EnemyBehavior : MonoBehaviour
         choseRetreatDirection = false;
         minDistanceRangeChosen = false;
 
+        LookTowardsPath();
+
         if (!enemyManager.canAttack && distanceFromPlayer < minDistance)
         {
             movementState = MovementState.Retreat;
@@ -203,7 +215,7 @@ public class EnemyBehavior : MonoBehaviour
         enemyManager.agent.updateRotation = false;
         enemyManager.agent.updatePosition = true;
 
-        LookTowardsPath();
+        
         enemyManager.agent.SetDestination(player.position);
         Vector3 velocity = transform.InverseTransformDirection(enemyManager.agent.desiredVelocity).normalized;
         enemyManager.enemyAnimationManager.SetMovementParameters(velocity.x, velocity.z);
@@ -249,6 +261,10 @@ public class EnemyBehavior : MonoBehaviour
                 movementDir = -transform.right;
             }
 
+            if (!enemyManager.agent.isOnNavMesh)
+            {
+                Debug.LogWarning(gameObject.transform.parent.name);
+            }
             enemyManager.agent.Move(movementDir * 0.01f * Time.deltaTime);
             Vector3 vel = transform.InverseTransformDirection(movementDir);
             enemyManager.enemyAnimationManager.SetMovementParameters(retreatAxisDirection, 0);

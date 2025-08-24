@@ -6,8 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+public enum EnemyClassification
+{
+    Melee, 
+    Ranged
+}
 public class EnemyManager : MonoBehaviour, IDamageable
 {
+    public EnemyClassification enemyClassification;
     [field: SerializeField]
     public float Health { get; set; }
 
@@ -73,6 +79,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
                     PlayerManager.instance.playerCameraManager.DisableCurrentTarget();
                     WorldEnemySpawnerManager.Instance.UnregisterEnemy(this);
                 }
+
+                enemyCombatManager.CloseWeaponCollider();
             
             };
         }
@@ -185,6 +193,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
         SendAttackSignal?.Invoke(this);
     }
 
+    public void ClearAllSubscribers()
+    {
+        SendAttackSignal = null;
+    }
     public void DestroySelf()
     {
         Destroy(gameObject.transform.parent.gameObject);
