@@ -58,7 +58,5 @@ public class PlayerGuard : PlayerCombatBaseState
     {
         playerManager.playerCombatManager.elapsedFrames = 0;
         playerManager.playerCombatManager.parryWindowActive = false;
-
-        Debug.Log(playerManager.playerCombatManager.parryWindowActive);
     }
 }

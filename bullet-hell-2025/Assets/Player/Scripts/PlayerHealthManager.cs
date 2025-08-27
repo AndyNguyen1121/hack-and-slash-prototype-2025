@@ -28,12 +28,12 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         playerManager.playerUIManager.SetHealthSliderValue(1);
     }
 
-    public void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
+    public bool TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
         if (playerManager.playerCombatManager.parryWindowActive)
         {
             playerManager.playerCombatManager.ActivateParryBehavior();   
-            return;
+            return false;
         }
         value = -value;
         Health += value;
@@ -43,6 +43,8 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         HandleHitBehavior(value, attackLocation, attackSource);
 
         playerManager.swordSlashManager.DisableSwordSlashParticle();
+
+        return true;
     }
 
     public void IncreaseHealth(float value)

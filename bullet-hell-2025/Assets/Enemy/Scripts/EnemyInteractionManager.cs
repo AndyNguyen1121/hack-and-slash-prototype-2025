@@ -19,6 +19,11 @@ public class EnemyInteractionManager : MonoBehaviour
     public LayerMask whatIsGround;
     public float minTimeOnGround = 0.1f;
     public float timeOnGround;
+    private bool ignoreGroundDetection = false;
+    private Coroutine ignoreGroundCoroutine;
+
+    // during certain actions, ignore ground detection
+    public float ignoreGroundDetectionDuration = 0.05f;
 
     private Tween grappleTween;
     public virtual void Awake()
@@ -37,6 +42,12 @@ public class EnemyInteractionManager : MonoBehaviour
     {
         if (!enemyManager.isAlive)
             return;
+        
+        if (ignoreGroundDetection)
+        {
+            isGrounded = false;
+            return;
+        }
 
         isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
         if (isGrounded)
@@ -47,20 +58,37 @@ public class EnemyInteractionManager : MonoBehaviour
         {
             timeOnGround = 0f;
         }
-
-        if (timeOnGround > minTimeOnGround && inKnockUpAnimation)
+        //timeOnGround > minTimeOnGround && 
+        if (inKnockUpAnimation && isGrounded)
         {
-            animator.CrossFade("KnockupEnd", 0.05f);
+            animator.CrossFade("KnockupEnd", 0.15f);
             inKnockUpAnimation = false;
             rb.isKinematic = true;
             timeOnGround = 0f;
         }
     }
 
+    private void IgnoreGroundDetection(float duration)
+    {
+        if (ignoreGroundCoroutine != null)
+        {
+            StopCoroutine(ignoreGroundCoroutine);
+        }
+
+        ignoreGroundCoroutine = StartCoroutine(IgnoreGroundDetectionCoroutine(duration));
+    }
+    private IEnumerator IgnoreGroundDetectionCoroutine(float time)
+    {
+        ignoreGroundDetection = true;
+        yield return new WaitForSeconds(time);
+        ignoreGroundDetection = false;
+    }
+
     public virtual void JumpToHeightInTime(float height)
     {
-        Debug.Log("hit");
         timeOnGround = 0f;
+        IgnoreGroundDetection(ignoreGroundDetectionDuration);
+
         if (height == 0 || !enemyManager.isAlive)
             return;
 
@@ -77,32 +105,18 @@ public class EnemyInteractionManager : MonoBehaviour
 
         float gravity = Mathf.Abs(Physics.gravity.y);
         float mass = rb.mass;
-
         float velocity = Mathf.Sqrt(2f * gravity * Mathf.Abs(height));
-
         float impulseForce = mass * velocity;
-
         Vector3 direction = height > 0 ? Vector3.up : Vector3.down;
 
         rb.AddForce(direction * impulseForce, ForceMode.Impulse);
-
-       /* if (!inKnockUpAnimation)
-        {
-            Vector3 dirFromPlayer = transform.position - PlayerManager.instance.transform.position;
-            dirFromPlayer.y = 0f;
-
-            velocity = Mathf.Sqrt(2f * gravity * Mathf.Abs(0.25f));
-            impulseForce = mass * velocity;
-            rb.AddForce(impulseForce * dirFromPlayer, ForceMode.Impulse);
-        }
-*/
-
         inKnockUpAnimation = true;
     }
 
     public virtual void KnockBackRigidbody(float force, Vector3 directionOfImpact)
     {
         timeOnGround = 0f;
+        IgnoreGroundDetection(ignoreGroundDetectionDuration + 0.1f);
 
         if (force == 0 || !enemyManager.isAlive)
             return;
@@ -153,18 +167,6 @@ public class EnemyInteractionManager : MonoBehaviour
 
     public virtual void Grapple(float stopDistance, float yOffset)
     {
-        /* if (!isGrounded)
-         {
-             timeOnGround = 0f;
-
-             if (!inKnockUpAnimation)
-                 animator.Play("KnockUp", 0, 0f);
-             else
-                 animator.Play("KnockUpRestart", 0, 0f);
-
-             inKnockUpAnimation = true;
-         }
- */
         if (!enemyManager.canGrapple)
             return;
         
@@ -178,21 +180,13 @@ public class EnemyInteractionManager : MonoBehaviour
 
         if (grappleTween != null)
             grappleTween.Kill();
-        /*DOTween.To(() => 0f, x =>
-        {
-            elapsedTime = x;
-            Vector3 updatedEndPosition = PlayerManager.instance.transform.position + (dirFromPlayer * stopDistance);
-            transform.position = Vector3.Lerp(transform.position, updatedEndPosition, x / 0.25f);
-        }, 0.25f, 0.25f).SetEase(Ease.OutSine);*/
-
-        
-
 
         transform.DORotateQuaternion(Quaternion.LookRotation(-dirFromPlayer), 0.25f);
 
         if (Mathf.Abs(desiredPosition.y - transform.position.y) > 1f) 
         {
             timeOnGround = 0f;
+            IgnoreGroundDetection(ignoreGroundDetectionDuration);
 
             if (!inKnockUpAnimation)
                 animator.Play("KnockUp", 0, 0f);

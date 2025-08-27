@@ -6,8 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+public enum EnemyClassification
+{
+    Melee, 
+    Ranged
+}
 public class EnemyManager : MonoBehaviour, IDamageable
 {
+    public EnemyClassification enemyClassification;
     [field: SerializeField]
     public float Health { get; set; }
 
@@ -36,6 +42,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public bool canAttack = true;
     public bool isAlive = true;
     public bool canGrapple = true;
+    public bool canMove = true;
 
     public event Action<EnemyManager> SendAttackSignal;
     public event Action OnDeath;
@@ -72,6 +79,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
                     PlayerManager.instance.playerCameraManager.DisableCurrentTarget();
                     WorldEnemySpawnerManager.Instance.UnregisterEnemy(this);
                 }
+
+                enemyCombatManager.CloseWeaponCollider();
             
             };
         }
@@ -93,10 +102,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     #region Health
-    public virtual void TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
+    public virtual bool TakeDamage(float value, Vector3 attackLocation, GameObject attackSource)
     {
         if (!isAlive)
-            return;
+            return false;
 
         Health = Mathf.Max(Health - value, 0);
 
@@ -109,7 +118,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         {
             isAlive = false;
             OnDeath?.Invoke();
-            return;
+            return false;
         }
 
         float horizontalHitDir = Vector3.Dot(hitDirection, transform.right);
@@ -139,6 +148,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
             }
         }
 
+        return true;
         
     }
 
@@ -174,7 +184,6 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void EndAttack()
     {
         canAttack = false;
-        WorldEnemySpawnerManager.Instance.RemoveAttackSignal(this);
         WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
     }
 
@@ -184,6 +193,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
         SendAttackSignal?.Invoke(this);
     }
 
+    public void ClearAllSubscribers()
+    {
+        SendAttackSignal = null;
+    }
     public void DestroySelf()
     {
         Destroy(gameObject.transform.parent.gameObject);

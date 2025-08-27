@@ -14,12 +14,19 @@ public class WorldEnemySpawnerManager : MonoBehaviour
     private List<EnemyManager> allEnemies = new();
 
     [SerializeField]
-    private List<EnemyManager> attackSignalList = new();
+    private List<EnemyManager> meleeAttackSignalList = new();
 
     [SerializeField]
-    private List<EnemyManager> currentlyAttackingEnemies = new();
+    private List<EnemyManager> rangedAttackSignalList = new();
 
-    public int maxAttackingEnemies = 2;
+    [SerializeField]
+    private List<EnemyManager> currentlyAttackingMeleeEnemies = new();
+
+    [SerializeField]
+    private List<EnemyManager> currentlyAttackingRangedEnemies = new();
+
+    public int maxAttackingMeleeEnemies = 2;
+    public int maxAttackingRangedEnemies = 2;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,7 +47,8 @@ public class WorldEnemySpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TryActivateNextAttacker();
+        TryActivateNextAttacker(ref currentlyAttackingMeleeEnemies, meleeAttackSignalList, maxAttackingMeleeEnemies);
+        TryActivateNextAttacker(ref currentlyAttackingRangedEnemies, rangedAttackSignalList, maxAttackingRangedEnemies);
     }
 
     public void RegisterEnemy(EnemyManager enemy)
@@ -48,7 +56,15 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         if (!allEnemies.Contains(enemy))
         {
             allEnemies.Add(enemy);
-            enemy.SendAttackSignal += AddAttackSignal;
+
+            if (enemy.enemyClassification == EnemyClassification.Melee)
+            {
+                enemy.SendAttackSignal += AddMeleeAttackSignal;
+            }
+            else if (enemy.enemyClassification == EnemyClassification.Ranged) 
+            {
+                enemy.SendAttackSignal += AddRangedAttackSignal;
+            }
         }
     }
 
@@ -57,74 +73,97 @@ public class WorldEnemySpawnerManager : MonoBehaviour
         if (allEnemies.Contains(enemy))
         {
             allEnemies.Remove(enemy);
-            enemy.SendAttackSignal -= AddAttackSignal;
+            enemy.ClearAllSubscribers();
             RemoveAttackSignal(enemy);
             RemoveFromAttackingPool(enemy);
 
-            if (currentlyAttackingEnemies.Contains(enemy))
+            if (currentlyAttackingMeleeEnemies.Contains(enemy))
             {
-                currentlyAttackingEnemies.Remove(enemy);
+                currentlyAttackingMeleeEnemies.Remove(enemy);
+            }
+            else if (currentlyAttackingRangedEnemies.Contains(enemy))
+            {
+                currentlyAttackingRangedEnemies.Remove(enemy);
             }
         }
     }
 
-    private void AddAttackSignal(EnemyManager enemy)
+    private void AddMeleeAttackSignal(EnemyManager enemy)
     {
-        if (!attackSignalList.Contains(enemy) && !currentlyAttackingEnemies.Contains(enemy))
+        if (!meleeAttackSignalList.Contains(enemy) 
+            && !currentlyAttackingMeleeEnemies.Contains(enemy))
         {
-            attackSignalList.Add(enemy);
-            //TryActivateNextAttacker();
+            meleeAttackSignalList.Add(enemy);
+        }
+    }
+
+    private void AddRangedAttackSignal(EnemyManager enemy)
+    {
+        if (!rangedAttackSignalList.Contains(enemy) 
+            && !currentlyAttackingRangedEnemies.Contains(enemy))
+        {
+            rangedAttackSignalList.Add(enemy);
         }
     }
 
     public void RemoveAttackSignal(EnemyManager enemy)
     {
-        if (attackSignalList.Contains(enemy))
+        if (enemy.enemyClassification == EnemyClassification.Melee 
+            && meleeAttackSignalList.Contains(enemy))
         {
-            attackSignalList.Remove(enemy);
-            //TryActivateNextAttacker();
+            meleeAttackSignalList.Remove(enemy);
+        }
+        else if (enemy.enemyClassification == EnemyClassification.Ranged 
+            && rangedAttackSignalList.Contains(enemy))
+        {
+            rangedAttackSignalList.Remove(enemy);
         }
     }
 
-    private void TryActivateNextAttacker()
+    private void TryActivateNextAttacker(ref List<EnemyManager> currentAttackingEnemyList, List<EnemyManager> signalList, int maxActiveEnemies)
     {
-        while (currentlyAttackingEnemies.Count < maxAttackingEnemies && attackSignalList.Count > 0)
+        if (currentAttackingEnemyList.Count < maxActiveEnemies 
+            && signalList.Count > 0 && allEnemies.Count > 0)
         {
             EnemyManager closestEnemy = null;
             float closestDistance = Mathf.Infinity;
 
-            foreach (EnemyManager enemy in attackSignalList)
+            foreach (EnemyManager enemy in signalList)
             {
                 float distance = Vector3.Distance(PlayerManager.instance.transform.position, enemy.transform.position);
 
-                if (distance < closestDistance && !currentlyAttackingEnemies.Contains(enemy)) 
+                if (distance < closestDistance && !currentAttackingEnemyList.Contains(enemy)) 
                 {
                     closestEnemy = enemy;
                     closestDistance = distance;
+                  
                 }
             }
 
             if (closestEnemy != null)
             {
-                closestEnemy.canAttack = true;
-                currentlyAttackingEnemies.Add(closestEnemy);
+                RemoveAttackSignal(closestEnemy);
             }
 
-           /* var enemy = attackSignalList.Dequeue();
-
-            if (allEnemies.Contains(enemy))
+            if (allEnemies.Contains(closestEnemy))
             {
-                enemy.canAttack = true;
-                currentlyAttackingEnemies.Add(enemy);
-            }*/
+                closestEnemy.canAttack = true;
+                currentAttackingEnemyList.Add(closestEnemy);
+            }
         }
     }
 
     public void RemoveFromAttackingPool(EnemyManager enemy)
     {
-        if (currentlyAttackingEnemies.Contains(enemy))
+        if (enemy.enemyClassification == EnemyClassification.Melee 
+            && currentlyAttackingMeleeEnemies.Contains(enemy))
         {
-            currentlyAttackingEnemies.Remove(enemy);
+            currentlyAttackingMeleeEnemies.Remove(enemy);
+        }
+        else if (enemy.enemyClassification == EnemyClassification.Ranged 
+            && currentlyAttackingRangedEnemies.Contains(enemy))
+        {
+            currentlyAttackingRangedEnemies.Remove(enemy);
         }
     }
 

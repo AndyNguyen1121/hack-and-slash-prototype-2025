@@ -110,6 +110,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5787063361295048343
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ca7cde53737d94ea3cf815cfa8b68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &-5676809561592079070
 AnimatorState:
   serializedVersion: 6
@@ -121,7 +133,8 @@ AnimatorState:
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -56657336172018712}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -435,6 +448,7 @@ MonoBehaviour:
   isPerformingAction: 0
   enableAgent: 0
   disableWeaponCollider: 1
+  canMove: 0
 --- !u!1102 &-1300444270768726155
 AnimatorState:
   serializedVersion: 6
@@ -493,6 +507,19 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2640143122114771446}
+--- !u!114 &-56657336172018712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3ba58f0b41c9c43ad57f331f16e8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ikEnable: 0
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -530,7 +557,7 @@ AnimatorController:
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_DefaultWeight: 0
-    m_IKPass: 0
+    m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
 --- !u!1102 &1018437452275586651
@@ -769,7 +796,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1300444270768726155}
-    m_Position: {x: 450, y: 40, z: 0}
+    m_Position: {x: 430, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5199783330624352064}
     m_Position: {x: 400, y: -50, z: 0}
@@ -802,6 +829,7 @@ MonoBehaviour:
   isPerformingAction: 0
   enableAgent: 1
   disableWeaponCollider: 1
+  canMove: 1
 --- !u!1101 &5042669511021827283
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
