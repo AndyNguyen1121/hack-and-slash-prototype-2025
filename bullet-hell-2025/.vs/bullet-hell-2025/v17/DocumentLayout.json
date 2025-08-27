@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\positionanimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\menuclickmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\menuclickmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\glitchtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\glitchtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\positionanimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\positionanimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\scenes\\subsceneloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\assets\\scenes\\subsceneloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7D7BE06-7823-5224-20AA-BE1ECC9B05AD}|Assembly-CSharp.csproj|solutionrelative:assets\\scenes\\subsceneloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -39,19 +47,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PositionAnimator.cs",
-              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\PositionAnimator.cs",
-              "RelativeDocumentMoniker": "Assets\\PositionAnimator.cs",
-              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\PositionAnimator.cs",
-              "RelativeToolTip": "Assets\\PositionAnimator.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAABpAAAA",
+              "Title": "MenuClickManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\MenuClickManager.cs",
+              "RelativeDocumentMoniker": "Assets\\MenuClickManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\MenuClickManager.cs",
+              "RelativeToolTip": "Assets\\MenuClickManager.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACcAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T00:05:19.39Z",
+              "WhenOpened": "2025-08-27T06:16:42.557Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "GlitchText.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\GlitchText.cs",
+              "RelativeDocumentMoniker": "Assets\\GlitchText.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\GlitchText.cs",
+              "RelativeToolTip": "Assets\\GlitchText.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAIBJwDEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-26T20:58:25.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PositionAnimator.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\PositionAnimator.cs",
+              "RelativeDocumentMoniker": "Assets\\PositionAnimator.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\PositionAnimator.cs",
+              "RelativeToolTip": "Assets\\PositionAnimator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-23T00:05:19.39Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SubsceneLoader.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\bullet-hell-2025\\Assets\\Scenes\\SubsceneLoader.cs",
               "RelativeDocumentMoniker": "Assets\\Scenes\\SubsceneLoader.cs",
@@ -59,8 +91,7 @@
               "RelativeToolTip": "Assets\\Scenes\\SubsceneLoader.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T07:24:36.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-22T07:24:36.24Z"
             }
           ]
         },
