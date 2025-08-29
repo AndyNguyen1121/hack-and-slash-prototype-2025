@@ -8,7 +8,7 @@ using DG.Tweening;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 
-public class MenuClickManager : MonoBehaviour, IPointerClickHandler
+public class MenuClickManager : MonoBehaviour
 {
     public GameObject nextMenuToEnable;
     public GameObject menuToDisable;
@@ -16,9 +16,14 @@ public class MenuClickManager : MonoBehaviour, IPointerClickHandler
     public float disableDuration = 0.1f;
     public List<Button> otherButtons;
 
-
+    private Tween animationTween;
     private void OnEnable()
     {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
+
         transform.localScale = Vector3.one;
 
         TextMeshProUGUI[] text = GetComponentsInChildren<TextMeshProUGUI>();
@@ -40,19 +45,31 @@ public class MenuClickManager : MonoBehaviour, IPointerClickHandler
         {
             Color color = mainText.color;
             color.a = 0;
-            mainText.DOColor(color, disableDuration);
+            mainText.DOColor(color, disableDuration).SetUpdate(true);
         }
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick()
     {
+
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
+
         if (nextMenuToEnable != null)
         {
             nextMenuToEnable.SetActive(true);
         }
 
-        transform.DOScaleY(0, shrinkDuration);
-        transform.DOScaleX(1.25f, shrinkDuration).OnComplete(() =>
+
+        transform.DOScaleY(0, shrinkDuration).SetUpdate(true);
+        animationTween = transform.DOScaleX(1.25f, shrinkDuration).SetUpdate(true).OnComplete(() =>
         {
+            if (nextMenuToEnable != null)
+            {
+                nextMenuToEnable.SetActive(true);
+            }
+
             if (menuToDisable != null)
             {
                 menuToDisable.SetActive(false);

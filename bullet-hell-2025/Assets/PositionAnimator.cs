@@ -19,7 +19,7 @@ public class PositionAnimator : MonoBehaviour
     public List<Subscene> unloadScenes;
     public List<Subscene> loadScenes;
 
-
+    private Tween animationTween;
     // Update is called once per frame
     void Update()
     {
@@ -43,13 +43,18 @@ public class PositionAnimator : MonoBehaviour
             SubsceneLoader.instance.LoadSubscene(sc);
         }
 
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
+
         if (useLocalPosition)
         {
-            transform.DOLocalMove(endPosition, duration, false).From(startingPosition).SetEase(easeFunction).OnComplete(() => OnAnimationEnd.Invoke());
+            animationTween = transform.DOLocalMove(endPosition, duration, false).From(startingPosition).SetEase(easeFunction).OnComplete(() => OnAnimationEnd.Invoke());
         }
         else
         {
-            transform.DOMove(endPosition, duration, false).From(startingPosition).SetEase(easeFunction).OnComplete(() => OnAnimationEnd.Invoke());
+            animationTween = transform.DOMove(endPosition, duration, false).From(startingPosition).SetEase(easeFunction).OnComplete(() => OnAnimationEnd.Invoke());
         }
     }
 }
