@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6184889259443646078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8129440647637580968}
+  - component: {fileID: 8468707623454528486}
+  - component: {fileID: 2202828130279260549}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8129440647637580968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184889259443646078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8468707623454528486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184889259443646078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c727a351d6cb62e4492c8f655817dcc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2202828130279260549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184889259443646078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bc9dd418164c44aa35e716b70ea701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <footSteps>k__BackingField:
+    Guid:
+      Data1: 980445815
+      Data2: 1335770552
+      Data3: 1490605218
+      Data4: -1323442504
+    Path: event:/Player/FootSteps
+  <swordSlash>k__BackingField:
+    Guid:
+      Data1: -384797518
+      Data2: 1285871708
+      Data3: -51404907
+      Data4: 1036884685
+    Path: event:/Player/SwordSlash
+  <swordHit>k__BackingField:
+    Guid:
+      Data1: 1176352044
+      Data2: 1318981020
+      Data3: -397994365
+      Data4: 1904952602
+    Path: event:/Player/SwordHit
+  <swordParry>k__BackingField:
+    Guid:
+      Data1: 719856192
+      Data2: 1262479291
+      Data3: -1947883619
+      Data4: -1860773186
+    Path: event:/Player/SwordParry
+  <grapple>k__BackingField:
+    Guid:
+      Data1: 1426769783
+      Data2: 1245645691
+      Data3: -1536261973
+      Data4: -423600206
+    Path: event:/Player/Grapple
+  <enemyGrowlAggressive>k__BackingField:
+    Guid:
+      Data1: 294185048
+      Data2: 1162603245
+      Data3: 9310877
+      Data4: -1784298066
+    Path: event:/Enemy/AlienGrowlAggressive
+  <enemyDeath>k__BackingField:
+    Guid:
+      Data1: 23206681
+      Data2: 1089119726
+      Data3: 1221338045
+      Data4: -1059506797
+    Path: event:/Enemy/AlienDeath
+  <enemyGrowlIdle>k__BackingField:
+    Guid:
+      Data1: 1418593804
+      Data2: 1196119096
+      Data3: 2097751972
+      Data4: 534564810
+    Path: event:/Enemy/AlienGrowlIdle
+  <enemyAttack>k__BackingField:
+    Guid:
+      Data1: -1407949927
+      Data2: 1327373874
+      Data3: -1962021979
+      Data4: 506448733
+    Path: event:/Enemy/AlienAxeAttack
+  <enemyAxeHit>k__BackingField:
+    Guid:
+      Data1: -674996684
+      Data2: 1120505930
+      Data3: -750244472
+      Data4: 802299527
+    Path: event:/Enemy/AlienAxeHit
+  <buttonSwitch>k__BackingField:
+    Guid:
+      Data1: 781050033
+      Data2: 1224568949
+      Data3: 343549347
+      Data4: 1587275677
+    Path: event:/UI/ButtonSwitch
+  <buttonPress>k__BackingField:
+    Guid:
+      Data1: 1253202530
+      Data2: 1319092389
+      Data3: 1005653930
+      Data4: 101432429
+    Path: event:/UI/ButtonPress
+  <menuClose>k__BackingField:
+    Guid:
+      Data1: 1960376992
+      Data2: 1297608144
+      Data3: -1452821571
+      Data4: -429849796
+    Path: event:/UI/MenuClose
+  <menuOpen>k__BackingField:
+    Guid:
+      Data1: -685418501
+      Data2: 1229914319
+      Data3: -463273080
+      Data4: -1364403443
+    Path: event:/UI/MenuOpen
+  <sliderChange>k__BackingField:
+    Guid:
+      Data1: 974918397
+      Data2: 1243345082
+      Data3: -575938426
+      Data4: 1860068534
+    Path: event:/UI/SliderChange

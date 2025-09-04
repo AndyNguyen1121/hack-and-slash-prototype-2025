@@ -19,10 +19,17 @@ public class MenuAnimator : MonoBehaviour
     public Vector3 endPosition;
 
     private Tween animationTween;
+    private Camera mainCam;
+
     private void OnEnable()
     {
         if (backGroundImage == null)
             return;
+
+        if (mainCam == null)
+        {
+            mainCam = Camera.main;
+        }
 
         if (animationTween != null)
         {
@@ -31,12 +38,14 @@ public class MenuAnimator : MonoBehaviour
 
         if (shrinkY)
         {
-           animationTween = backGroundImage.transform.DOScaleY(1, scaleYDuration).From(0).SetEase(Ease.OutExpo).SetUpdate(true);
+           animationTween = backGroundImage.rectTransform.DOScaleY(1, scaleYDuration).From(0).SetEase(Ease.OutExpo).SetUpdate(true);
         }
         else if (slideOutFromLeft)
         {
            animationTween = backGroundImage.rectTransform.DOAnchorPos(endPosition, slideOutDuration).From(startPosition).SetUpdate(true);
         }
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuOpen, mainCam.transform.position);
     }
     
     public void DisableMenu()
@@ -45,6 +54,24 @@ public class MenuAnimator : MonoBehaviour
         {
             animationTween.Kill();
         }
-        animationTween = backGroundImage.transform.DOScaleY(0, scaleYDuration).From(backGroundImage.transform.localScale);
+
+        if (shrinkY)
+        {
+            animationTween = backGroundImage.rectTransform.DOScaleY(0, scaleYDuration).From(backGroundImage.transform.localScale).SetUpdate(true);
+        }
+        else if (slideOutFromLeft)
+        {
+            animationTween = backGroundImage.rectTransform.DOAnchorPos(startPosition, slideOutDuration).From(endPosition).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
+        }
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuClose, mainCam.transform.position);
+    }
+
+    private void OnDestroy()
+    {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
     }
 }

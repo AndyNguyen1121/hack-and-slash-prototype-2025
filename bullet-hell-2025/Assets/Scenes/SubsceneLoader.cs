@@ -27,7 +27,6 @@ public class SubsceneLoader : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
     }
     private void OnEnable()
     {
@@ -48,5 +47,12 @@ public class SubsceneLoader : MonoBehaviour
     public void LoadScene(int scene)
     {
         SceneManager.LoadScene(scene);
+        Time.timeScale = 1;
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
+        Time.timeScale = 1;
     }
 }

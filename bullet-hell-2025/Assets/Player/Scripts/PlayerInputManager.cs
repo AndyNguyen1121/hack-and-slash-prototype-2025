@@ -5,6 +5,10 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.EventSystems;
 
 #region InputID
 public enum InputID
@@ -42,6 +46,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool attackPressed = false;
     public bool dodgePressed = false;
     public bool isGuarding = false;
+    public bool pauseButtonPressed = false;
 
     [Header("Input Queue")]
     public float defaultQueueTimer = 0.35f;
@@ -59,7 +64,13 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Input Direction Relative To Player")]
     public Vector2 localInputDirection;
 
+    private float timeSinceLoadedIn = 0;
+
+    private InputSystemUIInputModule eventSystemInputModule;
+    public InputDevice currentDevice;
+
     private void Awake()
+
     {
         if (instance == null)
         {
@@ -76,20 +87,26 @@ public class PlayerInputManager : MonoBehaviour
     private void Start()
     {
         playerManager = PlayerManager.instance;
+        eventSystemInputModule = EventSystem.current.GetComponent<InputSystemUIInputModule>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         HandleMovementInput();
         HandleSprintingInput();
         HandleInteractInput();
         HandleJumpingInput();
         HandleAttackInput();
+        HandlePauseInput();
         HandleDodgeInput();
         HandleQueuedInputs();
         HandleJoystickIdleTime();
         CalculateInputDirectionRelativeToPlayer();
+
+        HandleTimeLoadedIn();
     }
 
     private void OnEnable()
@@ -114,10 +131,35 @@ public class PlayerInputManager : MonoBehaviour
                 isGuarding = false;
                 RemoveInput(InputID.Guard);
             };
+
+            InputSystem.onActionChange += InputActionChangeCallback;
         }
 
         inputActions.Enable();
         cameraInputProvider.enabled = true;
+    }
+
+    private void InputActionChangeCallback(object obj, InputActionChange change)
+    {
+        /*if (change != InputActionChange.ActionPerformed) return;
+
+        if (obj is InputAction receivedInputAction)
+        {
+            InputDevice lastDevice = receivedInputAction.activeControl.device;
+
+            if (lastDevice != currentDevice && lastDevice is Gamepad)
+            {
+                eventSystemInputModule.deselectOnBackgroundClick = false;
+                currentDevice = lastDevice;
+                Debug.Log("Gamepad detected - deselect disabled");
+            }
+            else if ((lastDevice != currentDevice) && lastDevice is Keyboard)
+            {
+                eventSystemInputModule.deselectOnBackgroundClick = true;
+                currentDevice = lastDevice;
+                Debug.Log("Keyboard/Mouse detected - deselect enabled");
+            }
+        }*/
     }
 
     private void OnDisable()
@@ -285,7 +327,10 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
     
-
+    private void HandlePauseInput()
+    {
+        pauseButtonPressed = inputActions.UI.Pause.WasPressedThisFrame();
+    }
     private void QueueInput(ref bool queuedInput)
     {
         attackInputQueue = false;
@@ -378,4 +423,29 @@ public class PlayerInputManager : MonoBehaviour
 
     }
 
+    public void HandleTimeLoadedIn()
+    {
+        timeSinceLoadedIn += Time.deltaTime;
+
+        if (timeSinceLoadedIn < 0.25)
+        {
+            jumpPressed = false;
+        }
+    }
+
+    public void DisableAllInputsExceptUI()
+    {
+        inputActions.Camera.Disable();
+        inputActions.MovementMap.Disable();
+        inputActions.Actions.Disable();
+        inputActions.UI.Enable();
+    }
+
+    public void EnableAllInputs()
+    {
+        inputActions.Camera.Enable();
+        inputActions.MovementMap.Enable();
+        inputActions.Actions.Enable();
+        inputActions.UI.Enable();
+    }
 }

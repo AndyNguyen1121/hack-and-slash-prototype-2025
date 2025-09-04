@@ -8,7 +8,7 @@ using DG.Tweening;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 
-public class MenuClickManager : MonoBehaviour
+public class MenuClickManager : MonoBehaviour, ISelectHandler
 {
     public GameObject nextMenuToEnable;
     public GameObject menuToDisable;
@@ -17,11 +17,17 @@ public class MenuClickManager : MonoBehaviour
     public List<Button> otherButtons;
 
     private Tween animationTween;
+    private Camera mainCam;
     private void OnEnable()
     {
         if (animationTween != null)
         {
             animationTween.Kill();
+        }
+
+        if (mainCam == null)
+        {
+            mainCam = Camera.main;
         }
 
         transform.localScale = Vector3.one;
@@ -45,7 +51,7 @@ public class MenuClickManager : MonoBehaviour
         {
             Color color = mainText.color;
             color.a = 0;
-            mainText.DOColor(color, disableDuration).SetUpdate(true);
+            animationTween = mainText.DOColor(color, disableDuration).SetUpdate(true);
         }
     }
     public void OnPointerClick()
@@ -62,8 +68,7 @@ public class MenuClickManager : MonoBehaviour
         }
 
 
-        transform.DOScaleY(0, shrinkDuration).SetUpdate(true);
-        animationTween = transform.DOScaleX(1.25f, shrinkDuration).SetUpdate(true).OnComplete(() =>
+        animationTween = transform.DOScaleY(0, shrinkDuration).SetUpdate(true).OnComplete(() =>
         {
             if (nextMenuToEnable != null)
             {
@@ -74,7 +79,7 @@ public class MenuClickManager : MonoBehaviour
             {
                 menuToDisable.SetActive(false);
             }
-        });
+        }); 
 
         foreach (var button in otherButtons)
         {
@@ -85,6 +90,19 @@ public class MenuClickManager : MonoBehaviour
             {
                 clickManager.FadeOut();
             }
+        }
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
+    }
+    public void OnSelect(BaseEventData eventData)
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonSwitch, mainCam.transform.position);
+    }
+    private void OnDestroy()
+    {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
         }
     }
 }

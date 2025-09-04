@@ -29,7 +29,7 @@ public class PositionAnimator : MonoBehaviour
         }
     }
 
-    void AnimatePosition()
+    public void AnimatePosition()
     {
         OnAnimationStart.Invoke();
 
@@ -55,6 +55,14 @@ public class PositionAnimator : MonoBehaviour
         else
         {
             animationTween = transform.DOMove(endPosition, duration, false).From(startingPosition).SetEase(easeFunction).OnComplete(() => OnAnimationEnd.Invoke());
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
         }
     }
 }
