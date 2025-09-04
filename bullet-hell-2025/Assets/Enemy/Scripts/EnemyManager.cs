@@ -58,7 +58,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
         enemyCollider = GetComponent<Collider>();
         Health = MaxHealth;
 
-        
+        agent.enabled = false;
+        agent.enabled = true;
         ActivateRootMotion();
     }
 
@@ -200,6 +201,16 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void DestroySelf()
     {
         Destroy(gameObject.transform.parent.gameObject);
+    }
+
+    public void PlayGrowl()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyGrowlAggressive, transform.position);
+    }
+
+    public void PlayAxeSwingSFX()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyAttack, transform.position);
     }
 
     private void OnDrawGizmos()

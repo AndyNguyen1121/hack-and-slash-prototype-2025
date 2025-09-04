@@ -45,6 +45,7 @@ public class EnemyBulletBehavior : MonoBehaviour
 
             if (damageScript.TakeDamage(damage, hit.collider.ClosestPointOnBounds(transform.position), gameObject))
             {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyAxeHit, transform.position);
                 Destroy(gameObject);
             }
             else

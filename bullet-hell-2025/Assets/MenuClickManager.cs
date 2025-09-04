@@ -8,7 +8,7 @@ using DG.Tweening;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 
-public class MenuClickManager : MonoBehaviour, IPointerClickHandler
+public class MenuClickManager : MonoBehaviour, ISelectHandler
 {
     public GameObject nextMenuToEnable;
     public GameObject menuToDisable;
@@ -16,9 +16,20 @@ public class MenuClickManager : MonoBehaviour, IPointerClickHandler
     public float disableDuration = 0.1f;
     public List<Button> otherButtons;
 
-
+    private Tween animationTween;
+    private Camera mainCam;
     private void OnEnable()
     {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
+
+        if (mainCam == null)
+        {
+            mainCam = Camera.main;
+        }
+
         transform.localScale = Vector3.one;
 
         TextMeshProUGUI[] text = GetComponentsInChildren<TextMeshProUGUI>();
@@ -40,24 +51,35 @@ public class MenuClickManager : MonoBehaviour, IPointerClickHandler
         {
             Color color = mainText.color;
             color.a = 0;
-            mainText.DOColor(color, disableDuration);
+            animationTween = mainText.DOColor(color, disableDuration).SetUpdate(true);
         }
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick()
     {
+
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+        }
+
         if (nextMenuToEnable != null)
         {
             nextMenuToEnable.SetActive(true);
         }
 
-        transform.DOScaleY(0, shrinkDuration);
-        transform.DOScaleX(1.25f, shrinkDuration).OnComplete(() =>
+
+        animationTween = transform.DOScaleY(0, shrinkDuration).SetUpdate(true).OnComplete(() =>
         {
+            if (nextMenuToEnable != null)
+            {
+                nextMenuToEnable.SetActive(true);
+            }
+
             if (menuToDisable != null)
             {
                 menuToDisable.SetActive(false);
             }
-        });
+        }); 
 
         foreach (var button in otherButtons)
         {
@@ -68,6 +90,19 @@ public class MenuClickManager : MonoBehaviour, IPointerClickHandler
             {
                 clickManager.FadeOut();
             }
+        }
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
+    }
+    public void OnSelect(BaseEventData eventData)
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonSwitch, mainCam.transform.position);
+    }
+    private void OnDestroy()
+    {
+        if (animationTween != null)
+        {
+            animationTween.Kill();
         }
     }
 }

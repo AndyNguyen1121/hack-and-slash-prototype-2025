@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -214,9 +215,19 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerFootstepSFX(AnimationEvent evt)
     {
-        if (evt.animatorClipInfo.weight < 0.57f)
+        var clipsInfo = animator.GetCurrentAnimatorClipInfo(0);
+        var highestWeightClipInfo = clipsInfo.OrderByDescending(c => c.weight).FirstOrDefault();
+
+        if (!highestWeightClipInfo.clip)
+        {
             return;
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
+        }
+
+        if (evt.animatorClipInfo.clip == highestWeightClipInfo.clip && Mathf.Approximately(evt.animatorClipInfo.weight, highestWeightClipInfo.weight))
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.footSteps, transform.position);
+        }
+        
     }
     #endregion
     private void OnDrawGizmos()

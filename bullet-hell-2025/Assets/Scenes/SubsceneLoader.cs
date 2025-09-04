@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 
 public enum Subscene
 {
-    Subscene2 = 1
+    MainMenu = 0,
+    SampleScene = 1,
+    SubScene1 = 2,
+    Subscene2 = 3,
 }
 public class SubsceneLoader : MonoBehaviour
 {
@@ -23,13 +26,12 @@ public class SubsceneLoader : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            LoadSubscene(Subscene.Subscene2);
-        }
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+            SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
     }
 
     public void LoadSubscene(Subscene subscene)
@@ -40,5 +42,17 @@ public class SubsceneLoader : MonoBehaviour
     public void UnloadSubscene(Subscene subscene)
     {
         SceneManager.UnloadSceneAsync(subscene.ToString());
+    }
+
+    public void LoadScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
+        Time.timeScale = 1;
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
+        Time.timeScale = 1;
     }
 }

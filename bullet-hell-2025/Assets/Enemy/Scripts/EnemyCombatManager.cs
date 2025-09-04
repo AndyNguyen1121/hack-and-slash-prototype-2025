@@ -21,7 +21,7 @@ public class EnemyCombatManager : MonoBehaviour
             if (other.gameObject.TryGetComponent<IDamageable>(out playerHealthManager))
             {
                 playerHealthManager.TakeDamage(damage, other.ClosestPointOnBounds(weaponCollider.transform.position), gameObject);
-                Debug.Log(other.name);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyAxeHit, transform.position);
             }
 
             colliderIds.Add(other.gameObject.GetInstanceID());

@@ -11,7 +11,7 @@ public class GlitchText : MonoBehaviour
     private string text;
     private string scrambledText;
 
-    public float revealInterval = 0.1f;
+    public float revealDuration = 1f;
 
     private void Awake()
     {
@@ -28,6 +28,8 @@ public class GlitchText : MonoBehaviour
         int revealedLetters = 0;
         int stringLength = text.Length;
 
+        float revealInterval = revealDuration / stringLength;
+
         char[] letters = new string(' ', stringLength).ToCharArray();
 
         float timer = 0;
@@ -42,7 +44,7 @@ public class GlitchText : MonoBehaviour
             }
             textMesh.text = new string(letters);
 
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
     }

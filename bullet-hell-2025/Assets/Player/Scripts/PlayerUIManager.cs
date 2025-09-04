@@ -19,6 +19,12 @@ public class PlayerUIManager : MonoBehaviour
     public Slider lockOnSlider;
     public GameObject lockOnCanvas;
 
+    [Header("Pause Menu")]
+    public bool isPaused;
+    public MenuAnimator pauseMenuAnimator;
+    public GameObject pauseMenuCanvas;
+
+
     private DG.Tweening.Sequence sliderUpdateSequence;
     private Tween sliderShake;
     // Start is called before the first frame update
@@ -39,6 +45,7 @@ public class PlayerUIManager : MonoBehaviour
     void Update()
     {
         HandleLockOnSlider();
+        HandlePauseMenu();
     }
 
     public void SetHealthSliderValue(float value)
@@ -90,5 +97,39 @@ public class PlayerUIManager : MonoBehaviour
         lockOnSlider.value = healthScript.Health / healthScript.MaxHealth;
         lockOnCanvas.SetActive(true);
 
+    }
+
+    public void HandlePauseMenu()
+    {
+        if (PlayerInputManager.instance.pauseButtonPressed)
+        {
+            if (!isPaused)
+            {
+                isPaused = true;
+                pauseMenuCanvas.gameObject.SetActive(true);
+                pauseMenuAnimator.gameObject.SetActive(true);
+                PlayerInputManager.instance.DisableAllInputsExceptUI();
+                EventSystemHandler.instance.ChangeSelectedButton(0);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                if (pauseMenuAnimator.gameObject.activeSelf)
+                {
+                    isPaused = false;
+                    pauseMenuAnimator.DisableMenu();
+                    PlayerInputManager.instance.EnableAllInputs();
+                    Time.timeScale = 1f;
+                }
+            }
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        PlayerInputManager.instance.EnableAllInputs();
+        pauseMenuAnimator.DisableMenu();
+        Time.timeScale = 1f;
     }
 }

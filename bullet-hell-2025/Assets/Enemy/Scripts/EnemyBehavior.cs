@@ -37,6 +37,12 @@ public class EnemyBehavior : MonoBehaviour
     public bool isStunned = false;
     public bool isStopped = false;
 
+    [Header("Growl SFX")]
+    private float timeSinceLastGrowl;
+    private float growlTimeThreshold;
+    private float minGrowlTime = 0;
+    private float maxGrowlTime = 20;
+
     // Start is called before the first frame update
     public virtual void Awake()
     {
@@ -50,6 +56,8 @@ public class EnemyBehavior : MonoBehaviour
         movementState = MovementState.Retreat;
         player = PlayerManager.instance.transform;
         enemyManager.agent.stoppingDistance = attackDistance;
+
+        growlTimeThreshold = Random.Range(minGrowlTime, maxGrowlTime);
     }
 
     // Update is called once per frame
@@ -61,6 +69,8 @@ public class EnemyBehavior : MonoBehaviour
         UpdateRangeToTarget();
         HandleStunnedState();
         enemyBehaviorTree.Process();
+        HandleGrowlIdle();
+        
     }
 
     void UpdateRangeToTarget()
@@ -106,6 +116,7 @@ public class EnemyBehavior : MonoBehaviour
         WorldEnemySpawnerManager.Instance.UnregisterEnemy(enemyManager);
         enemyManager.enemyCombatManager.UnparentWeapon();
 
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyDeath, transform.position);
         if (!enemyManager.enemyInteractionManager.isGrounded)
         {
             DissolveObject dissolveScript = GetComponent<DissolveObject>();
@@ -322,6 +333,18 @@ public class EnemyBehavior : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
         }
 
+    }
+
+    private void HandleGrowlIdle()
+    {
+        timeSinceLastGrowl += Time.deltaTime;
+
+        if (timeSinceLastGrowl > growlTimeThreshold)
+        {
+            growlTimeThreshold = Random.Range(minGrowlTime, maxGrowlTime);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyGrowlIdle, transform.position);
+            timeSinceLastGrowl = 0;
+        }
     }
 
 }
