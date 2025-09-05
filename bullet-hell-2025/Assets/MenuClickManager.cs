@@ -8,7 +8,7 @@ using DG.Tweening;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 
-public class MenuClickManager : MonoBehaviour, ISelectHandler
+public class MenuClickManager : MonoBehaviour, ISelectHandler, ISubmitHandler
 {
     public GameObject nextMenuToEnable;
     public GameObject menuToDisable;
@@ -92,11 +92,16 @@ public class MenuClickManager : MonoBehaviour, ISelectHandler
             }
         }
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
+        
     }
     public void OnSelect(BaseEventData eventData)
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonSwitch, mainCam.transform.position);
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
     }
     private void OnDestroy()
     {

@@ -24,7 +24,8 @@ public class PlayerUIManager : MonoBehaviour
     public MenuAnimator pauseMenuAnimator;
     public GameObject pauseMenuCanvas;
 
-
+    [Header("Death Screen")]
+    public GameObject deathScreen;
     private DG.Tweening.Sequence sliderUpdateSequence;
     private Tween sliderShake;
     // Start is called before the first frame update
@@ -111,6 +112,9 @@ public class PlayerUIManager : MonoBehaviour
                 PlayerInputManager.instance.DisableAllInputsExceptUI();
                 EventSystemHandler.instance.ChangeSelectedButton(0);
                 Time.timeScale = 0;
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             else
             {
@@ -118,8 +122,13 @@ public class PlayerUIManager : MonoBehaviour
                 {
                     isPaused = false;
                     pauseMenuAnimator.DisableMenu();
-                    PlayerInputManager.instance.EnableAllInputs();
+
+                    if (!playerManager.isDead)
+                        PlayerInputManager.instance.EnableAllInputs();
                     Time.timeScale = 1f;
+
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                 }
             }
         }
@@ -128,8 +137,22 @@ public class PlayerUIManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        PlayerInputManager.instance.EnableAllInputs();
+        if (!playerManager.isDead)
+            PlayerInputManager.instance.EnableAllInputs();
+
         pauseMenuAnimator.DisableMenu();
         Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void ActivateDeathScreen()
+    {
+        Time.timeScale = 0;
+        deathScreen.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

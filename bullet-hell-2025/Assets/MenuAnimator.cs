@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MenuAnimator : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class MenuAnimator : MonoBehaviour
     private Tween animationTween;
     private Camera mainCam;
 
+    public GameObject switchEventSystemButton;
     private void OnEnable()
     {
         if (backGroundImage == null)
@@ -43,6 +45,12 @@ public class MenuAnimator : MonoBehaviour
         else if (slideOutFromLeft)
         {
            animationTween = backGroundImage.rectTransform.DOAnchorPos(endPosition, slideOutDuration).From(startPosition).SetUpdate(true);
+        }
+
+        if (switchEventSystemButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(switchEventSystemButton);
         }
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.menuOpen, mainCam.transform.position);

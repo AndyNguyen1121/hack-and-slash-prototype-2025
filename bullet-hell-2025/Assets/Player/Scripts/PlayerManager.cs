@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     public bool canAttack = true;
     public bool useGravity = true;
     public bool inFinisher = false;
+    public bool isDead = false;
 
     [Header("Ground Check")]
     public bool isGrounded = true;
@@ -74,6 +75,9 @@ public class PlayerManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         meshTrail = GetComponent<MeshTrail>();  
         animator = GetComponent<Animator>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Start is called before the first frame update

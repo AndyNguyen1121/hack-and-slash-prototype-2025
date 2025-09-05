@@ -441,6 +441,29 @@ public class PlayerInputManager : MonoBehaviour
         inputActions.UI.Enable();
     }
 
+    public void ToggleInputs(bool camera, bool movement, bool actions, bool ui)
+    {
+        if (camera)
+            inputActions.Camera.Disable();
+        else
+            inputActions.Camera.Enable();
+
+        if (movement)
+            inputActions.MovementMap.Disable();
+        else
+            inputActions.MovementMap.Enable();
+
+        if (actions)
+            inputActions.Actions.Disable();
+        else
+            inputActions.Actions.Enable();
+
+        if (ui)
+            inputActions.UI.Disable();
+        else
+            inputActions.UI.Enable();
+    }
+
     public void EnableAllInputs()
     {
         inputActions.Camera.Enable();

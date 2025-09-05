@@ -15,6 +15,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
 
     public PlayerManager playerManager;
     public GameObject bloodParticle;
+    private bool playedDeathAnimation = false;
 
     private void Awake()
     {
@@ -35,12 +36,22 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
             playerManager.playerCombatManager.ActivateParryBehavior();   
             return false;
         }
-        value = -value;
-        Health += value;
+
+        Health = Mathf.Max(0, Health - value);
 
         playerManager.playerUIManager.UpdateHealthSliders(Health, MaxHealth);
 
-        HandleHitBehavior(value, attackLocation, attackSource);
+        if (Health <= 0 && !playedDeathAnimation)
+        {
+            playedDeathAnimation = true;
+            playerManager.playerAnimationManager.PlayActionAnimation("PlayerDeath", true);
+            PlayerInputManager.instance.DisableAllInputsExceptUI();
+            playerManager.isDead = true;
+        }
+        else if (Health > 0)
+        {
+            HandleHitBehavior(value, attackLocation, attackSource);
+        }
 
         playerManager.swordSlashManager.DisableSwordSlashParticle();
 
