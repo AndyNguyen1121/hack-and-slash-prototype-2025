@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class Turn_Move : MonoBehaviour {
 	public float TurnX;
 	public float TurnY;
@@ -14,7 +14,7 @@ public class Turn_Move : MonoBehaviour {
 	public bool World;
 
 	// Use this for initialization
-	void Start () {
+	*//*void Start () {
 		
 	}
 	
@@ -27,5 +27,5 @@ public class Turn_Move : MonoBehaviour {
 			transform.Rotate(TurnX * Time.deltaTime,TurnY * Time.deltaTime,TurnZ * Time.deltaTime, Space.Self);
 			transform.Translate(MoveX * Time.deltaTime, MoveY * Time.deltaTime, MoveZ * Time.deltaTime, Space.Self);
 		}
-	}
-}
+	}*//*
+}*/

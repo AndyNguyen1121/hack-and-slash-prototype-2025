@@ -19,14 +19,13 @@ public class PlayerDashStab : PlayerCombatBaseState
             canMove: false,
             useGravity: true);
 
-        //playerManager.playerAnimationManager.ChangeRootMotionMultiplier(1.5f, 1, 1.5f);
 
         // Setup Variables
-        float elapsed = 0;
         float duration = 0.5f;
-        float distance = 2f;
+        float distanceToStopInFrontOfEnemy = 2f;
         float maxDistance = playerManager.playerCameraManager.lockOnRadius;
-        playerManager.characterController.enabled = false;
+        //playerManager.characterController.enabled = false;
+        playerManager.canMove = false;
         Vector3 endPosition = Vector3.zero;
 
         // Clamp to max distance if target not in range
@@ -41,23 +40,23 @@ public class PlayerDashStab : PlayerCombatBaseState
             float distanceAwayFromEnemy = Mathf.Abs(distanceFromPlayer - playerManager.playerCameraManager.lockOnRadius);
             endPosition = playerManager.playerCameraManager.currentLockOnTarget.position + (distanceAwayFromEnemy * dirToPlayer);
         }
+        Vector3 startPos = playerManager.transform.position;
 
         dashTween = DOTween.To(() => 0f, x =>
         {
-            elapsed = x;
-            Vector3 updatedStartPos = playerManager.transform.position;
-
-            // Dynamically update end position if target is in range
+            
             if (inRange)
             {
-                endPosition = playerManager.playerCameraManager.currentLockOnTarget.position;
-                endPosition = endPosition + (dirToPlayer * distance);
+                endPosition = playerManager.playerCameraManager.currentLockOnTarget.position + (dirToPlayer * distanceToStopInFrontOfEnemy);
             }
 
-            endPosition.y = updatedStartPos.y;
-            playerManager.transform.position = Vector3.Lerp(updatedStartPos, endPosition, x / duration);
+            endPosition.y = startPos.y;
+            Vector3 targetPos = Vector3.Lerp(startPos, endPosition, x / duration);
 
-        }, duration, duration).OnComplete(() => playerManager.characterController.enabled = true);
+            Vector3 delta = targetPos - playerManager.transform.position;
+            playerManager.characterController.Move(delta);
+
+        }, duration, duration);
     }
 
     public override void UpdateState()

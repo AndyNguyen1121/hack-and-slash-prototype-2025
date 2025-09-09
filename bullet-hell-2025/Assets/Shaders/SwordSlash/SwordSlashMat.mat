@@ -93,7 +93,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorMultiplier: 30
+    - _ColorMultiplier: 2
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -118,7 +118,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _VoronoiPower: 5.3
+    - _VoronoiPower: 0.25
     - _VoronoiScale: 34.5
     - _VoronoiSpeed: 1000
     - _WorkflowMode: 1
@@ -126,7 +126,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BottomAlpha: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 16, g: 0, b: 0, a: 0.68235296}
+    - _Color: {r: 1, g: 0.6044493, b: 0.035848916, a: 0.68235296}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopAlpha: {r: 1, g: 1, b: 1, a: 1}
