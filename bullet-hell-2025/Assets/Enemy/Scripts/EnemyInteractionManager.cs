@@ -183,7 +183,7 @@ public class EnemyInteractionManager : MonoBehaviour
 
         transform.DORotateQuaternion(Quaternion.LookRotation(-dirFromPlayer), 0.25f);
 
-        if (Mathf.Abs(desiredPosition.y - transform.position.y) > 1f) 
+        if (Mathf.Abs(desiredPosition.y - transform.position.y) > 0.25f) 
         {
             timeOnGround = 0f;
             IgnoreGroundDetection(ignoreGroundDetectionDuration);
@@ -204,6 +204,8 @@ public class EnemyInteractionManager : MonoBehaviour
             {
                 inKnockUpAnimation = false;
             }
+
+            desiredPosition.y = transform.position.y ;
         }
 
         grappleTween = rb.DOMove(desiredPosition, 0.25f).SetEase(Ease.OutSine)

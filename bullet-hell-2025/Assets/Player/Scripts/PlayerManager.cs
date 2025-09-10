@@ -38,9 +38,11 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Ground Check")]
     public bool isGrounded = true;
+    public bool onStairs;
     public float groundCheckRadius;
     public Vector3 groundCheckOffset;
     public LayerMask whatIsGround;
+    public LayerMask whatIsStairs;
 
 
 
@@ -113,6 +115,7 @@ public class PlayerManager : MonoBehaviour
     private void CheckGroundedState()
     {
         isGrounded = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsGround);
+        onStairs = Physics.CheckSphere(transform.position + groundCheckOffset, groundCheckRadius, whatIsStairs);
         animator.SetBool("isGrounded", isGrounded);
     }
 

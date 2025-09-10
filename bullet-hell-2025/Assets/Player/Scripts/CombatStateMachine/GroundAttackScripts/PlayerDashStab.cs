@@ -24,7 +24,6 @@ public class PlayerDashStab : PlayerCombatBaseState
         float duration = 0.5f;
         float distanceToStopInFrontOfEnemy = 2f;
         float maxDistance = playerManager.playerCameraManager.lockOnRadius;
-        //playerManager.characterController.enabled = false;
         playerManager.canMove = false;
         Vector3 endPosition = Vector3.zero;
 

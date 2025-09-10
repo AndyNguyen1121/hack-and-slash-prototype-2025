@@ -113,7 +113,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         Vector3 hitDirection = attackLocation - transform.position;
         hitDirection.Normalize();
         hitDirection.y = 0;
-        Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
+        Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity, this.transform);
 
         if (Health == 0)
         {

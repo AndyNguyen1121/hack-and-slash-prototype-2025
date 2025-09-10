@@ -123,12 +123,11 @@ public class PlayerMovementManager : MonoBehaviour
             verticalVelocity = Vector3.zero;
             return;
         }
-
-
-        if (verticalVelocity.y < 0 && !isJumping && playerManager.isGrounded)
+       
+        if (!isJumping && playerManager.isGrounded)
         {
-            verticalVelocity = Vector3.zero;
-            //verticalVelocity.y += groundGravityScale * Time.deltaTime;
+            //verticalVelocity = Vector3.zero;
+            verticalVelocity.y = groundGravityScale;
         }
         else
         {
