@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public interface IDamageable
 {
     public float Health { get; }
-    public float MaxHealth { get; }
+    public float MaxHealth { get; set; }
     public UnityEvent OnHealthChanged { get; set; }
 
     /// <summary>

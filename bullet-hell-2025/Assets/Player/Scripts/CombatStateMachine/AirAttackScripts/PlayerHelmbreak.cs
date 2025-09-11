@@ -17,6 +17,8 @@ public class PlayerHelmbreak : PlayerCombatBaseState
             useGravity: false);
 
         playerManager.playerMovementManager.isJumping = false;
+
+        playerManager.IgnoreEnemyLayerCollision();
     }
 
     public override void UpdateState()
@@ -38,6 +40,6 @@ public class PlayerHelmbreak : PlayerCombatBaseState
 
     public override void ExitState()
     {
-
+        playerManager.AttemptToEnableEnemyCollision();
     }
 }

@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public virtual void Start()
     {
-        WorldEnemySpawnerManager.Instance.RegisterEnemy(this);
+        WorldEnemyManager.Instance.RegisterEnemy(this);
         ActivateCooldown();
 
         LockOnTarget lockOnScript  = GetComponent<LockOnTarget>();
@@ -78,9 +78,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
                 if (PlayerManager.instance.playerCameraManager.currentLockOnTarget == this.transform)
                 {
                     PlayerManager.instance.playerCameraManager.DisableCurrentTarget();
-                    WorldEnemySpawnerManager.Instance.UnregisterEnemy(this);
+                    WorldEnemyManager.Instance.UnregisterEnemy(this);
                 }
 
+                PlayerManager.instance.IgnorePlayerCollider(enemyCollider);
                 enemyCombatManager.CloseWeaponCollider();
             
             };
@@ -185,7 +186,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void EndAttack()
     {
         canAttack = false;
-        WorldEnemySpawnerManager.Instance.RemoveFromAttackingPool(this);
+        WorldEnemyManager.Instance.RemoveFromAttackingPool(this);
     }
 
     public IEnumerator ResetAttack(float time)

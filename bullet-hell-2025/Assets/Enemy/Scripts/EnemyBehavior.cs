@@ -113,7 +113,7 @@ public class EnemyBehavior : MonoBehaviour
             return;
         deathSequenceStarted = true;
 
-        WorldEnemySpawnerManager.Instance.UnregisterEnemy(enemyManager);
+        WorldEnemyManager.Instance.UnregisterEnemy(enemyManager);
         enemyManager.enemyCombatManager.UnparentWeapon();
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyDeath, transform.position);

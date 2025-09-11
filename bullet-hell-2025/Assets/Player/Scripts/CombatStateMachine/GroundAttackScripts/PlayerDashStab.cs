@@ -19,6 +19,7 @@ public class PlayerDashStab : PlayerCombatBaseState
             canMove: false,
             useGravity: true);
 
+        playerManager.IgnoreEnemyLayerCollision();
 
         // Setup Variables
         float duration = 0.5f;
@@ -77,6 +78,6 @@ public class PlayerDashStab : PlayerCombatBaseState
 
     public override void ExitState()
     {
-
+        playerManager.AttemptToEnableEnemyCollision();
     }
 }

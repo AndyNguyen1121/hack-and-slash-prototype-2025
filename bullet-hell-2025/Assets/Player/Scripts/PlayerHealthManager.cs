@@ -10,11 +10,12 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
     public float Health { get; private set; }
 
     [field: SerializeField]
-    public float MaxHealth { get; private set; }
+    public float MaxHealth { get; set; }
     public UnityEvent OnHealthChanged { get; set; }
 
     public PlayerManager playerManager;
     public GameObject bloodParticle;
+    public GameObject blockParticle;
     private bool playedDeathAnimation = false;
 
     private void Awake()
@@ -35,6 +36,10 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         {
             playerManager.playerCombatManager.ActivateParryBehavior();   
             return false;
+        }
+        else if (playerManager.animator.GetBool("isGuarding"))
+        {
+            value *= 0.5f;
         }
 
         Health = Mathf.Max(0, Health - value);
@@ -77,31 +82,51 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable
         float horizontalHitDir = Vector3.Dot(hitDirection.normalized, transform.right);
         float verticalHitDir = Vector3.Dot(transform.forward, hitDirection.normalized);
 
-
-        if (Mathf.Abs(horizontalHitDir) > Mathf.Abs(verticalHitDir))
+        if (!playerManager.animator.GetBool("isGuarding"))
         {
-            if (horizontalHitDir < 0)
+            if (Mathf.Abs(horizontalHitDir) > Mathf.Abs(verticalHitDir))
             {
-                playerManager.playerAnimationManager.PlayActionAnimation("DamageLeft", true);
+                if (horizontalHitDir < 0)
+                {
+                    playerManager.playerAnimationManager.PlayActionAnimation("DamageLeft", true);
+                }
+                else
+                {
+                    playerManager.playerAnimationManager.PlayActionAnimation("DamageRight", true);
+                }
             }
             else
             {
-                playerManager.playerAnimationManager.PlayActionAnimation("DamageRight", true);
+                if (verticalHitDir < 0)
+                {
+                    playerManager.playerAnimationManager.PlayActionAnimation("DamageBack", true);
+                }
+                else
+                {
+                    playerManager.playerAnimationManager.PlayActionAnimation("DamageFront", true);
+                }
             }
         }
         else
         {
-            if (verticalHitDir < 0)
-            {
-                playerManager.playerAnimationManager.PlayActionAnimation("DamageBack", true);
-            }
-            else
-            {
-                playerManager.playerAnimationManager.PlayActionAnimation("DamageFront", true);
-            }
+            playerManager.playerAnimationManager.PlayActionAnimation("GuardHit", true);
         }
 
-        Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
+        GameObject particle = null;
+
+        if (playerManager.animator.GetBool("isGuarding"))
+        {
+            particle = Instantiate(blockParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
+        }
+        else
+        {
+            particle = Instantiate(bloodParticle, attackLocation + (0.3f * -hitDirection), Quaternion.identity);
+        }
+
+        if (particle != null)
+        {
+            Destroy(particle, 1.5f);
+        }
 
         playerManager.playerCombatManager.ActivateIntenseScreenShakeImpulse(1.5f);
     }
