@@ -8,13 +8,13 @@ using DG.Tweening;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 
-public class MenuClickManager : MonoBehaviour, ISelectHandler, ISubmitHandler
+public class MenuClickManager : MonoBehaviour, ISelectHandler, ISubmitHandler, IPointerClickHandler
 {
     public GameObject nextMenuToEnable;
     public GameObject menuToDisable;
     public float shrinkDuration = 0.2f;
     public float disableDuration = 0.1f;
-    public List<Button> otherButtons;
+    public List<Transform> otherButtons;
 
     private Tween animationTween;
     private Camera mainCam;
@@ -81,12 +81,12 @@ public class MenuClickManager : MonoBehaviour, ISelectHandler, ISubmitHandler
             }
         }); 
 
-        foreach (var button in otherButtons)
+        foreach (var targetTransform in otherButtons)
         {
-            if (button.gameObject == this.gameObject)
+            if (targetTransform.gameObject == this.gameObject)
                 continue;
 
-            if (button.TryGetComponent<MenuClickManager>(out MenuClickManager clickManager))
+            if (targetTransform.TryGetComponent<MenuClickManager>(out MenuClickManager clickManager))
             {
                 clickManager.FadeOut();
             }
@@ -100,6 +100,11 @@ public class MenuClickManager : MonoBehaviour, ISelectHandler, ISubmitHandler
     }
 
     public void OnSubmit(BaseEventData eventData)
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.buttonPress, mainCam.transform.position);
     }

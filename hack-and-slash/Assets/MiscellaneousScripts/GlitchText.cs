@@ -11,15 +11,19 @@ public class GlitchText : MonoBehaviour
     private string text;
     private string scrambledText;
 
+    public bool textCanChange = false;
     public float revealDuration = 1f;
 
     private void Awake()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
+        text = textMesh.text;
     }
     private void OnEnable()
     {
-        text = textMesh.text;
+        if (textCanChange)
+            text = textMesh.text;
+
         StartCoroutine(ScrambleText());
     }
     private IEnumerator ScrambleText()

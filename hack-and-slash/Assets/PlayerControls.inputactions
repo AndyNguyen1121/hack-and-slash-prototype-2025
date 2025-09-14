@@ -269,11 +269,11 @@
                 },
                 {
                     "name": "",
-                    "id": "1ba836fa-f29b-47de-a8d5-5f6ec77f92a5",
-                    "path": "<Keyboard>/ctrl",
+                    "id": "c15b645d-c2a7-4587-b017-177306bfd2e7",
+                    "path": "<Keyboard>/alt",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false

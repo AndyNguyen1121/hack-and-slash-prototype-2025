@@ -27,13 +27,9 @@ public class EventSystemHandler : MonoBehaviour
     }
     public void ChangeSelectedButton(int index)
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        /*EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(buttons[index].buttonGameObject);
-        buttonStack.Add(buttons[index].buttonGameObject);
+        buttonStack.Add(buttons[index].buttonGameObject);*/
     }
 
-    public void SearchForValidButton()
-    {
-
-    }
 }

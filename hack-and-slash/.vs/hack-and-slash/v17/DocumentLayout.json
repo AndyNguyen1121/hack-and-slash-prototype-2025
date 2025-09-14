@@ -3,24 +3,84 @@
   "WorkspaceRootPath": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\wavemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\wavemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\menuclickmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\menuclickmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\eventsystemhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\eventsystemhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\skilldescriptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\skilldescriptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\glitchtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\glitchtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\positionanimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\positionanimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\activationtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\activationtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\audio\\fmodevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\audio\\fmodevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\combatstatemachine\\groundattackscripts\\playerguard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playercombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playercombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playerinputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerinputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playermovementmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playermovementmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\enemy\\scripts\\enemycombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\enemy\\scripts\\enemycombatmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\shaders\\dissolve\\dissolveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\dissolve\\dissolveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\rotateskybox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\rotateskybox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\enemy\\scripts\\enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\enemy\\scripts\\enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\combatstatemachine\\groundattackscripts\\playercounterattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\groundattackscripts\\playercounterattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playerhealthmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playerhealthmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\wavemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\wavemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\enemy\\scripts\\shieldenemy\\shieldenemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\enemy\\scripts\\shieldenemy\\shieldenemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\combatstatemachine\\groundattackscripts\\playerguard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\combatstatemachine\\groundattackscripts\\playerguard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|e:\\unity projects\\bullet-hell-2025\\hack-and-slash\\assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\assets\\miscellaneousscripts\\activationtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10788353-4A3E-86FC-70B9-21365B791F4E}|Assembly-CSharp.csproj|solutionrelative:assets\\miscellaneousscripts\\activationtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 511,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,7 +110,155 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SkillDescriptionHandler.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\SkillDescriptionHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\SkillDescriptionHandler.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\SkillDescriptionHandler.cs",
+              "RelativeToolTip": "Assets\\MiscellaneousScripts\\SkillDescriptionHandler.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAADgAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:13:17.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MenuClickManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\MenuClickManager.cs",
+              "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\MenuClickManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\MenuClickManager.cs",
+              "RelativeToolTip": "Assets\\MiscellaneousScripts\\MenuClickManager.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAgwGoAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:05:10.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EventSystemHandler.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\EventSystemHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\EventSystemHandler.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\EventSystemHandler.cs",
+              "RelativeToolTip": "Assets\\MiscellaneousScripts\\EventSystemHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:02:11.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GlitchText.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\GlitchText.cs",
+              "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\GlitchText.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\GlitchText.cs",
+              "RelativeToolTip": "Assets\\MiscellaneousScripts\\GlitchText.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T06:59:47.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FMODEvents.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Audio\\FMODEvents.cs",
+              "RelativeDocumentMoniker": "Assets\\Audio\\FMODEvents.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Audio\\FMODEvents.cs",
+              "RelativeToolTip": "Assets\\Audio\\FMODEvents.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T04:40:41.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DissolveObject.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Shaders\\Dissolve\\DissolveObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Shaders\\Dissolve\\DissolveObject.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Shaders\\Dissolve\\DissolveObject.cs",
+              "RelativeToolTip": "Assets\\Shaders\\Dissolve\\DissolveObject.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAowJQAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T01:58:04.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EnemyCombatManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\EnemyCombatManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Enemy\\Scripts\\EnemyCombatManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\EnemyCombatManager.cs",
+              "RelativeToolTip": "Assets\\Enemy\\Scripts\\EnemyCombatManager.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T00:22:06.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PlayerHealthManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerHealthManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerHealthManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerHealthManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerHealthManager.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAgwCgAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T00:14:00.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PlayerCounterAttack.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerCounterAttack.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerCounterAttack.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerCounterAttack.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerCounterAttack.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T00:02:22.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EnemyManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\EnemyManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Enemy\\Scripts\\EnemyManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\EnemyManager.cs",
+              "RelativeToolTip": "Assets\\Enemy\\Scripts\\EnemyManager.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwFQAAABfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T23:59:33.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerCombatManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerCombatManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerCombatManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerCombatManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerCombatManager.cs",
+              "ViewState": "AQIAAL8AAAAAAAAAAABRwOEAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T23:55:00.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ShieldEnemyManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\ShieldEnemy\\ShieldEnemyManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Enemy\\Scripts\\ShieldEnemy\\ShieldEnemyManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Enemy\\Scripts\\ShieldEnemy\\ShieldEnemyManager.cs",
+              "RelativeToolTip": "Assets\\Enemy\\Scripts\\ShieldEnemy\\ShieldEnemyManager.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAgwEcAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T23:54:28.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "WaveManager.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\WaveManager.cs",
               "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\WaveManager.cs",
@@ -58,25 +266,60 @@
               "RelativeToolTip": "Assets\\MiscellaneousScripts\\WaveManager.cs",
               "ViewState": "AQIAAF4AAAAAAAAAAAAkwHQAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T01:53:37.344Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T01:53:37.344Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "PositionAnimator.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\PositionAnimator.cs",
               "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\PositionAnimator.cs",
               "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\PositionAnimator.cs",
               "RelativeToolTip": "Assets\\MiscellaneousScripts\\PositionAnimator.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBsAAAAAAAAA",
+              "ViewState": "AQIAACoAAAAAAAAAAAAUwE4AAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-12T01:34:22.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 11,
+              "Title": "RotateSkybox.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\RotateSkybox.cs",
+              "RelativeDocumentMoniker": "Assets\\RotateSkybox.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\RotateSkybox.cs",
+              "RelativeToolTip": "Assets\\RotateSkybox.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T00:23:55.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerInputManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerInputManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerInputManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerInputManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerInputManager.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAADgv2cAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T01:29:55.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PlayerMovementManager.cs",
+              "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerMovementManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerMovementManager.cs",
+              "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerMovementManager.cs",
+              "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerMovementManager.cs",
+              "ViewState": "AQIAAOUAAAAAAAAAAAAEwPQAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T01:32:09.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "ActivationTrigger.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\MiscellaneousScripts\\ActivationTrigger.cs",
               "RelativeDocumentMoniker": "Assets\\MiscellaneousScripts\\ActivationTrigger.cs",
@@ -84,34 +327,31 @@
               "RelativeToolTip": "Assets\\MiscellaneousScripts\\ActivationTrigger.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T01:32:07.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T01:32:07.255Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 18,
               "Title": "PlayerGuard.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerGuard.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerGuard.cs",
               "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerGuard.cs",
               "RelativeToolTip": "Assets\\Player\\Scripts\\CombatStateMachine\\GroundAttackScripts\\PlayerGuard.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAFAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAEwDIAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T01:22:09.329Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T01:22:09.329Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "PlayerManager.cs",
               "DocumentMoniker": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerManager.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerManager.cs",
               "ToolTip": "E:\\Unity Projects\\bullet-hell-2025\\hack-and-slash\\Assets\\Player\\Scripts\\PlayerManager.cs",
               "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAwEkAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T01:22:04.329Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T01:22:04.329Z"
             }
           ]
         },

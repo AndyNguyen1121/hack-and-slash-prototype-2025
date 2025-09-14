@@ -240,7 +240,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleDodgeInput()
     {
-        dodgePressed = inputActions.MovementMap.Dodge.WasPressedThisFrame();
+        dodgePressed = inputActions.MovementMap.Dodge.WasPerformedThisFrame();
 
         if (dodgePressed)
             AddInput(InputID.Dash);

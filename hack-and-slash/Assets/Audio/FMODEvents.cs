@@ -31,6 +31,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference menuOpen { get; private set; }
     [field: SerializeField] public EventReference sliderChange { get; private set; }
 
+    [field: Header("Door Sounds")]
+    [field: SerializeField] public EventReference doorClose { get; private set; }
+    [field: SerializeField] public EventReference doorOpen { get; private set; }
+
     private void Awake()
     {
         DontDestroyOnLoad(this);

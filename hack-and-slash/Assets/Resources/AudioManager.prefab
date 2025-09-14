@@ -162,3 +162,17 @@ MonoBehaviour:
       Data3: -575938426
       Data4: 1860068534
     Path: event:/UI/SliderChange
+  <doorClose>k__BackingField:
+    Guid:
+      Data1: 1312394675
+      Data2: 1130850193
+      Data3: 749166476
+      Data4: 870615321
+    Path: event:/Door/DoorClose
+  <doorOpen>k__BackingField:
+    Guid:
+      Data1: 186813863
+      Data2: 1220159775
+      Data3: 724995716
+      Data4: 1273036689
+    Path: event:/Door/DoorOpen

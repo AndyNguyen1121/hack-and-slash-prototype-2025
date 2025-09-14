@@ -69,6 +69,16 @@ public class PositionAnimator : MonoBehaviour
         }
     }
 
+    public void PlayDoorOpenSFX()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.doorOpen, transform.position);
+    }
+
+    public void PlayDoorCloseSFX()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.doorClose, transform.position);
+    }
+
     private void OnDestroy()
     {
         if (animationTween != null)
