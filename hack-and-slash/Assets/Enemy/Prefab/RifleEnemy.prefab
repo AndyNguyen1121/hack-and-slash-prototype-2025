@@ -1356,6 +1356,7 @@ MonoBehaviour:
   colliderIds: 
   bullet: {fileID: 7320506130262811712, guid: e985fed7a6a3e9247a53e2de828cfc02, type: 3}
   gunTip: {fileID: 675309251392292620}
+  gunWarning: {fileID: 2546711696959350166, guid: da5c46136932bb7408484a26062ef978, type: 3}
 --- !u!4 &8733045839447343903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 234480625599603528, guid: 6df41fd94eb27c24c9267c0c728b5a78, type: 3}

@@ -12,6 +12,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference swordHit { get; private set; }
     [field: SerializeField] public EventReference swordParry { get; private set; }
     [field: SerializeField] public EventReference grapple { get; private set; }
+    [field: SerializeField] public EventReference roll { get; private set; }
 
     [field: Space(10)]
 
@@ -21,6 +22,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference enemyGrowlIdle { get; private set; }
     [field: SerializeField] public EventReference enemyAttack { get; private set; }
     [field: SerializeField] public EventReference enemyAxeHit { get; private set; }
+    [field: SerializeField] public EventReference laserShoot { get; private set; }
+    [field: SerializeField] public EventReference laserHit { get; private set; }
+    [field: SerializeField] public EventReference shieldBreak { get; private set; }
+    [field: SerializeField] public EventReference shieldHit { get; private set; }
 
     [field: Space(10)]
 

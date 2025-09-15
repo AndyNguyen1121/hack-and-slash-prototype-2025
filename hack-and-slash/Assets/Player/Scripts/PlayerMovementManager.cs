@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using Unity.XR.GoogleVr;
 
 public class PlayerMovementManager : MonoBehaviour
 {
@@ -255,9 +256,11 @@ public class PlayerMovementManager : MonoBehaviour
                     dashDirection = "DodgeBack";
                 }
 
+
                 canRotateInInputDir = false;
             }
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.roll, transform.position);
             playerManager.playerAnimationManager.ChangeRootMotionMultiplier(dashSpeed, 1f, dashSpeed);
             playerManager.playerAnimationManager.PlayActionAnimation(
                 animationName: dashDirection,

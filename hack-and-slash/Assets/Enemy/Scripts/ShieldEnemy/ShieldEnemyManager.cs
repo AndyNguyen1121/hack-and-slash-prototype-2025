@@ -58,10 +58,16 @@ public class ShieldEnemyManager : EnemyManager
 
             if (shieldHealth == 0 && enemyBehavior is ShieldEnemyBehavior shieldEnemyBehavior)
             {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.shieldBreak, transform.position);
                 ExplodeShield();
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.shieldHit, transform.position);
             }
 
             enemyAnimationManager.PlayActionAnimation("TinyImpact", false, true, true, 0);
+
             
             return false;
         }

@@ -131,36 +131,12 @@ public class PlayerInputManager : MonoBehaviour
                 isGuarding = false;
                 RemoveInput(InputID.Guard);
             };
-
-            InputSystem.onActionChange += InputActionChangeCallback;
         }
 
         inputActions.Enable();
         cameraInputProvider.enabled = true;
     }
 
-    private void InputActionChangeCallback(object obj, InputActionChange change)
-    {
-        /*if (change != InputActionChange.ActionPerformed) return;
-
-        if (obj is InputAction receivedInputAction)
-        {
-            InputDevice lastDevice = receivedInputAction.activeControl.device;
-
-            if (lastDevice != currentDevice && lastDevice is Gamepad)
-            {
-                eventSystemInputModule.deselectOnBackgroundClick = false;
-                currentDevice = lastDevice;
-                Debug.Log("Gamepad detected - deselect disabled");
-            }
-            else if ((lastDevice != currentDevice) && lastDevice is Keyboard)
-            {
-                eventSystemInputModule.deselectOnBackgroundClick = true;
-                currentDevice = lastDevice;
-                Debug.Log("Keyboard/Mouse detected - deselect enabled");
-            }
-        }*/
-    }
 
     private void OnDisable()
     {

@@ -92,6 +92,13 @@ MonoBehaviour:
       Data3: -1536261973
       Data4: -423600206
     Path: event:/Player/Grapple
+  <roll>k__BackingField:
+    Guid:
+      Data1: -1082372387
+      Data2: 1233941049
+      Data3: 2044499103
+      Data4: 520747951
+    Path: event:/Player/Roll
   <enemyGrowlAggressive>k__BackingField:
     Guid:
       Data1: 294185048
@@ -127,6 +134,34 @@ MonoBehaviour:
       Data3: -750244472
       Data4: 802299527
     Path: event:/Enemy/AlienAxeHit
+  <laserShoot>k__BackingField:
+    Guid:
+      Data1: 1986231241
+      Data2: 1333502546
+      Data3: -2060946814
+      Data4: 1321691437
+    Path: event:/Enemy/AlienShoot
+  <laserHit>k__BackingField:
+    Guid:
+      Data1: 850855587
+      Data2: 1193308635
+      Data3: 1103296149
+      Data4: 2029601634
+    Path: event:/Enemy/LaserHit
+  <shieldBreak>k__BackingField:
+    Guid:
+      Data1: -1430234959
+      Data2: 1229342227
+      Data3: -1500288361
+      Data4: -861030132
+    Path: event:/Enemy/ShieldBreak
+  <shieldHit>k__BackingField:
+    Guid:
+      Data1: -845443800
+      Data2: 1083735739
+      Data3: -1035913584
+      Data4: -2048975164
+    Path: event:/Enemy/ShieldHit
   <buttonSwitch>k__BackingField:
     Guid:
       Data1: 781050033

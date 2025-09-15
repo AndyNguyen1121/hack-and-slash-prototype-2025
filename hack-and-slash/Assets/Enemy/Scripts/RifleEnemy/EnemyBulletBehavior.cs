@@ -23,6 +23,7 @@ public class EnemyBulletBehavior : MonoBehaviour
         activeCollisionLayerMask = whatIsPlayer;
         rb.velocity = transform.forward * speed;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -45,7 +46,7 @@ public class EnemyBulletBehavior : MonoBehaviour
 
             if (damageScript.TakeDamage(damage, hit.collider.ClosestPointOnBounds(transform.position), gameObject))
             {
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyAxeHit, transform.position);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.laserHit, transform.position);
                 Destroy(gameObject);
             }
             else
