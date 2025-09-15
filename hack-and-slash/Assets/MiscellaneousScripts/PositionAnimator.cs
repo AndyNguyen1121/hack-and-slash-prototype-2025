@@ -79,6 +79,11 @@ public class PositionAnimator : MonoBehaviour
         AudioManager.instance.PlayOneShot(FMODEvents.instance.doorClose, transform.position);
     }
 
+    public void SwitchBackgroundMusic()
+    {
+        FMODEvents.instance.SetBackgroundMusic(FMODEvents.instance.combat);
+    }
+
     private void OnDestroy()
     {
         if (animationTween != null)

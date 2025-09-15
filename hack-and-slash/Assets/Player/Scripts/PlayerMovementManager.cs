@@ -246,10 +246,12 @@ public class PlayerMovementManager : MonoBehaviour
                 if (playerInputManager.localInputDirection == Vector2.left)
                 {
                     dashDirection = "DodgeLeft";
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.roll, transform.position);
                 }
                 else if (playerInputManager.localInputDirection == Vector2.right)
                 {
                     dashDirection = "DodgeRight";
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.roll, transform.position);
                 }
                 else if (playerInputManager.localInputDirection == Vector2.down)
                 {
@@ -260,7 +262,11 @@ public class PlayerMovementManager : MonoBehaviour
                 canRotateInInputDir = false;
             }
 
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.roll, transform.position);
+            if (dashDirection == "DodgeFront")
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.rollForwards, transform.position);
+            }
+            
             playerManager.playerAnimationManager.ChangeRootMotionMultiplier(dashSpeed, 1f, dashSpeed);
             playerManager.playerAnimationManager.PlayActionAnimation(
                 animationName: dashDirection,

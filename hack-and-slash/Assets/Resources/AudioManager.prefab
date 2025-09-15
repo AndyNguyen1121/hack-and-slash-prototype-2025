@@ -57,6 +57,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bc9dd418164c44aa35e716b70ea701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <menu>k__BackingField:
+    Guid:
+      Data1: -1819479682
+      Data2: 1156645345
+      Data3: -1288523887
+      Data4: 271723806
+    Path: event:/Music/MenuMusic
+  <combat>k__BackingField:
+    Guid:
+      Data1: -360406869
+      Data2: 1132812538
+      Data3: -683995223
+      Data4: 1572828401
+    Path: event:/Music/FightMusic
+  <tutorial>k__BackingField:
+    Guid:
+      Data1: 1935841940
+      Data2: 1291566935
+      Data3: -129298526
+      Data4: 1879706858
+    Path: event:/Music/Tutorial
   <footSteps>k__BackingField:
     Guid:
       Data1: 980445815
@@ -99,6 +120,13 @@ MonoBehaviour:
       Data3: 2044499103
       Data4: 520747951
     Path: event:/Player/Roll
+  <rollForwards>k__BackingField:
+    Guid:
+      Data1: 1834303334
+      Data2: 1268666642
+      Data3: -1575319680
+      Data4: -1919469850
+    Path: event:/Player/RollForward
   <enemyGrowlAggressive>k__BackingField:
     Guid:
       Data1: 294185048

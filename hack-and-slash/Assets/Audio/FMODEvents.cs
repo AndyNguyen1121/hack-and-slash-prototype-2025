@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
+using UnityEngine.SceneManagement;
 
 public class FMODEvents : MonoBehaviour
 {
     public static FMODEvents instance;
+
+    
+    public EventInstance backgroundMusic;
+
+    [field: Header("Background Music")]
+    [field: SerializeField] public EventReference menu { get; private set; }
+    [field: SerializeField] public EventReference combat { get; private set; }
+    [field: SerializeField] public EventReference tutorial { get; private set; }
+
+
     [field: Header("PlayerSounds")]
     [field: SerializeField] public EventReference footSteps { get; private set; }
     [field: SerializeField] public EventReference swordSlash { get; private set; }
@@ -13,6 +25,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference swordParry { get; private set; }
     [field: SerializeField] public EventReference grapple { get; private set; }
     [field: SerializeField] public EventReference roll { get; private set; }
+    [field: SerializeField] public EventReference rollForwards { get; private set; }
 
     [field: Space(10)]
 
@@ -45,5 +58,33 @@ public class FMODEvents : MonoBehaviour
         DontDestroyOnLoad(this);
        if (instance == null) 
             instance = this;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void SetBackgroundMusic(EventReference eventReference)
+    {
+        StopBackgroundMusic();
+        backgroundMusic = AudioManager.instance.CreateInstance(eventReference);
+        backgroundMusic.start();
+    }
+
+    public void StopBackgroundMusic()
+    {
+        if (backgroundMusic.isValid())
+            backgroundMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StopBackgroundMusic();
+        if (scene.buildIndex == 0)
+        {
+            SetBackgroundMusic(menu);
+        }
+        else if (scene.buildIndex == 1)
+        {
+            SetBackgroundMusic(tutorial);
+        }
     }
 }

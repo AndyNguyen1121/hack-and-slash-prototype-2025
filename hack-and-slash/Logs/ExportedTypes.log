@@ -1017,6 +1017,7 @@
 0x6434c2de7662f430 -    7220610363306472496 - UnityEditor.VFX.VFXSpawnerBurstOld
 0x64458c09dcfbd68d -    7225335151175915149 - UnityEditor.VFX.VFXDataParticle
 0x646abf73d66401c5 -    7235806255563145669 - Unity.VisualScripting.LudiqBehaviourEditor
+0x648e2fd2dc220fde -    7245781433168564190 - HighScoreManager
 0x649d2324f0c7e354 -    7249989616701793108 - UnityEditor.Rendering.Universal.PixelPerfectCameraEditor
 0x64c38aa231ca06ad -    7260799453476030125 - UnityEngine.Timeline.PlayableTrack
 0x64c9cf23dc0015ca -    7262563627033433546 - UnityEngine.Timeline.ActivationPlayableAsset
@@ -2271,6 +2272,7 @@
 0xded7d80f8f691546 -   16057540557754930502 - Unity.AI.Navigation.Editor.NavMeshModifierVolumeEditor
 0xdef1632afb85adc6 -   16064730382066888134 - UnityEngine.Rendering.UI.DebugUIHandlerVector2
 0xdf03728af804114e -   16069813836580131150 - Unity.VisualScripting.FuzzyWindow
+0xdf0c33eff18518a8 -   16072278275820689576 - FadeOutImage
 0xdf4fd0c7cde3bc7c -   16091309550189395068 - UnityEngine.TerrainData
 0xdf98ae3e2cde9367 -   16111819248981939047 - Unity.Cinemachine.Editor.CinemachineSplineRollEditor
 0xdfa682bf4eb9ecc1 -   16115712074763070657 - UnityEditor.VFX.VFXOperatorPointCache

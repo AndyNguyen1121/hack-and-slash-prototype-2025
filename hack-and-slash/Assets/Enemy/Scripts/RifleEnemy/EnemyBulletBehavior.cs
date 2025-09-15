@@ -44,7 +44,14 @@ public class EnemyBulletBehavior : MonoBehaviour
             if (!hit.collider.TryGetComponent<IDamageable>(out damageScript))
                 return;
 
-            if (damageScript.TakeDamage(damage, hit.collider.ClosestPointOnBounds(transform.position), gameObject))
+            float adjustedDamage = damage;
+
+            if (activeCollisionLayerMask == whatIsEnemy)
+            {
+                adjustedDamage = 50f;
+            }
+
+            if (damageScript.TakeDamage(adjustedDamage, hit.collider.ClosestPointOnBounds(transform.position), gameObject))
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.laserHit, transform.position);
                 Destroy(gameObject);
